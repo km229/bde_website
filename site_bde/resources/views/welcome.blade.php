@@ -90,7 +90,7 @@
                     <a href="https://laravel-news.com">GROSSE</a>
                     <a href="https://nova.laravel.com">PUTE</a>
                     <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://github.com/laravel/laravel">jdec jtm remi</a>
                 </div>
             </div>
         </div>
