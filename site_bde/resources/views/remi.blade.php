@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Rémi</a>
+                    <a href="https://laravel.com/docs">Rémi lel dequfeisfr</a>
                     <a href="https://laracasts.com">C'est</a>
                     <a href="https://laravel-news.com">Le</a>
                     <a href="https://nova.laravel.com">Plus</a>
