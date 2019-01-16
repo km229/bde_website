@@ -15,8 +15,10 @@ Route::get('/', 'WelcomeController@index');
 Route::post('/', 'WelcomeController@index');
 
 Route::get('/login', 'LoginController@index');
+Route::post('/login', 'LoginController@index');
 
 Route::get('/register', 'RegisterController@index');
+Route::post('/register', 'RegisterController@index');
 
 Route::get('/shop', 'ShopController@index');
 
