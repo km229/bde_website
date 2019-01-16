@@ -85,12 +85,12 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">rémi la grosse pute de merde </a>
-                    <a href="https://laracasts.com">LA</a>
-                    <a href="https://laravel-news.com">GROSSE</a>
-                    <a href="https://nova.laravel.com">PUTE</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">jdec jtm remi</a>
+                    <a href="https://laravel.com/docs">rémi </a>
+                    <a href="https://laracasts.com">le</a>
+                    <a href="https://laravel-news.com">génie</a>
+                    <a href="https://nova.laravel.com">de</a>
+                    <a href="https://forge.laravel.com">la</a>
+                    <a href="https://github.com/laravel/laravel">promo</a>
                 </div>
             </div>
         </div>
