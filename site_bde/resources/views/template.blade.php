@@ -8,8 +8,11 @@
         @yield('title')
     </head>
     <body>
+        <header>
+            <h1>Site BDE</h1>
+        </header>
         @yield('body')
-        <script src="{{ asset('js/bootstrap.min.js') }}">
-        <script src="{{ asset('js/jquery-3.3.1.min.js') }}">
+        <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     </body>
 </html>
