@@ -1,5 +1,7 @@
-header, footer{
-    background-color: black;
-    color: white;
-    text-align: center;
+.navbar{
+	background-color: black;
+}
+
+.navbar a{
+	color: white;
 }

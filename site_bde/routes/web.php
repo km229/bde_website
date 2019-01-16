@@ -11,22 +11,52 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
+Route::get('/', [
+    'as' => 'home',
+    'uses' => 'WelcomeController@index'
+]);
 Route::post('/', 'WelcomeController@index');
 
-Route::get('login', 'LoginController@index');
+
+
+Route::get('login', [
+    'as' => 'login',
+    'uses' => 'LoginController@index'
+]);
 Route::post('login', [
     'as' => 'login',
     'uses' => 'LoginController@index'
 ]);
 
-Route::get('register', 'RegisterController@index');
+
+
+Route::get('register', [
+    'as' => 'register',
+    'uses' => 'RegisterController@index'
+]);
 Route::post('register', 'RegisterController@index');
 
-Route::get('shop', 'ShopController@index');
 
-Route::get('ideas', 'IdeasController@index');
 
-Route::get('activities', 'ActivitiesController@index');
+Route::get('shop', [
+    'as' => 'shop',
+    'uses' => 'ShopController@index'
+]);
+
+
+
+Route::get('ideas', [
+    'as' => 'ideas',
+    'uses' => 'IdeasController@index'
+]);
+
+
+
+Route::get('activities', [
+    'as' => 'activities',
+    'uses' => 'ActivitiesController@index'
+]);
+
+
 
 Route::get('account', 'AccountController@index');
