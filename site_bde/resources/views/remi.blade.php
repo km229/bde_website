@@ -81,16 +81,16 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Rémi
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">rémi la grosse pute de merde </a>
-                    <a href="https://laracasts.com">LA</a>
-                    <a href="https://laravel-news.com">GROSSE</a>
-                    <a href="https://nova.laravel.com">PUTE</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="https://laravel.com/docs">Rémi</a>
+                    <a href="https://laracasts.com">C'est</a>
+                    <a href="https://laravel-news.com">Le</a>
+                    <a href="https://nova.laravel.com">Plus</a>
+                    <a href="https://forge.laravel.com">Beau</a>
+                    <a href="https://github.com/laravel/laravel">:)</a>
                 </div>
             </div>
         </div>
