@@ -3,14 +3,19 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-tofit=no">
+	<!-- Utilise Bootstrap -->
 	<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+	<!-- Utilise FontAwesome -->
 	<link href="{{ asset('fonts/fontawesome/css/all.min.css') }}" rel="stylesheet">
-	<link href="{{ asset('css/style.css') }}" rel="stylesheet">
+	<!-- Utilise CSS -->
+	<link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
+	<!-- Utilise LESS -->
+	<link rel="stylesheet/less" type="text/css" href="{{ asset('less/styles.less') }}">
 	<title>@yield('title')</title>
 </head>
 <body>
 	<header>
-		<inner>
+		<div class="inner">
 			<nav class="navbar navbar-expand-lg navbar">
 				<a class="navbar-brand" href="/">BDE CESI</a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,13 +44,25 @@
 					</li>
 				</ul>
 			</nav>
-		</inner>
+		</div>
 	</header>
 	@yield('body')
 	<footer>
-
+		<div class="inner">
+			<div class="footer-menu">
+				<div class="footer-bloc">
+				<div class="footer-title"></div>
+				<ul>
+					<li></li>
+					<li></li>
+					<li></li>
+				</ul>
+				</div>
+			</div>
+		</div>
 	</footer>
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
 </body>
 </html>
