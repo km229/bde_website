@@ -50,6 +50,16 @@ Route::get('ideas', [
     'uses' => 'IdeasController@index'
 ]);
 
+Route::post('ideas', [
+    'as' => 'ideas',
+    'uses' => 'IdeasController@index'
+]);
+
+Route::get('ideas/create', [
+    'as' => 'ideas_create',
+    'uses' => 'IdeasController@create'
+]);
+
 
 
 Route::get('activities', [
