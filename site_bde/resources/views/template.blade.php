@@ -34,7 +34,7 @@
 						</li>
 					</ul>
 				</div>
-			
+				
 				<ul class="navbar-nav" style="float : right;">
 					<li class="nav-item">
 						<a class="nav-link" href="{{ route('register') }}">Sign up</a>
@@ -51,12 +51,12 @@
 		<div class="inner">
 			<div class="footer-menu">
 				<div class="footer-bloc">
-				<div class="footer-title"></div>
-				<ul>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
+					<div class="footer-title"></div>
+					<ul>
+						<li></li>
+						<li></li>
+						<li></li>
+					</ul>
 				</div>
 			</div>
 		</div>
