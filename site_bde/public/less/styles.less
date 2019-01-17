@@ -1,5 +1,5 @@
 /* ------ COMMON ------ */
-body { min-width: @size-inner; width: 100%; margin: 0; padding: 0; color: @dark; font: normal 100%/1.4em 'Montserrat', sans-serif; background: #FFF }
+body { width: 100%; color: @dark; font: normal 100%/1.4em 'Montserrat', sans-serif; background: #FFF }
 p { margin: 0 0 1em }
 h1 { margin: 0 0 30px; font: 2.3em/1.1em 'MontserratBold', sans-serif; color: @yellow } 
 h2 { margin: 0 0 20px; font: 1.5em/1.1em 'Montserrat', sans-serif; text-transform: uppercase; color: @yellow }
@@ -17,18 +17,78 @@ a {
         &:hover { color: @yellow; background: #FFF }  
     }
 }
-.inner { position: relative; width: @size-inner; margin: 0 auto }
+.inner { position: relative; width: 95%; max-width: 1200px; margin: 0 auto }
+ul { margin-block-start: 0; margin-block-end: 0; margin-inline-start: 0; margin-inline-end: 0; padding-inline-start: 0 }
 
+/* ------ HEADER ------ */
+header {
+    background: @dark; height: 100px;
+    .inner { display: flex; flex-wrap: wrap; justify-content: space-between }
+    .logo {
+        height: 100px;
+        a { 
+            display: block; position: relative; height: 100%; width: auto; display: block;
+            img { position: absolute; height: 100%; width: auto }
+        }
+    }
+    .burger { display: none }
+    nav {
+        > ul {
+            position: relative; display: flex; height: 100%; list-style-type: none;
+        }
+        .level1, .level2 { display: flex; align-items: center; margin: 0 15px }
+        .level1 {
+            &:hover { 
+                text-decoration: underline; cursor: pointer;
+                a { color: @yellow; text-decoration: underline }
+            }
+        }
+        .level2 { 
+            color: @yellow; 
+            ul {
+                display: none; position: absolute; width: 100%; top: 100px; left: 0; background: #FFF; box-shadow: 3px 3px 5px @dark; text-align: center; list-style-type: none;
+                li { 
+                    color: @dark;
+                    a { 
+                        display: block; padding: 10px 0;
+                        &:hover { background: @yellow; color: #FFF }
+                    }
+                }
+            }
+            &:hover {
+                ul { display: block; z-index: 1 }
+            }
+        }
+    }
+}
 
 /* ------ FOOTER ------ */
 footer {
-    
+    background-color: @dark; padding: 30px 0;
+    .footer-menu { 
+        display: flex; flex-wrap: wrap; justify-content: space-between;
+        .footer-title { color: @yellow; text-transform: uppercase; margin-bottom: 20px }
+        .footer-bloc {
+            ul li { list-style-type: none; padding: 0 }
+            a { color: #FFF }
+            .social { 
+                display: flex; font-size: 25px;
+                a:hover { color: @yellow; text-decoration: none }
+            }
+        }
+    }
 }
 
-
+@media only screen and (min-width: 1px) and (max-width: 599px)
+{
+    /* ------ HEADER ------ */
+    header {
+        .burger { display: block }
+    }
+}
 
 /* ------ VARIABLES ------ */
-@size-inner: 1300px;
+@size-inner: 1200px;
 @dark: #000;
 @grey: #898989;
 @yellow: rgba(255, 194, 82);
