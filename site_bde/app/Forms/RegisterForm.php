@@ -10,17 +10,17 @@ class RegisterForm extends Form
     {
         $this->formOptions = [
             'method' => 'POST',
-            'url' => route('login')
+            'url' => route('register_check')
         ];
 
         $this
-            ->add('first_name', 'text')
-            ->add('last_name', 'text')
-            ->add('location', 'text')
-            ->add('email', 'text')
-            ->add('password', 'password')
-            ->add('submit', 'submit',[
-                'label' => 'Sign up'
-            ]);
-    }
+        ->add('first_name', 'text')
+        ->add('last_name', 'text')
+        ->add('location', 'text')
+        ->add('email', 'text')
+        ->add('password', 'password')
+        ->add('submit', 'submit',[
+            'label' => 'Sign up'
+        ]);
+}
 }
