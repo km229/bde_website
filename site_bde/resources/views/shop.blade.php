@@ -5,6 +5,6 @@ Ideas
 @endsection
 
 @section('body')
-	Coucou
+	Shop
 @endsection
 

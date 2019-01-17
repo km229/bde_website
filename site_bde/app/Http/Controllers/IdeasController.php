@@ -11,10 +11,10 @@ class IdeasController extends Controller
     //
     public function create(FormBuilder $formbuilder){
         $form = $formbuilder->create(IdeasForm::class);
-        return view('ideas_create', compact('form'));
+        return view('ideas.ideas_create', compact('form'));
     }
 
     public function index(){
-    	return view('ideas');
+    	return view('ideas.ideas');
     }
 }
