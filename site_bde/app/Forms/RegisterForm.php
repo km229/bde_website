@@ -14,13 +14,23 @@ class RegisterForm extends Form
         ];
 
         $this
-        ->add('first_name', 'text')
-        ->add('last_name', 'text')
-        ->add('location', 'text')
-        ->add('email', 'text')
-        ->add('password', 'password')
+        ->add('first_name', 'text',[
+            'rules'=>'required|min:1'
+        ])
+        ->add('last_name', 'text',[
+            'rules'=>'required|min:1'
+        ])
+        ->add('location', 'text',[
+            'rules'=>'required|min:1'
+        ])
+        ->add('email', 'text',[
+            'rules'=>'required|min:1'
+        ])
+        ->add('password', 'password',[
+            'rules'=>'required|min:1'
+        ])
         ->add('submit', 'submit',[
             'label' => 'Sign up'
         ]);
-}
+    }
 }

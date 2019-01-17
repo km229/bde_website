@@ -23,7 +23,10 @@ Route::get('login', [
     'as' => 'login',
     'uses' => 'LoginController@index'
 ]);
-
+Route::post('login', [
+    'as' => 'login_check',
+    'uses' => 'LoginController@check'
+]);
 
 Route::get('register', [
     'as' => 'register',

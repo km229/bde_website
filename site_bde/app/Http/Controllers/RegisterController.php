@@ -16,6 +16,11 @@ class RegisterController extends Controller
 
 	public function check(){
 		if(!empty($_POST)){
+
+			if(sizeof($test = DB::table('members')->get()->where('member_mail', $_POST['email'])) > 0){
+				return redirect(route('register'));
+			}
+
 			DB::table('members')->insert(
 				array(
 					'member_firstname' => $_POST['first_name'],

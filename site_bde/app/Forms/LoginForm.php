@@ -10,12 +10,17 @@ class LoginForm extends Form
     {
         $this->formOptions = [
             'method' => 'POST',
-            'url' => route('welcome')
+            'url' => route('login')
         ];
 
         $this
-            ->add('username', 'text')
-            ->add('password', 'password')
+            ->add('email', 'text',[
+                'label'=>'E-mail',
+                'rules'=>'required|min:1'
+            ])
+            ->add('password', 'password',[
+                'rules'=>'required|min:1'
+            ])
 
             ->add('submit', 'submit',[
                 'label' => 'Sign in'
