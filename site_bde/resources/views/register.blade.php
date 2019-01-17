@@ -5,7 +5,7 @@ Sign up
 @endsection
 
 @section('body')
-<div class="container">
-	{!! form($form) !!}
-</div>
+	<div class="container">
+		{!! form($form) !!}
+	</div>
 @endsection
