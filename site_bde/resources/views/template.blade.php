@@ -59,7 +59,7 @@
         
         <footer>
             <div class="inner">
-                <div class="footer-menu row">
+                <div class="footer-menu">
                     <div class="footer-bloc">
                         <div class="footer-title">Boite à idées</div>
                         <ul>
@@ -87,6 +87,12 @@
                             <li><a href=""><i class="fab fa-twitter"></i></a></li>
                         </ul>
                     </div>
+                </div>
+                <div class="footer-menu">
+                    <div class="footer-bloc"><a href="">Plan du site</a></div>
+                    <div class="footer-bloc"><a href="">Mentions légales</a></div>
+                    <div class="footer-bloc"><a href="">Contact</a></div>
+                    <div class="footer-bloc"><div>Développé par le groupe 2</div></div>
                 </div>
             </div>
         </footer>
