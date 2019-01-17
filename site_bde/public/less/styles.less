@@ -1,4 +1,35 @@
-.navbar {
-    background-color: black;
-    a { color: white }
+/* ------ COMMON ------ */
+body { overflow: hidden; position: relative; min-width: @size-inner; width: 100%; margin: 0; padding: 0; color: @dark; font: normal 100%/1.4em 'Montserrat', sans-serif; background: #FFF }
+p { margin: 0 0 1em }
+h1 { margin: 0 0 30px; font: 2.3em/1.1em 'MontserratBold', sans-serif; color: @yellow } 
+h2 { margin: 0 0 20px; font: 1.5em/1.1em 'Montserrat', sans-serif; text-transform: uppercase; color: @yellow }
+h3 { font: 1.2em/1.5em 'MontserratSemiBold',sans-serif }
+strong { font-weight: normal; font-family: 'MontserratBold', sans-serif }
+a { 
+    text-decoration: none; color: @yellow;
+    &:hover { text-decoration: underline }
 }
+.bloc-link a { display: block; z-index: 2; position: absolute; top: 0; left: 0; width: 100%; height: 100% }
+.button {
+    margin: 0; text-align: center;
+    a {
+        position: relative; display: block; padding: 0 50px; font: .9em/50px 'Montserrat', sans-serif; color: #FFF; text-decoration: none;  border: 1px solid @yellow; cursor: pointer; background: @yellow;
+        &:hover { color: @yellow; background: #FFF }  
+    }
+}
+.inner { position: relative; width: @size-inner; margin: 0 auto }
+
+
+/* ------ FOOTER ------ */
+footer {
+    
+}
+
+
+
+/* ------ VARIABLES ------ */
+@size-inner: 1300px;
+@dark: #000;
+@grey: #898989;
+@yellow: rgba(255, 194, 82);
+
