@@ -25,9 +25,9 @@
             <div class="burger"><i class="fas fa-bars"></i></div>
             <nav>
                 <ul>
-                    <li class="level1"><a href="activities">Activities</a></li>
-                    <li class="level1"><a href="ideas">Ideas</a></li>
-                    <li class="level1"><a href="shop">Shop</a></li>
+                    <li class="level1"><a href="/activities">Activities</a></li>
+                    <li class="level1"><a href="/ideas">Ideas</a></li>
+                    <li class="level1"><a href="/shop">Shop</a></li>
                     <li class="level2">
                         <?php
                         if(isset($_SESSION["name"])){
@@ -39,17 +39,17 @@
                         <ul>
                             <?php
                             if(isset($_SESSION["name"])){
-                                echo "<li><a href=\"\">My orders</a></li>"
-                                ."<li><a href=\"\">My informations</a></li>"
-                                . "<li><a href=\"\">Logout</a></li>";
+                                echo "<li><a href=\"/\">My orders</a></li>"
+                                ."<li><a href=\"/\">My informations</a></li>"
+                                . "<li><a href=\"/\">Logout</a></li>";
                             } else {
-                                echo "<li><a href=\"register\">Sign up</a></li>"
-                                ."<li><a href=\"login\">Sign in</a></li>";
+                                echo "<li><a href=\"/register\">Sign up</a></li>"
+                                ."<li><a href=\"/login\">Sign in</a></li>";
                             }
                             ?>
                         </ul>
                     </li>
-                    <li class="level1"><a href="test">Cart</a></li>
+                    <li class="level1"><a href="/account">Cart</a></li>
                 </ul>
             </nav>
         </div>
@@ -66,20 +66,21 @@
                 <div class="footer-bloc">
                     <div class="footer-title">Boite à idées</div>
                     <ul>
-                        <li><a href="">Ajouter une idée</a></li>
-                        <li><a href="">Voir la liste des idées</a></li>
+                        <li><a href="/ideas/create">Ajouter une idée</a></li>
+                        <li><a href="/ideas">Voir la liste des idées</a></li>
                     </ul>
                 </div>
                 <div class="footer-bloc">
                     <div class="footer-title">Activités</div>
                     <ul>
-                        <li><a href="">Liste des activités</a></li>
+                        <li><a href="/activities">Liste des activités</a></li>
+                        <li><a href="/activities/create">Ajouter une activité</a></li>
                     </ul>
                 </div>
                 <div class="footer-bloc">
                     <div class="footer-title">Boutique</div>
                     <ul>
-                        <li><a href="">Accès</a></li>
+                        <li><a href="/shop">Accès</a></li>
                         <li><a href="">Rechercher un produit</a></li>
                     </ul>
                 </div>

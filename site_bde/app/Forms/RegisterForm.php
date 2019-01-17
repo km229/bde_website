@@ -23,7 +23,7 @@ class RegisterForm extends Form
         ->add('location', 'text',[
             'rules'=>'required|min:1'
         ])
-        ->add('email', 'text',[
+        ->add('email', 'email',[
             'rules'=>'required|min:1'
         ])
         ->add('password', 'password',[

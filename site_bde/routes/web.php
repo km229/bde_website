@@ -42,6 +42,14 @@ Route::get('shop', [
     'as' => 'shop',
     'uses' => 'ShopController@index'
 ]);
+Route::get('shop/add', [
+    'as' => 'shop_add',
+    'uses' => 'ShopController@add'
+]);
+Route::post('shop/add', [
+    'as' => 'shop_add_check',
+    'uses' => 'ShopController@add_check'
+]);
 
 
 /*---IDEAS---*/
