@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-    <title> Site </title>
+Site
 @endsection
 
 @section('body')
@@ -33,4 +33,5 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 @endsection
