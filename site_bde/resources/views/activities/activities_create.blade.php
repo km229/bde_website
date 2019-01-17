@@ -1,10 +1,12 @@
 @extends('template')
 
 @section('title')
-Ideas
+Activities
 @endsection
 
 @section('body')
-	Activities
+<div class="container">
+	{!! form($form) !!}
+</div>
 @endsection
 

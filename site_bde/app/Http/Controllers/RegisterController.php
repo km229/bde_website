@@ -27,7 +27,7 @@ class RegisterController extends Controller
 					'member_lastname' => $_POST['last_name'],
 					'member_mail' => $_POST['email'],
 					'member_password' => $_POST['password'],
-					'is_admin' => 0,
+					'is_admin' => 0
 				)
 			);
 			return redirect(route('login'));
