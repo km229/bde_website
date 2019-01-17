@@ -55,7 +55,11 @@
             </div>
         </header>
         
-        @yield('body')
+        <main>
+            <div class="inner">
+                @yield('body')
+            </div>
+        </main>
         
         <footer>
             <div class="inner">
@@ -92,7 +96,7 @@
                     <div class="footer-bloc"><a href="">Plan du site</a></div>
                     <div class="footer-bloc"><a href="">Mentions légales</a></div>
                     <div class="footer-bloc"><a href="">Contact</a></div>
-                    <div class="footer-bloc"><div>Développé par le groupe 2</div></div>
+                    <div class="footer-bloc"><div>Développé par le groupe 1</div></div>
                 </div>
             </div>
         </footer>
@@ -104,8 +108,12 @@
             $(".burger").click(function(){
                 if($("header").attr("class")===""){
                     $("header").addClass("menu-open");
+                    $(".fa-bars").addClass("fa-times");
+                    $(".fa-times").removeClass("fa-bars");
                 } else {
                     $("header").removeClass("menu-open");
+                    $(".fa-times").addClass("fa-bars");
+                    $(".fa-bars").removeClass("fa-times");
                 }
             });
         </script>

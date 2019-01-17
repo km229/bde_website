@@ -5,7 +5,7 @@ Sign in
 @endsection
 
 @section('body')
-<h1 class="d-none">Welcome back !</h1>
+<h1>Welcome back !</h1>
 
 <div class="container">
 	{!! form($form) !!}
