@@ -17,16 +17,16 @@
     </head>
     <body>
         
-        <header>
+        <header class="">
             <div class="inner">
                 <div class="logo">
-                    <a href=""><img src='{{ asset('img/logo.jpg') }}'></a>
+                    <a href="/"><img src='{{ asset('img/logo.jpg') }}'></a>
                 </div>
                 <div class="burger"><i class="fas fa-bars"></i></div>
                 <nav>
                     <ul>
                         <li class="level1"><a href="activities">Activities</a></li>
-                        <li class="level1"><a href="ideas/ideas">Ideas</a></li>
+                        <li class="level1"><a href="ideas">Ideas</a></li>
                         <li class="level1"><a href="shop">Shop</a></li>
                         <li class="level2">
                             <?php
@@ -94,5 +94,14 @@
         <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
+        <script>
+            $(".burger").click(function(){
+                if($("header").attr("class")===""){
+                    $("header").addClass("menu-open");
+                } else {
+                    $("header").removeClass("menu-open");
+                }
+            });
+        </script>
     </body>
 </html>
