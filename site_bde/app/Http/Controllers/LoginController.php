@@ -24,7 +24,7 @@ class LoginController extends Controller
 		if(!empty($_POST)){
 
 			if(sizeof($member = DB::table('members')->get()->where('member_mail', $_POST['email'])) == 0){
-				return redirect(route('login'));
+				return redirect(route('login'))->with('error', 'no_email');
 			}
 
 			$index = $member->keys()[0];
@@ -33,12 +33,12 @@ class LoginController extends Controller
 
 			if(!password_verify($_POST['password'], $password)){
 
-				return redirect(route('login'));
+				return redirect(route('login'))->with('error', 'login_error');
 			}
 
 			$_SESSION['name'] = $member[$index]->member_firstname;
 
-			return redirect(route('welcome'));
+			return redirect(route('welcome'))->with('message', 'welcome_back');
 		}
 	}
 
