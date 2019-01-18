@@ -31,5 +31,51 @@ Site
 		<span class="sr-only">Next</span>
 	</a>
 </div>
+<section>
+	<article>
+		<h1>Presentation</h1>
+		Welcome to the BDE website ! </br>
+		Each CESI centers have a BDE (Student Office) to animate life on campus. It represents all the students of the school, whether the IE CESI, the EXIA or the Cesi Alternance. The BDE is an association of students from the same school elected by their students. </br>
+		This website allows students to give event ideas to BDE members, to register to participate and also to publish, like and comment pictures of past events. There is also a super nice equipment store that can support us!
+	</article>
+	<article>
+		<h2>Activities</h2>
+		<div class="container">
+  			<div class="row">
+   				<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+   				</div>
+    			<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+   				</div>
+   				<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+    			</div>
+				<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+    			</div>
+  			</div>
+		</div>
+	</article>
+	<article>
+		<h2>Boutique</h2>
+		<div class="container">
+  			<div class="row">
+   				<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+   				</div>
+    			<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+   				</div>
+   				<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+    			</div>
+				<div class="col-sm">
+					<img class="d-block w-100" SRC="img/lol.jpg">
+    			</div>
+  			</div>
+		</div>
+	</article>
+</section>
 
 @endsection
