@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Forms\ShopForm;
+
+use App\Forms\ShopProductForm;
+use App\Forms\ShopCategoryForm;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
@@ -19,13 +21,13 @@ class ShopController extends Controller
 
     }
 
-    public function add(FormBuilder $formbuilder){
-		$form = $formbuilder->create(ShopForm::class);
-		return view('shop.shop_add', compact('form'));
-	}
+    public function add_product(FormBuilder $formbuilder){
+        $form = $formbuilder->create(ShopProductForm::class);
+        return view('shop.shop_add_product', compact('form'));
+    }
 
-	 public function add_check(){
-		if(!empty($_POST)){
+    public function add_product_check(){
+        if(!empty($_POST)){
 
             DB::table('product')->insert(
                 array(
@@ -36,7 +38,16 @@ class ShopController extends Controller
             );
             return redirect(route('shop'));
         }
-	}
+    }
+
+    public function add_category(FormBuilder $formbuilder){
+        $form = $formbuilder->create(ShopCategoryForm::class);
+        return view('shop.shop_add_category', compact('form'));
+    }
+
+    public function add_category_check(){
+        return redirect(route('shop'));
+    }
+
+
 }
-
-

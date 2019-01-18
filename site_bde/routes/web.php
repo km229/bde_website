@@ -46,13 +46,21 @@ Route::get('shop', [
     'as' => 'shop',
     'uses' => 'ShopController@index'
 ]);
-Route::get('shop/add', [
-    'as' => 'shop_add',
-    'uses' => 'ShopController@add'
+Route::get('shop/add/product', [
+    'as' => 'shop_add_product',
+    'uses' => 'ShopController@add_product'
 ]);
-Route::post('shop/add', [
-    'as' => 'shop_add_check',
-    'uses' => 'ShopController@add_check'
+Route::post('shop/add/product', [
+    'as' => 'shop_add_product_check',
+    'uses' => 'ShopController@add_product_check'
+]);
+Route::get('shop/add/category', [
+    'as' => 'shop_add_category',
+    'uses' => 'ShopController@add_category'
+]);
+Route::post('shop/add/category', [
+    'as' => 'shop_add_category_check',
+    'uses' => 'ShopController@add_category_check'
 ]);
 Route::get('shop/cart', [
     'as' => 'cart',
@@ -98,6 +106,7 @@ Route::post('activities/create', [
 
 
 Route::get('account', 'AccountController@index');
+Route::get('account/orders', 'AccountController@orders');
 
 
 /*---MENTIONS---*/

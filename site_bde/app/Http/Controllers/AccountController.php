@@ -10,4 +10,8 @@ class AccountController extends Controller
     public function index(){
         return view('account');
     }
+
+    public function orders(){
+        return view('orders');
+    }
 }

@@ -26,13 +26,16 @@ class LoginController extends Controller
 			if(sizeof($member = DB::table('members')->get()->where('member_mail', $_POST['email'])) == 0){
 				return redirect(route('login'));
 			}
+
 			$password = $member[0]->member_password;
 
 			if($password !== $_POST['password']){
 				return redirect(route('login'));
 			}
 
-			$_SESSION['name'] = $_POST['email'];
+
+
+			$_SESSION['name'] = $member[0]->member_firstname;
 			$_SESSION['password'] = $_POST['password'];
 
 			return redirect(route('welcome'));

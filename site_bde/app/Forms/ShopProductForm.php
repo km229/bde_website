@@ -4,13 +4,13 @@ namespace App\Forms;
 
 use Kris\LaravelFormBuilder\Form;
 
-class ShopForm extends Form
+class ShopProductForm extends Form
 {
 	public function buildForm()
 	{
 		$this->formOptions = [
 			'method' => 'POST',
-			'url' => route('shop_add_check')
+			'url' => route('shop_add_product_check')
 		];
 
 		$this

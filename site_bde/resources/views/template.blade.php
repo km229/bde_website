@@ -45,8 +45,8 @@ if(!isset($_SESSION)){
                         <ul>
                             <?php
                             if(isset($_SESSION["name"])){
-                                echo "<li><a href=\"/\">My orders</a></li>"
-                                ."<li><a href=\"/\">My informations</a></li>"
+                                echo "<li><a href=\"/account/orders\">My orders</a></li>"
+                                ."<li><a href=\"/account\">My informations</a></li>"
                                 . "<li><a href=\"/logout\">Logout</a></li>";
                             } else {
                                 echo "<li><a href=\"/register\">Sign up</a></li>"
