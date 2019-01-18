@@ -7,12 +7,9 @@ Ideas
 @section('body')
 	<h2 id="test">Suggestion box</h2>
 	<article>	
-		<p>Suggestion box allows students of the school to give event ideas to BDE members.</p>
+		<p>Suggestion box allows students of the school to give event ideas to BDE members. Don't hesitate to add ideas !</p>
 	</article>
-	<style>
-    	.dotted {border: 5px dotted #fff; border-style: none none dotted; }
-	</style>	
-	<hr class='dotted' />
+	
 <div class="row">
 
     <div class="col-lg-3">
@@ -28,6 +25,9 @@ Ideas
                 </span>
                 </div>
             </div>
+		</div>
+		<div class="list-group">
+            <a href="/ideas/create" class="list-group-item button">Create an idea</a>
         </div>
     </div>
     <!-- /.col-lg-3 -->
