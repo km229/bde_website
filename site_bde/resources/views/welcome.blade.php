@@ -58,7 +58,7 @@ Site
 		</div>
 	</article>
 	<article>
-		<h2>Boutique</h2>
+		<h2>Shop</h2>
 		<div class="container">
   			<div class="row">
    				<div class="col-sm">
