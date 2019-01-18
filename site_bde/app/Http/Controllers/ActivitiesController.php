@@ -11,7 +11,9 @@ class ActivitiesController extends Controller
 {
     //
 	public function index(){
-		return view('activities.activities');
+		$activities = DB::table('activity')->get();
+
+        return view('activities.activities', compact("activities"));
 	}
 
 	public function create(FormBuilder $formbuilder){
