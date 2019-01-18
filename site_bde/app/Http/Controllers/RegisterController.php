@@ -23,10 +23,12 @@ class RegisterController extends Controller
 		if(!empty($_POST)){
 
 			if(sizeof($test = DB::table('members')->get()->where('member_mail', $_POST['email'])) > 0){
-				$error = "email_exists";
 				return redirect(route('register'))->with('error', 'email_exists');
 			}
 
+			if(isset($_POST['password']) && !preg_match('(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}', $_POST['password'])){
+				return redirect(route('register'))->with('error', 'mdp_error');
+			}
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 			DB::table('members')->insert(

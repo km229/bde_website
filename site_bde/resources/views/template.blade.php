@@ -110,6 +110,7 @@ if(!isset($_SESSION)){
     <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
+    @yield('script')
     <script>
         $(".burger").click(function(){
             if($("header").attr("class")===""){
