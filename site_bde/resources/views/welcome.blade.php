@@ -16,10 +16,10 @@ Site
 			<img class="d-block w-100" src="{{ asset('img/lol.jpg') }}" alt="First slide">
 		</div>
 		<div class="carousel-item">
-			<img class="d-block w-100" src="{{ asset('img/lul.png') }}" alt="Second slide">
+			<img class="d-block w-100" src="{{ asset('img/lul.jpg') }}" alt="Second slide">
 		</div>
 		<div class="carousel-item">
-			<img class="d-block w-100" src="{{ asset('img/lol.jpg') }}" alt="Third slide">
+			<img class="d-block w-100" src="{{ asset('img/lil.jpg') }}" alt="Third slide">
 		</div>
 	</div>
 	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
