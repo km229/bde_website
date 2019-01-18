@@ -24,7 +24,7 @@ class RegisterForm extends Form
             'rules'=>'required|min:1'
         ])
         ->add('email', 'email',[
-            'rules'=>'required|min:1'
+            'rules'=>'required|min:1|email'
         ])
         ->add('password', 'password',[
             'rules'=>'required|min:1'

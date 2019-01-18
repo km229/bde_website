@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Forms\RegisterForm;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
+
+if(!isset($_SESSION)){
+	session_start();
+}
 
 class RegisterController extends Controller
 {
@@ -18,7 +23,8 @@ class RegisterController extends Controller
 		if(!empty($_POST)){
 
 			if(sizeof($test = DB::table('members')->get()->where('member_mail', $_POST['email'])) > 0){
-				return redirect(route('register'));
+				$error = "email_exists";
+				return redirect(route('register'))->with('error', 'email_exists');
 			}
 
 			DB::table('members')->insert(
@@ -30,7 +36,8 @@ class RegisterController extends Controller
 					'is_admin' => 0
 				)
 			);
-			return redirect(route('login'));
+			$_SESSION["name"]=$_POST["first_name"];
+			return redirect(route('welcome'))->with('message', 'hello');
 		}
 	}
 }

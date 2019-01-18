@@ -1,3 +1,9 @@
+<?php
+if(!isset($_SESSION)){
+    session_start();
+} 
+?>
+
 @extends('template')
 
 @section('title')
@@ -77,5 +83,16 @@ Site
 		</div>
 	</article>
 </section>
+
+<?php
+	if(session()->has('message') && session('message')==="hello" && $_SESSION("name")){
+		echo "
+		<div class=\"alert alert-success\">
+		<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+			<strong>Welcome ". $_SESSION["name"] ." !</strong>
+		</div>
+		";
+	}
+?>
 
 @endsection
