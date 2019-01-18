@@ -83,12 +83,6 @@ Shop
         </div>
     </div>
 
-    @script
-    $(.buttoncat).onclick(function (){
-
-    })
-
-    @endscript
 
 @endsection
 

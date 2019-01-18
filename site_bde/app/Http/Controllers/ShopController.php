@@ -30,12 +30,13 @@ class ShopController extends Controller
 
         if(!empty($_POST)){
 
+            $cat = $_POST['category']+1;
             DB::table('product')->insert(
                 array(
                     'product_name' => $_POST['name'],
                     'product_desc' => $_POST['description'],
                     'product_price' => $_POST['price'],
-                    'category_id_fk' => $_POST['category']
+                    'category_id_fk' => $cat
                 )
             );
             return redirect(route('shop'));
