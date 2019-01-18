@@ -1,3 +1,9 @@
+<?php 
+if(!isset($_SESSION)){
+    session_start();
+} 
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,7 +22,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
-    
+
     <header class="">
         <div class="inner">
             <div class="logo">
@@ -41,7 +47,7 @@
                             if(isset($_SESSION["name"])){
                                 echo "<li><a href=\"/\">My orders</a></li>"
                                 ."<li><a href=\"/\">My informations</a></li>"
-                                . "<li><a href=\"/\">Logout</a></li>";
+                                . "<li><a href=\"/logout\">Logout</a></li>";
                             } else {
                                 echo "<li><a href=\"/register\">Sign up</a></li>"
                                 ."<li><a href=\"/login\">Sign in</a></li>";
@@ -49,7 +55,7 @@
                             ?>
                         </ul>
                     </li>
-                    <li class="level1"><a href="/account">Cart</a></li>
+                    <li class="level1"><a href="/shop/cart">Cart</a></li>
                 </ul>
             </nav>
         </div>

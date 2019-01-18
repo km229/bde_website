@@ -20,6 +20,10 @@ Route::post('login', [
     'as' => 'login_check',
     'uses' => 'LoginController@check'
 ]);
+Route::get('logout', [
+    'as' => 'logout',
+    'uses' => 'LoginController@logout'
+]);
 
 
 /*---REGISTER---*/
@@ -49,6 +53,10 @@ Route::get('shop/add', [
 Route::post('shop/add', [
     'as' => 'shop_add_check',
     'uses' => 'ShopController@add_check'
+]);
+Route::get('shop/cart', [
+    'as' => 'cart',
+    'uses' => 'CartController@index'
 ]);
 
 
@@ -90,3 +98,12 @@ Route::post('activities/create', [
 
 
 Route::get('account', 'AccountController@index');
+
+
+/*---MENTIONS---*/
+
+
+Route::get('legal', [
+    'as' => 'legal',
+    'uses' => 'LegalController@index'
+]);
