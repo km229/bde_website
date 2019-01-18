@@ -11,7 +11,12 @@ class ShopController extends Controller
 {
     //
     public function index(){
-        return view('shop.shop');
+        $products = DB::table('product')->get();
+        $category = DB::table('category')->get();
+
+
+        return view('shop.shop', compact("products"), compact("category"));
+
     }
 
     public function add(FormBuilder $formbuilder){
@@ -33,3 +38,5 @@ class ShopController extends Controller
         }
 	}
 }
+
+
