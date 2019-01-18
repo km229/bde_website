@@ -23,7 +23,12 @@ class LoginController extends Controller
 	public function check(){
 		if(!empty($_POST)){
 
-			if(sizeof($test = DB::table('members')->get()->where('member_mail', $_POST['email'])) == 0){
+			if(sizeof($member = DB::table('members')->get()->where('member_mail', $_POST['email'])) == 0){
+				return redirect(route('login'));
+			}
+			$password = $member[0]->member_password;
+
+			if($password !== $_POST['password']){
 				return redirect(route('login'));
 			}
 
