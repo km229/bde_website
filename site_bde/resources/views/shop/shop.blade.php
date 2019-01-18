@@ -11,7 +11,7 @@ Shop
 
         <h1 class="my-4">BDE CESI Saint-Nazaire</h1>
         <div class="card my-4">
-            <h5 class="card-header">Search</h5>
+            <h5 class="card-header card-search">Search</h5>
             <div class="card-body">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
