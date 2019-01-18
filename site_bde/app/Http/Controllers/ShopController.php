@@ -16,9 +16,7 @@ class ShopController extends Controller
         $products = DB::table('product')->get();
         $category = DB::table('category')->get();
 
-
         return view('shop.shop', compact("products"), compact("category"));
-
     }
 
     public function add_product(FormBuilder $formbuilder){
@@ -27,13 +25,17 @@ class ShopController extends Controller
     }
 
     public function add_product_check(){
+
+
+
         if(!empty($_POST)){
 
             DB::table('product')->insert(
                 array(
                     'product_name' => $_POST['name'],
                     'product_desc' => $_POST['description'],
-                    'product_price' => $_POST['price']
+                    'product_price' => $_POST['price'],
+                    'category_id_fk' => $_POST['category']
                 )
             );
             return redirect(route('shop'));
@@ -46,6 +48,9 @@ class ShopController extends Controller
     }
 
     public function add_category_check(){
+        DB::table('category')->insert(
+            array(
+                'category_name' => $_POST['name']));
         return redirect(route('shop'));
     }
 

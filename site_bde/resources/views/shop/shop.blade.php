@@ -23,7 +23,7 @@ Shop
         </div>
         <div class="list-group">
             @foreach ($category as $cat)
-            <a href="#" class="list-group-item"><?php echo $cat -> category_name ?></a>
+            <a href="#" id="<?php echo $cat -> category_id ?>" class="list-group-item buttoncat"><?php echo $cat -> category_name ?></a>
             @endforeach
 
         </div>
@@ -62,8 +62,9 @@ Shop
         </div>
 
         <div class="row">
+
     @foreach ($products as $product)
-        <div class="col-lg-4 col-md-6 mb-4">
+        <div class="col-lg-4 col-md-6 mb-4 item <?php  echo $product -> category_id_fk ?>">
             <div class="card h-100">
                 <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
                 <div class="card-body">
@@ -81,5 +82,13 @@ Shop
     @endforeach
         </div>
     </div>
+
+    @script
+    $(.buttoncat).onclick(function (){
+
+    })
+
+    @endscript
+
 @endsection
 
