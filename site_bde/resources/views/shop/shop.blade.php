@@ -20,6 +20,10 @@ Shop
                 </span>
                 </div>
             </div>
+            <div>
+            <a href="/shop/add/product" class="list-group-item button">add a product</a>
+            <a href="/shop/add/category" class="list-group-item button">add an category</a>
+        </div>
         </div>
         <div class="list-group">
             @foreach ($category as $cat)
