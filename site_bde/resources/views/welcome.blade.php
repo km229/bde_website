@@ -12,6 +12,7 @@ Site
 
 @section('body')
 
+<section>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
 	<ol class="carousel-indicators">
 		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -20,13 +21,13 @@ Site
 	</ol>
 	<div class="carousel-inner">
 		<div class="carousel-item active">
-			<img class="d-block w-100" src="{{ asset('img/lol.jpg') }}" alt="First slide">
+			<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="First slide">
 		</div>
 		<div class="carousel-item">
-			<img class="d-block w-100" src="{{ asset('img/lul.jpg') }}" alt="Second slide">
+			<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Second slide">
 		</div>
 		<div class="carousel-item">
-			<img class="d-block w-100" src="{{ asset('img/lil.jpg') }}" alt="Third slide">
+			<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Third slide">
 		</div>
 	</div>
 	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -38,47 +39,47 @@ Site
 		<span class="sr-only">Next</span>
 	</a>
 </div>
+</section>
 
 <section>
-	<h2  id="test">Presentation</h2>
+	<h1>Welcome to the BDE CESI website !</h1>
 	<article> 
-		<p>Welcome to the BDE website ! </p>
 		<p>Each CESI centers have a BDE (Student Office) to animate life on campus. It represents all the students of the school, whether the IE CESI, the EXIA or the Cesi Alternance. The BDE is an association of students from the same school elected by their students. </p>
 		<p>This website allows students to give event ideas to BDE members, to register to participate and also to publish, like and comment pictures of past events. There is also a super nice equipment store that can support us!</p>
 	</article>
 	<article>
-		<h2  id="test">Activities</h2>
+		<h2>Activities</h2>
 		<div class="container">
   			<div class="row">
-   				<div class="col-sm">
+   				<div class="col-sm-12 col-md-6 col-lg-3">
+					<img class="d-block w-100" SRC="img/group.jpg">
+   				</div>
+    			<div class="col-sm-12 col-md-6 col-lg-3">
 					<img class="d-block w-100" SRC="img/lol.jpg">
    				</div>
-    			<div class="col-sm">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-   				</div>
-   				<div class="col-sm">
+   				<div class="col-sm-12 col-md-6 col-lg-3">
 					<img class="d-block w-100" SRC="img/lol.jpg">
     			</div>
-				<div class="col-sm">
+				<div class="col-sm-12 col-md-6 col-lg-3">
 					<img class="d-block w-100" SRC="img/lol.jpg">
     			</div>
   			</div>
 		</div>
 	</article>
 	<article>
-		<h2  id="test">Shop</h2>
+		<h2>Best products</h2>
 		<div class="container">
   			<div class="row">
-   				<div class="col-sm">
+   				<div class="col-sm-12 col-md-6 col-lg-3">
 					<img class="d-block w-100" SRC="img/lol.jpg">
    				</div>
-    			<div class="col-sm">
+    			<div class="col-sm-12 col-md-6 col-lg-3">
 					<img class="d-block w-100" SRC="img/lol.jpg">
    				</div>
-   				<div class="col-sm">
+   				<div class="col-sm-12 col-md-6 col-lg-3">
 					<img class="d-block w-100" SRC="img/lol.jpg">
     			</div>
-				<div class="col-sm">
+				<div class="col-sm-12 col-md-6 col-lg-3">
 					<img class="d-block w-100" SRC="img/lol.jpg">
     			</div>
   			</div>
