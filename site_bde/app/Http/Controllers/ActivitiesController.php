@@ -28,7 +28,8 @@ class ActivitiesController extends Controller
                 array(
                     'activity_title' => $_POST['name'],
                     'activity_desc' => $_POST['description'],
-                    'activity_date' => $_POST['date']
+                    'activity_date' => $_POST['date'],
+                    'activity_img' => $_POST['image']
                 )
             );
             return redirect(route('activities'));

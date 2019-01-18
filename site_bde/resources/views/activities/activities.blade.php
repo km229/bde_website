@@ -10,7 +10,7 @@ Activities
 
 		<h1 class="my-4">BDE CESI Saint-Nazaire</h1>
 		<div class="card my-4">
-			<h5 class="card-header card-search">Search</h5>
+			<h5 class="card-header black">Search</h5>
 			<div class="card-body">
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search for...">
@@ -19,10 +19,11 @@ Activities
 					</span>
 				</div>
 			</div>
+			<div class="list-group">
+				<a href="/activities/create" class="list-group-item button">Create an activity</a>
+			</div>
 		</div>
-		<div class="list-group">
-            <a href="/activities/create" class="list-group-item button">Create an activity</a>
-        </div>
+		
 
 
 	</div>
