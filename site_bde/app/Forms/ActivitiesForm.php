@@ -15,10 +15,18 @@ class ActivitiesForm extends Form
 		];
 
 		$this
-		->add('name', 'text')
-		->add('description', 'textarea')
-		->add('image', 'file')
-		->add('date', 'date')
+		->add('name', 'text',[
+			'rules' => 'required|min:1'
+		])
+		->add('description', 'textarea',[
+			'rules' => 'required|min:1'
+		])
+		->add('image', 'file',[
+			'rules' => 'required|min:1'
+		])
+		->add('date', 'date',[
+			'rules' => 'required'
+		])
 		->add('submit', 'submit');
 	}
 }
