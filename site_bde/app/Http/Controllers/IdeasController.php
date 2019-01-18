@@ -16,7 +16,11 @@ class IdeasController extends Controller
     }
 
     public function index(){
-    	return view('ideas.ideas');
+        $ideas = DB::table('idea')->get();
+
+
+        return view('ideas.ideas', compact("ideas"));
+
     }
 
     public function create_check(){

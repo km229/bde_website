@@ -1,12 +1,15 @@
 /* ------ COMMON ------ */
-body { width: 100%; color: #FFF; background: @dark; font: normal 100%/1.4em 'Montserrat', sans-serif }
+body { overflow-x: hidden; width: 100%; color: #FFF; background: @dark; font: normal 100%/1.4em 'Montserrat', sans-serif }
 p { margin: 0 0 1em }
 h1 { margin: 0 0 30px; font: 2.3em/1.1em 'MontserratBold', sans-serif; color: @yellow } 
 h2 { margin: 0 0 20px; font: 1.5em/1.1em 'Montserrat', sans-serif; text-transform: uppercase; color: @yellow }
 h3 { font: 1.2em/1.5em 'MontserratSemiBold',sans-serif }
 strong { font-weight: normal; font-family: 'MontserratBold', sans-serif }
+#test{
+    padding: 25px 0px 25px 70px;	
+}
 a { 
-    display: block; text-decoration: none; color: @yellow;
+    text-decoration: none; color: @yellow;
     &:hover { color: @yellow; text-decoration: underline }
 }
 .bloc-link a { display: block; z-index: 2; position: absolute; top: 0; left: 0; width: 100%; height: 100% }
@@ -19,6 +22,7 @@ a {
 }
 .inner { position: relative; width: 95%; max-width: 1200px; margin: 0 auto }
 ul { margin-block-start: 0; margin-block-end: 0; margin-inline-start: 0; margin-inline-end: 0; padding-inline-start: 0 }
+.alert { z-index: 2; position: fixed; top: 25px; width: 95%; max-width: 1200px }
 
 /* ------ HEADER ------ */
 header {
