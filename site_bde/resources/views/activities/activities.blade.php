@@ -20,6 +20,9 @@ Activities
 				</div>
 			</div>
 		</div>
+		<div class="list-group">
+            <a href="/activities/create" class="list-group-item button">Create an activity</a>
+        </div>
 
 
 	</div>
