@@ -31,14 +31,12 @@ class LoginController extends Controller
 
 			$password = $member[$index]->member_password;
 
-			if($password !== $_POST['password']){
+			if(!password_verify($_POST['password'], $password)){
+
 				return redirect(route('login'));
 			}
 
-
-
 			$_SESSION['name'] = $member[$index]->member_firstname;
-			$_SESSION['password'] = $_POST['password'];
 
 			return redirect(route('welcome'));
 		}

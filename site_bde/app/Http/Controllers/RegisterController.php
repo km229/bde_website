@@ -27,12 +27,14 @@ class RegisterController extends Controller
 				return redirect(route('register'))->with('error', 'email_exists');
 			}
 
+			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
 			DB::table('members')->insert(
 				array(
 					'member_firstname' => $_POST['first_name'],
 					'member_lastname' => $_POST['last_name'],
 					'member_mail' => $_POST['email'],
-					'member_password' => $_POST['password'],
+					'member_password' => $password,
 					'is_admin' => 0
 				)
 			);
