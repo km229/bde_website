@@ -27,7 +27,9 @@ class LoginController extends Controller
 				return redirect(route('login'));
 			}
 
-			$password = $member[0]->member_password;
+			$index = $member->keys()[0];
+
+			$password = $member[$index]->member_password;
 
 			if($password !== $_POST['password']){
 				return redirect(route('login'));
@@ -35,7 +37,7 @@ class LoginController extends Controller
 
 
 
-			$_SESSION['name'] = $member[0]->member_firstname;
+			$_SESSION['name'] = $member[$index]->member_firstname;
 			$_SESSION['password'] = $_POST['password'];
 
 			return redirect(route('welcome'));
