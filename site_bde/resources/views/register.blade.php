@@ -9,10 +9,12 @@ Sign up
 <?php
 	if(session('error')==="email_exists"){
 		echo "<div class=\"alert alert-danger\">
+		<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
 		<strong>The email you provided already exists !</strong></div>";
 	}
 	if(session('error')==="mdp_error"){
 		echo "<div class=\"alert alert-danger\">
+		<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
 		<strong>The password entered does not meet the conditions !</strong></div>";
 	}
 ?>

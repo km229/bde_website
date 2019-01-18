@@ -26,7 +26,7 @@ class RegisterController extends Controller
 				return redirect(route('register'))->with('error', 'email_exists');
 			}
 
-			if(isset($_POST['password']) && !preg_match('(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}', $_POST['password'])){
+			if(isset($_POST['password']) && !preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/', $_POST['password'])){
 				return redirect(route('register'))->with('error', 'mdp_error');
 			}
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
