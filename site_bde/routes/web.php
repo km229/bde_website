@@ -105,7 +105,10 @@ Route::post('activities/create', [
 /*---ACCOUNT---*/
 
 
-Route::get('account', 'AccountController@index');
+Route::get('account', [
+    'as' => 'account',
+    'uses' => 'AccountController@index'
+]);
 Route::get('account/orders', 'AccountController@orders');
 
 

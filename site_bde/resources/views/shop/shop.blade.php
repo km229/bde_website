@@ -11,7 +11,7 @@ Shop
 
         <h1 class="my-4">BDE CESI Saint-Nazaire</h1>
         <div class="card my-4">
-            <h5 class="card-header card-search">Search</h5>
+            <h5 class="card-header card-search black">Search</h5>
             <div class="card-body">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
@@ -24,7 +24,7 @@ Shop
           </div>
       </div>
       <div class="list-group card my-4 card-search">
-        <h5 class="card-header">Categories</h5>
+        <h5 class="card-header black">Categories</h5>
         <a href="/shop"  class="list-group-item buttoncat">All</a>
         @foreach ($category as $cat)
         <a href="?category=<?php echo $cat -> category_id ?>" class="list-group-item buttoncat"><?php echo $cat -> category_name ?></a>
@@ -34,9 +34,9 @@ Shop
     </div>
 
     <div class="list-group card my-4 card-search">
-        <h5 class="card-header">Administration</h5>
-        <a href="/shop/add/product" class="list-group-item button">New product</a>
-        <a href="/shop/add/category" class="list-group-item button">New category</a>
+        <h5 class="card-header black">Administration</h5>
+        <a href="/shop/add/product" class="list-group-item black">New product</a>
+        <a href="/shop/add/category" class="list-group-item black">New category</a>
 
     </div>
 
@@ -91,9 +91,9 @@ Shop
                 echo '</p></div><div class="card-footer"><button class="btn btn-secondary" type="button">Add to cart</button></div></div></div>';}}
 
                 else {
-                    echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body"><h4 class="card-title"><a href="#">';
+                    echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body black"><h4 class="card-title"><a href="#">';
                     echo $product -> product_name;
-                    echo '</a></h4><h5>';
+                    echo '</a></h4><h5>Price : ';
                     echo $product -> product_price;
                     echo '€</h5><p>';
                     echo $product -> product_desc;

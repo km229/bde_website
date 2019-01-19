@@ -100,7 +100,7 @@ if(!isset($_SESSION)){
             </div>
             <div class="footer-menu">
                 <div class="footer-bloc"><a href="">Plan du site</a></div>
-                <div class="footer-bloc"><a href="">Mentions légales</a></div>
+                <div class="footer-bloc"><a href="/legal">Mentions légales</a></div>
                 <div class="footer-bloc"><a href="">Contact</a></div>
                 <div class="footer-bloc"><div>Développé par le groupe 1</div></div>
             </div>

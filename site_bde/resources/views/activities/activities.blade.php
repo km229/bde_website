@@ -19,12 +19,14 @@ Activities
 					</span>
 				</div>
 			</div>
-			<div class="list-group">
-				<a href="/activities/create" class="list-group-item button">Create an activity</a>
-			</div>
+			
 		</div>
 		
+		<div class="list-group card my-4 card-search">
+			<h5 class="card-header black">Administration</h5>
+			<a href="/shop/add/product" class="list-group-item black">New activity</a>
 
+		</div>
 
 	</div>
 	<!-- /.col-lg-3 -->
@@ -35,7 +37,7 @@ Activities
 			@foreach ($activities as $activity)
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100 ">
-					<a href="#"><?php echo '<img class="image-site" src="data:image/jpeg;base64,'.base64_encode($activity -> activity_img) .'" />'; ?></a>
+					<a href="#"><?php echo '<img src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" />'; ?></a>
 					<div class="card-body card-body2">
 						<h4 class="card-title">
 							<a href="#"><?php  echo $activity -> activity_title ?></a>

@@ -5,11 +5,11 @@ Ideas
 @endsection
 
 @section('body')
-	<h2 id="test">Suggestion box</h2>
-	<article>	
-		<p>Suggestion box allows students of the school to give event ideas to BDE members. Don't hesitate to add ideas !</p>
-	</article>
-	
+<h2 id="test">Suggestion box</h2>
+<article>	
+  <p>Suggestion box allows students of the school to give event ideas to BDE members. Don't hesitate to add ideas !</p>
+</article>
+
 <div class="row">
 
     <div class="col-lg-3">
@@ -21,22 +21,23 @@ Ideas
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
                     <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">Go!</button>
-                </span>
-                </div>
-            </div>
-            <div class="list-group">
-            <a href="/ideas/create" class="list-group-item black">Create an idea</a>
-        </div>
-		</div>
-		
+                      <button class="btn btn-secondary" type="button">Go!</button>
+                  </span>
+              </div>
+          </div>
+      </div>
+      <div class="list-group card my-4 card-search">
+        <h5 class="card-header black">Administration</h5>
+        <a href="/ideas/create" class="list-group-item black">New idea</a>
+
     </div>
-    <!-- /.col-lg-3 -->
+</div>
+<!-- /.col-lg-3 -->
 
-    <div class="col-lg-9">
+<div class="col-lg-9">
 
-        <div class="row">
-    @foreach ($ideas as $idea)
+    <div class="row">
+        @foreach ($ideas as $idea)
         <div class="col-lg-4 col-md-6 mb-4">
             <div class="card h-100">
                 <div class="card-body card-body2">
@@ -47,8 +48,8 @@ Ideas
                 </div>
             </div>
         </div>
-    @endforeach
-        </div>
+        @endforeach
     </div>
+</div>
 @endsection
 
