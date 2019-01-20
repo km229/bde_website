@@ -79,32 +79,41 @@ Shop
 
         @foreach ($products as $product)
         <?php
-        if (isset($_GET['category'])){
+        $table = DB::table('category')->get()->where('category_id',$product -> category_id_fk);
 
+        $index = $table->keys()[0];
+
+        $category = $table[$index];
+
+        if (isset($_GET['category'])){
             if ($product -> category_id_fk == $_GET['category']){
-                echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body"><h4 class="card-title"><a href="#">';
+                echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body black"><h4 class="card-title"><a href="#">';
                 echo $product -> product_name;
                 echo '</a></h4><h5>';
                 echo $product -> product_price;
                 echo '€</h5><p>';
                 echo $product -> product_desc;
-                echo '</p></div><div class="card-footer"><button class="btn btn-secondary" type="button">Add to cart</button></div></div></div>';}}
+                echo '</p></div><div class="card-footer black"><button class="btn btn-secondary" type="button">Add to cart</button>'.$category -> category_name.'</div></div></div>';
 
-                else {
-                    echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body black"><h4 class="card-title"><a href="#">';
-                    echo $product -> product_name;
-                    echo '</a></h4><h5>Price : ';
-                    echo $product -> product_price;
-                    echo '€</h5><p>';
-                    echo $product -> product_desc;
-                    echo '</p></div><div class="card-footer"><button class="btn btn-secondary" type="button">Add to cart</button></div></div></div>';
-                    echo '';}
-
-                    ?>
-                    @endforeach
-                </div>
-            </div>
+            }
+        } else {
 
 
-            @endsection
+            echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body black"><h4 class="card-title"><a href="#">';
+            echo $product -> product_name;
+            echo '</a></h4><h5>Price : ';
+            echo $product -> product_price;
+            echo '€</h5><p>';
+            echo $product -> product_desc;
+            echo '</p></div><div class="card-footer black"><button class="btn btn-secondary" type="button">Add to cart</button>'.$category -> category_name.'</div></div></div>';
+            echo '';
+
+        }
+        ?>
+        @endforeach
+    </div>
+</div>
+
+
+@endsection
 
