@@ -24,7 +24,7 @@ Activities
 		
 		<div class="list-group card my-4 card-search">
 			<h5 class="card-header black">Administration</h5>
-			<a href="/shop/add/product" class="list-group-item black">New activity</a>
+			<a href="/activities/create" class="list-group-item black">New activity</a>
 
 		</div>
 
