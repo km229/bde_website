@@ -77,7 +77,7 @@ Site
 				<h3>'. $products[$i] -> product_name .'</h3>
 				<img class="d-block w-100" src="';
 				if(isset($products[$i] -> product_img)){
-					echo 'data:image/jpeg;base64,'. base64($products[$i] -> product_img) .'" >';
+					echo 'data:image/jpeg;base64,'. base64_encode($products[$i] -> product_img) .'" >';
 				} else { echo asset('img/noimg.jpg').'" >'; }
 				echo '<a href="products/' . $products[$i] -> product_id . '" ></a></div>';
 			}
