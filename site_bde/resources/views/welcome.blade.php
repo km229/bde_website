@@ -48,21 +48,24 @@ Site
 		<p>This website allows students to give event ideas to BDE members, to register to participate and also to publish, like and comment pictures of past events. There is also a super nice equipment store that can support us!</p>
 	</article>
 	<article>
-		<h2>Activities</h2>
+		<h2>Recent activities</h2>
 		<div class="container">
   			<div class="row">
-   				<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/group.jpg">
-   				</div>
-    			<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-   				</div>
-   				<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-    			</div>
-				<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-    			</div>
+		<?php
+		if(sizeof($activities)>0){
+			if(sizeof($activities)>4){ $size=4; }
+			else { $size=sizeof($activities); }
+			for ($i=0; $i < $size; $i++) { 
+				echo "<div class=\"col-sm-12 col-md-6 col-lg-3\">
+				<h3>". $activities[$i] -> activity_title ."</h3>
+				<p>". $activities[$i] -> activity_desc ."</p>
+				<img class=\"d-block w-100\" SRC=\"data:image/jpeg;base64,". base64_encode($activities[$i] -> activity_img) ."\">
+			   </div>";
+			}
+		} else {
+			echo "No recent activities to present.";
+		}
+		?>
   			</div>
 		</div>
 	</article>
