@@ -48,7 +48,7 @@ class AccountForm extends Form
 		
 		->add('location', 'choice',[	
 			'choices' => $table2,
-			'data' => ($table[$index] -> location_center)		
+			'selected' => $table[$index]->location_id -1	
 		])
 		
 		->add('email', 'email',[
