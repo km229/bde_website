@@ -117,6 +117,10 @@ Route::get('activities/{id}', [
     'as' => 'activities_id',
     'uses' => 'ActivitiesController@id'
 ]);
+Route::get('activities/{id}/delete', [
+    'as' => 'activities_delete',
+    'uses' => 'ActivitiesController@delete'
+]);
 Route::post('activities/create', [
     'as' => 'activities_create_check',
     'uses' => 'ActivitiesController@create_check'

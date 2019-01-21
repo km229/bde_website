@@ -60,4 +60,11 @@ class ActivitiesController extends Controller
 		}
 		return redirect(route('activities'));
 	}
+
+	public function delete($id){
+		DB::table('activity')
+		->where('activity_id',$id)
+		->delete();
+		return redirect(route('activities'));
+	}
 }
