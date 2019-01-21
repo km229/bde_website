@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
 
+if(!isset($_SESSION)){
+    session_start();
+}
+
 class IdeasController extends Controller
 {
     //
@@ -32,7 +36,8 @@ class IdeasController extends Controller
             DB::table('idea')->insert(
                 array(
                     'idea_title' => $_POST['name'],
-                    'idea_desc' => $_POST['description']
+                    'idea_desc' => $_POST['description'],
+                    'member_id_fk' => $_SESSION['id']
                 )
             );
             return redirect(route('ideas'));

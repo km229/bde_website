@@ -1,6 +1,6 @@
 <?php
 if(!isset($_SESSION)){
-    session_start();
+	session_start();
 } 
 ?>
 
@@ -13,27 +13,32 @@ Site
 @section('body')
 
 <section>
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
-	<ol class="carousel-indicators">
-		<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-		<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-		<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-	</ol>
-	<div class="carousel-inner">
-		<div class="carousel-item active">
-			<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="First slide">
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" >
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="carousel-item active">
+				<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="First slide">
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Second slide">
+			</div>
+			<div class="carousel-item">
+				<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Third slide">
+			</div>
 		</div>
-		
+		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
 	</div>
-	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-	</a>
-	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-	</a>
-</div>
 </section>
 
 <section>
@@ -45,68 +50,68 @@ Site
 	<article>
 		<h2>Recent activities</h2>
 		<div class="container">
-  			<div class="row">
-		<?php
-		$size = sizeof($activities);
-		if($size>0){
-			for ($i=0; $i < $size; $i++) { 
-				echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
-				<h3>'. $activities[$i] -> activity_title .'</h3>
-				<img class="d-block w-100" src="';
-				if(isset($activities[$i] -> activity_img)){
-					echo 'data:image/jpeg;base64,'. base64_encode($activities[$i] -> activity_img) .'" >';
-				} else { echo asset('img/noimg.jpg').'" >'; }
-				echo '<a href="activities/' . $activities[$i] -> activity_id . '" ></a></div>';
-			}
-		} else {
-			echo "<p>No recent activities to present.</p>";
-		}
-		?>
-  			</div>
+			<div class="row">
+				<?php
+				$size = sizeof($activities);
+				if($size>0){
+					for ($i=0; $i < $size; $i++) { 
+						echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
+						<h3>'. $activities[$i] -> activity_title .'</h3>
+						<img class="d-block w-100" src="';
+						if(isset($activities[$i] -> activity_img)){
+							echo 'data:image/jpeg;base64,'. base64_encode($activities[$i] -> activity_img) .'" >';
+						} else { echo asset('img/noimg.jpg').'" >'; }
+						echo '<a href="activities/' . $activities[$i] -> activity_id . '" ></a></div>';
+					}
+				} else {
+					echo "<p>No recent activities to present.</p>";
+				}
+				?>
+			</div>
 		</div>
 	</article>
 	<article>
 		<h2>Best products</h2>
 		<div class="container">
-  			<div class="row">
-			  <?php
-			  $size = sizeof($products);
-			  if($size>0){
-				  for ($i=0; $i < $size; $i++) { 
-				echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
-				<h3>'. $products[$i] -> product_name .'</h3>
-				<img class="d-block w-100" src="';
-				if(isset($products[$i] -> product_img)){
-					echo 'data:image/jpeg;base64,'. base64_encode($products[$i] -> product_img) .'" >';
-				} else { echo asset('img/noimg.jpg').'" >'; }
-				echo '<a href="products/' . $products[$i] -> product_id . '" ></a></div>';
-			}
-		} else {
-			echo "<p>No recent activities to present.</p>";
-		}
-		?>
-  			</div>
+			<div class="row">
+				<?php
+				$size = sizeof($products);
+				if($size>0){
+					for ($i=0; $i < $size; $i++) { 
+						echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
+						<h3>'. $products[$i] -> product_name .'</h3>
+						<img class="d-block w-100" src="';
+						if(isset($products[$i] -> product_img)){
+							echo 'data:image/jpeg;base64,'. base64_encode($products[$i] -> product_img) .'" >';
+						} else { echo asset('img/noimg.jpg').'" >'; }
+						echo '<a href="shop/' . $products[$i] -> product_id . '" ></a></div>';
+					}
+				} else {
+					echo "<p>No recent activities to present.</p>";
+				}
+				?>
+			</div>
 		</div>
 	</article>
 </section>
 
 
 <?php
-	if(session('message')==="hello" && $_SESSION["name"]){
-		echo "
-		<div class=\"alert alert-success\">
-		<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-			<strong>Welcome ". $_SESSION["name"] ." !</strong>
-		</div>
-		";
-	} if(session('message')==="welcome_back" && $_SESSION["name"]){
-		echo "
-		<div class=\"alert alert-success\">
-		<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-			<strong>Welcome back ". $_SESSION["name"] ." !</strong>
-		</div>
-		";
-	}
+if(session('message')==="hello" && $_SESSION["name"]){
+	echo "
+	<div class=\"alert alert-success\">
+	<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+	<strong>Welcome ". $_SESSION["name"] ." !</strong>
+	</div>
+	";
+} if(session('message')==="welcome_back" && $_SESSION["name"]){
+	echo "
+	<div class=\"alert alert-success\">
+	<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
+	<strong>Welcome back ". $_SESSION["name"] ." !</strong>
+	</div>
+	";
+}
 ?>
 
 @endsection

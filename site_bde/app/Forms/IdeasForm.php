@@ -16,7 +16,6 @@ class IdeasForm extends Form
 		$this
 		->add('name', 'text')
 		->add('description', 'textarea')
-		->add('image', 'file')
 		->add('submit', 'submit');
 	}
 }
