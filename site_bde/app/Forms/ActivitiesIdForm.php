@@ -24,7 +24,10 @@ class ActivitiesIdForm extends Form
 
 		$table = DB::table('activity')->get()->where('activity_id', $id);
 
-		$activity = $table[0];
+		$index = $table->keys()[0];
+
+
+		$activity = $table[$index];
 
 		$this
 		->add('name', 'text',[
