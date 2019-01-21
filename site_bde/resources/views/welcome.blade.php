@@ -23,12 +23,7 @@ Site
 		<div class="carousel-item active">
 			<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="First slide">
 		</div>
-		<div class="carousel-item">
-			<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Second slide">
-		</div>
-		<div class="carousel-item">
-			<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Third slide">
-		</div>
+		
 	</div>
 	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -52,18 +47,19 @@ Site
 		<div class="container">
   			<div class="row">
 		<?php
-		if(sizeof($activities)>0){
-			if(sizeof($activities)>4){ $size=4; }
-			else { $size=sizeof($activities); }
+		$size = sizeof($activities);
+		if($size>0){
 			for ($i=0; $i < $size; $i++) { 
-				echo "<div class=\"col-sm-12 col-md-6 col-lg-3\">
-				<h3>". $activities[$i] -> activity_title ."</h3>
-				<p>". $activities[$i] -> activity_desc ."</p>
-				<img class=\"d-block w-100\" SRC=\"data:image/jpeg;base64,". base64_encode($activities[$i] -> activity_img) ."\">
-			   </div>";
+				echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
+				<h3>'. $activities[$i] -> activity_title .'</h3>
+				<img class="d-block w-100" src="';
+				if(isset($activities[$i] -> activity_img)){
+					echo 'data:image/jpeg;base64,'. $activities[$i] -> activity_img .'" >';
+				} else { echo asset('img/noimg.jpg').'" >'; }
+				echo '<a href="activities/' . $activities[$i] -> activity_id . '" ></a></div>';
 			}
 		} else {
-			echo "No recent activities to present.";
+			echo "<p>No recent activities to present.</p>";
 		}
 		?>
   			</div>
@@ -73,18 +69,22 @@ Site
 		<h2>Best products</h2>
 		<div class="container">
   			<div class="row">
-   				<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-   				</div>
-    			<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-   				</div>
-   				<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-    			</div>
-				<div class="col-sm-12 col-md-6 col-lg-3">
-					<img class="d-block w-100" SRC="img/lol.jpg">
-    			</div>
+			  <?php
+			  $size = sizeof($products);
+			  if($size>0){
+				  for ($i=0; $i < $size; $i++) { 
+				echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
+				<h3>'. $products[$i] -> product_name .'</h3>
+				<img class="d-block w-100" src="';
+				if(isset($products[$i] -> product_img)){
+					echo 'data:image/jpeg;base64,'. $products[$i] -> product_img .'" >';
+				} else { echo asset('img/noimg.jpg').'" >'; }
+				echo '<a href="products/' . $products[$i] -> product_id . '" ></a></div>';
+			}
+		} else {
+			echo "<p>No recent activities to present.</p>";
+		}
+		?>
   			</div>
 		</div>
 	</article>

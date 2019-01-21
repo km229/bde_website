@@ -37,8 +37,12 @@ class AccountForm extends Form
 		->add('email', 'email',[
 			'value' => $member->member_mail
 		])
+		->add('old_password', 'password')
+		->add('new_password', 'password',[
+			'rules'=>'required|regex:(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}'
+		])
 		->add('submit', 'submit',[
-			'label' => 'Sign up'
+			'label' => 'Change'
 		]);
 	}
 }
