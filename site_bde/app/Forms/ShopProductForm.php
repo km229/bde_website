@@ -37,6 +37,9 @@ class ShopProductForm extends Form
 		->add('category', 'choice', [
 		    'choices' => $table
         ])
+            ->add('image', 'file',[
+                'rules' => 'required|min:1'
+            ])
 		->add('submit', 'submit');
 
 	}

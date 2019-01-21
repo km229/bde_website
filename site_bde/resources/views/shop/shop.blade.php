@@ -87,7 +87,7 @@ Shop
 
         if (isset($_GET['category'])){
             if ($product -> category_id_fk == $_GET['category']){
-                echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body black"><h4 class="card-title"><a href="#">';
+                echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
                 echo $product -> product_name;
                 echo '</a></h4><h5>';
                 echo $product -> product_price;
@@ -99,14 +99,13 @@ Shop
         } else {
 
 
-            echo '<div class="col-lg-4 col-md-6 mb-4 product <?php  echo $product -> category_id_fk ?>"><div class="card h-100"><a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a><div class="card-body black"><h4 class="card-title"><a href="#">';
+            echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img).'" />'; echo ' </a><div class="card-body black"><h4 class="card-title"><a href="#">';
             echo $product -> product_name;
             echo '</a></h4><h5>Price : ';
             echo $product -> product_price;
             echo '€</h5><p>';
             echo $product -> product_desc;
-            echo '</p></div><div class="card-footer black"><button class="btn btn-secondary" type="button">Add to cart</button>'.$category -> category_name.'</div></div></div>';
-            echo '';
+            echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>'.$category -> category_name.'</div></div></div>';
 
         }
         ?>
