@@ -37,10 +37,10 @@ Activities
 			@foreach ($activities as $activity)
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100 ">
-					<a href="#"><?php echo '<img src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" />'; ?></a>
+					<a href="/activities/{{$activity -> activity_id}}"><?php echo '<img src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" />'; ?></a>
 					<div class="card-body card-body2">
 						<h4 class="card-title">
-							<a href="#"><?php  echo $activity -> activity_title ?></a>
+							<a href="/activities/{{$activity -> activity_id}}"><?php  echo $activity -> activity_title ?></a>
 						</h4>
 						<p>Date : <?php  echo $activity -> activity_date ?></p>
 						<p><?php  echo $activity -> activity_desc ?></p>

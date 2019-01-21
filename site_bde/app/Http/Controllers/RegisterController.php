@@ -37,7 +37,8 @@ class RegisterController extends Controller
 					'member_lastname' => $_POST['last_name'],
 					'member_mail' => $_POST['email'],
 					'member_password' => $password,
-					'is_admin' => 0
+					'is_admin' => 0,
+					'location_id_fk' => ($_POST['location']+1)
 				)
 			);
 			if(sizeof($member = DB::table('members')->get()->where('member_mail', $_POST['email'])) == 0){

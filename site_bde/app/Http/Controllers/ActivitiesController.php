@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forms\ActivitiesForm;
+use App\Forms\ActivitiesIdForm;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
@@ -39,7 +40,7 @@ class ActivitiesController extends Controller
 }
 
 public function id($id, FormBuilder $formbuilder){
-    $form = $formbuilder->create(ActivitiesForm::class);
+    $form = $formbuilder->create(ActivitiesIdForm::class);
     return view('activities.activities_create', compact('form'));
 }
 }
