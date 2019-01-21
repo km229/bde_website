@@ -13,6 +13,7 @@ Ideas
             <a href="/account/orders" class="list-group-item black">My orders</a>
             <a href="/account" class="list-group-item black">My informations</a>
         </div>
+    </div>
 	<div class="col-lg-9">
 		{!! form($form) !!}
 </div>
