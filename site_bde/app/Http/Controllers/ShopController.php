@@ -84,4 +84,8 @@ class ShopController extends Controller
         $articles = DB::table('link_member_product_cart')->get()->where('member_id_fk', $_SESSION['id']);
         return redirect(route('shop'));
     }
+
+    public function id ($id){
+        return view('shop.shop_id');
+    }
 }
