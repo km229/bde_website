@@ -19,12 +19,13 @@ class ActivitiesIdForm extends Form
 
 		$this->formOptions = [
 			'method' => 'POST',
-			'url' => route('activities')
+			'url' => route('activities_id_update_check')
 		];
 
 		$table = DB::table('activity')->get()->where('activity_id', $id);
 
 		$index = $table->keys()[0];
+
 
 
 		$activity = $table[$index];
@@ -36,11 +37,12 @@ class ActivitiesIdForm extends Form
 		->add('description', 'textarea',[
 			'value' => $activity->activity_desc
 		])
-		->add('image', 'file',[
-			'value' => $activity->activity_img
-		])
+		->add('image', 'file')
 		->add('date', 'date',[
 			'value' => $activity->activity_date
+		])
+		->add('id', 'hidden',[
+			'value' => $id
 		])
 		->add('submit', 'submit',[
 			'label' => 'Update'

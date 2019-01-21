@@ -47,4 +47,17 @@ class ActivitiesController extends Controller
 		$form = $formbuilder->create(ActivitiesIdForm::class);
 		return view('activities.activities_create', compact('form'));
 	}
+
+	public function id_update_check(){
+		if($_FILES['image']['tmp_name'] === ""){
+			DB::table('activity')
+			->where('activity_id',$_POST['id'])
+			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_date' => $_POST['date']]);
+		}else{
+			DB::table('activity')
+			->where('activity_id',$_POST['id'])
+			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_img' => file_get_contents($_FILES['image']['tmp_name']),'activity_date' => $_POST['date']]);
+		}
+		return redirect(route('activities'));
+	}
 }
