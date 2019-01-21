@@ -16,9 +16,14 @@ class IdeasController extends Controller
     }
 
     public function index(){
-        $ideas = DB::table('idea')->join('members', 'idea.member_id_fk', '=', 'members.member_id');
-        return view('ideas.ideas', compact("ideas"));
+        $ideas = DB::table('idea')->join('members', 'idea.member_id_fk', '=', 'members.member_id')->paginate(9);
+        $links = $ideas->render();
+        return view('ideas.ideas', compact("ideas", "links"));
+    }
 
+    public function ideas_ppage(){
+        $ideas = DB::table('idea')->join('members', 'idea.member_id_fk', '=', 'members.member_id')->paginate($_POST['ppage']);
+        return $ideas;
     }
 
     public function create_check(){

@@ -66,6 +66,10 @@ Route::get('shop/cart', [
     'as' => 'cart',
     'uses' => 'CartController@index'
 ]);
+Route::get('shop/cart/remove_{id}', [
+    'as' => 'remove',
+    'uses' => 'CartController@remove'
+]);
 Route::get('shop/add_{id}', [
     'as' => 'shop_add_to_cart',
     'uses' => 'ShopController@add_to_cart'
