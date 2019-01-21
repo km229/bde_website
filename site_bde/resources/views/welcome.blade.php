@@ -47,8 +47,9 @@ Site
 		<div class="container">
   			<div class="row">
 		<?php
-		if(isset($activities)){
-			for ($i=0; $i < sizeof($activities); $i++) { 
+		$size = sizeof($activities);
+		if($size>0){
+			for ($i=0; $i < $size; $i++) { 
 				echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
 				<h3>'. $activities[$i] -> activity_title .'</h3>
 				<img class="d-block w-100" src="';
@@ -69,8 +70,9 @@ Site
 		<div class="container">
   			<div class="row">
 			  <?php
-		if(isset($products)){
-			for ($i=0; $i < sizeof($products); $i++) { 
+			  $size = sizeof($products);
+			  if($size>0){
+				  for ($i=0; $i < $size; $i++) { 
 				echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
 				<h3>'. $products[$i] -> product_name .'</h3>
 				<img class="d-block w-100" src="';
