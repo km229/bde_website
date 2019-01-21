@@ -70,28 +70,27 @@ if(!isset($_SESSION)){
         <div class="inner">
             <div class="footer-menu">
                 <div class="footer-bloc">
-                    <div class="footer-title">Boite à idées</div>
+                    <div class="footer-title">Idea box</div>
                     <ul>
-                        <li><a href="/ideas/create">Ajouter une idée</a></li>
-                        <li><a href="/ideas">Voir la liste des idées</a></li>
+                        <li><a href="/ideas">Check ideas</a></li>
+                        <li><a href="/ideas/create">New idea</a></li>
                     </ul>
                 </div>
                 <div class="footer-bloc">
-                    <div class="footer-title">Activités</div>
+                    <div class="footer-title">Activities</div>
                     <ul>
-                        <li><a href="/activities">Liste des activités</a></li>
-                        <li><a href="/activities/create">Ajouter une activité</a></li>
+                        <li><a href="/activities">Check activities</a></li>
+                        <li><a href="/activities/create">New activity</a></li>
                     </ul>
                 </div>
                 <div class="footer-bloc">
-                    <div class="footer-title">Boutique</div>
+                    <div class="footer-title">Shop</div>
                     <ul>
-                        <li><a href="/shop">Accès</a></li>
-                        <li><a href="">Rechercher un produit</a></li>
+                        <li><a href="/shop">Check products</a></li>
                     </ul>
                 </div>
                 <div class="footer-bloc">
-                    <div class="footer-title">Nous suivre</div>
+                    <div class="footer-title">Follow us</div>
                     <ul class="social">
                         <li><a href=""><i class="fab fa-facebook"></i></a></li>
                         <li><a href=""><i class="fab fa-twitter"></i></a></li>
@@ -99,10 +98,10 @@ if(!isset($_SESSION)){
                 </div>
             </div>
             <div class="footer-menu">
-                <div class="footer-bloc"><a href="">Plan du site</a></div>
-                <div class="footer-bloc"><a href="/legal">Mentions légales</a></div>
+                <div class="footer-bloc"><a href="">Sitemap</a></div>
+                <div class="footer-bloc"><a href="/legal">Legal terms</a></div>
                 <div class="footer-bloc"><a href="">Contact</a></div>
-                <div class="footer-bloc"><div>Développé par le groupe 1</div></div>
+                <div class="footer-bloc"><div>Developped by Group 1</div></div>
             </div>
         </div>
     </footer>
