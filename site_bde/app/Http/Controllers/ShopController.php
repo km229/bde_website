@@ -62,7 +62,8 @@ class ShopController extends Controller
     public function add_to_cart($id){
         $test = DB::table('link_member_product_cart')->get()->where('member_id_fk', $_SESSION['id'])->where('product_id_fk', $id);
         //dd($test);
-        if(empty($test[0])){
+
+        if(sizeof($test) == 0){
             DB::table('link_member_product_cart')->insert(
                 array(
                     'member_id_fk' => $_SESSION['id'],
@@ -71,15 +72,16 @@ class ShopController extends Controller
                 )
             );
         }else{
-            $quantity = $test[0] -> number + 1;
+            $index = $test->keys()[0];
+            $quantity = $test[$index] -> number + 1;
             DB::table('link_member_product_cart')->where('member_id_fk', $_SESSION['id'])->where('product_id_fk', $id)->update(
                 array(
                     'number' => $quantity,
                 )
             );
-
         }
 
+        $articles = DB::table('link_member_product_cart')->get()->where('member_id_fk', $_SESSION['id']);
         return redirect(route('shop'));
     }
 }

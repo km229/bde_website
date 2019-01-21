@@ -90,10 +90,10 @@ Shop
                 echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
                 echo $product -> product_name;
                 echo '</a></h4><h5>';
-                echo $product -> product_price;
-                echo '€</h5><p>';
+                echo $category -> category_name;
+                echo '</h5><p>';
                 echo $product -> product_desc;
-                echo '</p></div><div class="card-footer black"><button class="btn btn-secondary" type="button">Add to cart</button>'.$category -> category_name.'</div></div></div>';
+                echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>Price : '.$product -> product_price.' €</div></div></div>';
 
             }
         } else {
@@ -101,11 +101,11 @@ Shop
 
             echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img).'" />'; echo ' </a><div class="card-body black"><h4 class="card-title"><a href="#">';
             echo $product -> product_name;
-            echo '</a></h4><h5>Price : ';
-            echo $product -> product_price;
-            echo '€</h5><p>';
+            echo '</a></h4><h5>';
+            echo $category -> category_name;
+            echo '</h5><p>';
             echo $product -> product_desc;
-            echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>'.$category -> category_name.'</div></div></div>';
+            echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>Price : '.$product -> product_price.' €</div></div></div>';
 
         }
         ?>
