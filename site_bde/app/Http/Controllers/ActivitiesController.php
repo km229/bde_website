@@ -40,7 +40,7 @@ class ActivitiesController extends Controller
 	}
 
 	public function id($id){
-		return view('activities.activities_id');
+		return view('activities.activities_id', compact('id'));
 	}
 
 	public function id_update(FormBuilder $formbuilder){
