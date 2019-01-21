@@ -18,7 +18,7 @@ class AccountForm extends Form
 			'url' => route('account')
 		];
 
-		$table = DB::table('members')->get()->where('member_firstname', $_SESSION['name']);
+		$table = DB::table('members')->get()->where('member_mail', $_SESSION['email']);
 
 		$index = $table->keys()[0];
 

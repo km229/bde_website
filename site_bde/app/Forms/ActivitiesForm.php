@@ -10,8 +10,7 @@ class ActivitiesForm extends Form
 	{
 		$this->formOptions = [
 			'method' => 'POST',
-			'url' => route('activities_create_check'),
-			'enctype' => 'multipart/form-data'
+			'url' => route('activities_create_check')
 		];
 
 		$this

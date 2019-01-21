@@ -96,6 +96,10 @@ Route::get('activities/create', [
     'as' => 'activities_create',
     'uses' => 'ActivitiesController@create'
 ]);
+Route::get('activities/{id}', [
+    'as' => 'activities_id',
+    'uses' => 'ActivitiesController@id'
+]);
 Route::post('activities/create', [
     'as' => 'activities_create_check',
     'uses' => 'ActivitiesController@create_check'
