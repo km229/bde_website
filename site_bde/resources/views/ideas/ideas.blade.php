@@ -5,29 +5,23 @@ Ideas
 @endsection
 
 @section('body')
-<h2 id="test">Suggestion box</h2>
-<article>	
-  <p>Suggestion box allows students of the school to give event ideas to BDE members. Don't hesitate to add ideas !</p>
-</article>
 
 <div class="row">
 
     <div class="col-lg-3">
 
-        <h1 class="my-4">BDE CESI Saint-Nazaire</h1>
+        <h1 class="my-4">Idea box</h1>
+        <p  class="my-4">Idea box allows students of the school to give event ideas to BDE members.</p>
+        <p  class="my-4">Don't hesitate to add ideas !</p>
         <div class="card my-4">
-            <h5 class="card-header black">Search</h5>
+            <h3 class="card-header black">Search</h3>
             <div class="card-body">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-secondary" type="button">Go!</button>
-                  </span>
               </div>
           </div>
       </div>
       <div class="list-group card my-4 card-search">
-        <h5 class="card-header black">Administration</h5>
         <a href="/ideas/create" class="list-group-item black">New idea</a>
 
     </div>
@@ -37,18 +31,21 @@ Ideas
 <div class="col-lg-9">
 
     <div class="row">
-        @foreach ($ideas as $idea)
-        <div class="col-lg-4 col-md-6 mb-4">
+    <?php
+        if(sizeof($ideas)>0){
+            echo '
+            <div class="col-lg-4 col-md-6 mb-4 bloc-link">
             <div class="card h-100">
                 <div class="card-body card-body2">
-                    <h4 class="card-title">
-                        <a href="#"><?php  echo $idea -> idea_title ?></a>
-                    </h4>
-                    <p><?php  echo $idea -> idea_desc ?></p>
+                    <h4 class="card-title">'. $idea -> idea_title .'</h4>
+                    <p>'. $ideas[$i] -> idea_desc .'</p>
                 </div>
-            </div>
-        </div>
-        @endforeach
+                <a href="ideas/'.$ideas[$i]->idea_id.'"></a>
+            </div>';
+        } else {
+            echo "<p>All ideas have been processed, feel free to add a new one <a href=\"ideas/create\">here</a>!";
+        }
+    ?>
     </div>
 </div>
 @endsection

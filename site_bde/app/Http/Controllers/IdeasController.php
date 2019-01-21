@@ -16,9 +16,7 @@ class IdeasController extends Controller
     }
 
     public function index(){
-        $ideas = DB::table('idea')->get();
-
-
+        $ideas = DB::table('idea')->join('members', 'idea.member_id_fk', '=', 'members.member_id');
         return view('ideas.ideas', compact("ideas"));
 
     }
