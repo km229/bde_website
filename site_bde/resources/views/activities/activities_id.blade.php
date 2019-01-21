@@ -13,8 +13,8 @@ Activities
 
 			<div class="list-group card my-4 card-search">
 				<h5 class="card-header black">Administration</h5>
-				<a href="{{$id}}/update" class="list-group-item black">New activity</a>
-
+				<a href="{{$id}}/update" class="list-group-item black">Update activity</a>
+				<a href="/activities" class="list-group-item black">Back</a>
 			</div>
 
 		</div>
@@ -59,33 +59,33 @@ Activities
 		</div>
 		<h3 class="my-4">Related Projects</h3>
 
-			<div class="row">
+		<div class="row">
 
-				<div class="col-md-3 col-sm-6 mb-4">
-					<a href="#">
-						<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-					</a>
-				</div>
-
-				<div class="col-md-3 col-sm-6 mb-4">
-					<a href="#">
-						<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-					</a>
-				</div>
-
-				<div class="col-md-3 col-sm-6 mb-4">
-					<a href="#">
-						<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-					</a>
-				</div>
-
-				<div class="col-md-3 col-sm-6 mb-4">
-					<a href="#">
-						<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-					</a>
-				</div>
-
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="#">
+					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
+				</a>
 			</div>
+
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="#">
+					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
+				</a>
+			</div>
+
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="#">
+					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
+				</a>
+			</div>
+
+			<div class="col-md-3 col-sm-6 mb-4">
+				<a href="#">
+					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
+				</a>
+			</div>
+
+		</div>
 	</div>
 </div>
 @endsection
