@@ -18,12 +18,26 @@ class AccountForm extends Form
 			'url' => route('account_check')
 		];
 
-		$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+		$table = DB::table('members')
+			->join('location', 'location_id_fk', '=', 'location_id')
+			->get()->where('member_id', $_SESSION['id']);
 
+			$db = DB::table('location')->get();
+			$array = [];
+			foreach($db as $choice){
+				$array[] = $choice;
+	
+			}
+			$table2 = [];
+	
+			for($i = 0; $i < sizeof($array); $i++){
+				$table2[] =  $array[$i] -> location_center;
+			}
+
+			$index = $table->keys()[0];
 		$index = $table->keys()[0];
-
+		//dd($table[$index] -> location_id);
 		$member = $table[$index];
-
 		$this
 		->add('first_name', 'text',[
 			'value' => $member->member_firstname
@@ -31,9 +45,15 @@ class AccountForm extends Form
 		->add('last_name', 'text',[
 			'value' => $member->member_lastname
 		])
-		->add('location', 'text',[
-			'value' => 'test'
+		
+		->add('location', 'choice',[
+			'choices' => $table2,
+			'expanded' => true,
+			'multiple' => false,
+			'data' => ($table[$index] -> location_center)
+			
 		])
+		
 		->add('email', 'email',[
 			'value' => $member->member_mail
 		])
@@ -41,7 +61,7 @@ class AccountForm extends Form
 			'rules'=>'required|min:1'
 		])
 		->add('new_password', 'password',[
-			'rules'=>'required|regex:(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}'
+			'rules'=>'regex:(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}'
 		])
 		->add('submit', 'submit',[
 			'label' => 'Change'
