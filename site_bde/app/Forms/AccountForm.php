@@ -46,12 +46,9 @@ class AccountForm extends Form
 			'value' => $member->member_lastname
 		])
 		
-		->add('location', 'choice',[
+		->add('location', 'choice',[	
 			'choices' => $table2,
-			'expanded' => true,
-			'multiple' => false,
-			'data' => ($table[$index] -> location_center)
-			
+			'data' => ($table[$index] -> location_center)		
 		])
 		
 		->add('email', 'email',[
