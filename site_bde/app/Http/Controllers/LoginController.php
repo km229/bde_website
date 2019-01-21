@@ -37,7 +37,7 @@ class LoginController extends Controller
 			}
 
 			$_SESSION['name'] = $member[$index]->member_firstname;
-			$_SESSION['email'] = $member[$index]->member_mail;
+			$_SESSION['id'] = $member[$index]->member_id;
 
 			return redirect(route('welcome'))->with('message', 'welcome_back');
 		}

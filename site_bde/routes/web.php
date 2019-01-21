@@ -113,6 +113,12 @@ Route::get('account', [
     'as' => 'account',
     'uses' => 'AccountController@index'
 ]);
+
+Route::post('account', [
+    'as' => 'account_check',
+    'uses' => 'AccountController@check'
+]);
+
 Route::get('account/orders', 'AccountController@orders');
 
 

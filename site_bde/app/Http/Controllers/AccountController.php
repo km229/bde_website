@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Forms\AccountForm;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Illuminate\Support\Facades\DB;
+
+if(!isset($_SESSION)){
+	session_start();
+}
 
 class AccountController extends Controller
 {
@@ -16,5 +21,14 @@ class AccountController extends Controller
 
 	public function orders(){
 		return view('orders');
+	}
+	public function check(){
+	if(!empty($_POST)){
+		//dd($_POST);
+		DB::table('members')
+			->where('member_id',$_SESSION["id"] )
+			->update(['member_firstname' => $_POST["first_name"],'member_lastname' => $_POST["last_name"],'member_mail' => $_POST['email']]);
+		return redirect(route('account'));
+		}
 	}
 }

@@ -15,10 +15,10 @@ class AccountForm extends Form
 	{
 		$this->formOptions = [
 			'method' => 'POST',
-			'url' => route('account')
+			'url' => route('account_check')
 		];
 
-		$table = DB::table('members')->get()->where('member_mail', $_SESSION['email']);
+		$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
 
 		$index = $table->keys()[0];
 
