@@ -32,16 +32,57 @@
 					<h3 class="my-3">Description</h3>
 					<p>{{ $idea[0]->idea_desc }}</p>
 					<h3 class="my-3">Likes</h3>
+                    <span class="nb_like">
+                    <?php if(isset($like[0]->idea_likes)){ echo $like[0]->idea_likes; } 
+                    else { echo '0'; }?>
+                    </span>
+                    <i class="fas fa-heart"></i>
                     <div class="button">
-                    <a>{{ $like[0]->idea_likes }}</a>
                     <?php
-                        
-                    ?>
-                    </div>
+                    if(empty($verif_like[0])){
+                        echo '<a class="like">Like</a>';
+                    } else {
+                        echo '<a class="like">Dislike</a>';
+                    }
+                    ?></div>
+                </div>
 				</div>
 		</div>
         
 	</div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+    $(".like").click(function name(params) {
+        urlValue = <?php echo "'/ideas/".$idea[0]->idea_id."'"; ?>;
+        $.ajax({
+            method: 'POST',
+            url: urlValue,
+            data: { affect: $(".like").html() }
+        }).then(function name(data) {
+            if(data==="ok"){
+                oldval=parseInt($(".nb_like").text());
+                switch ($(".like").text()) {
+                case "Like":
+                    oldval++;
+                    $(".nb_like").text(oldval++);
+                    $(".like").text("Dislike");
+                    break;
+                case "Dislike":
+                    oldval--;
+                    $(".nb_like").text(oldval--);
+                    $(".like").text("Like");
+                    break;
+                default:
+                    break;
+            }
+            } if(data==="ko"){
+                alert('Error like/dislike');
+            }
+        });
+    });
+</script>
 @endsection
