@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 
 use App\Forms\ShopProductForm;
+use App\Forms\ShopIdForm;
 use App\Forms\ShopCategoryForm;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
+
 
 if(!isset($_SESSION)){
     session_start();
@@ -86,6 +88,41 @@ class ShopController extends Controller
     }
 
     public function id ($id){
-        return view('shop.shop_id');
+        return view('shop.shop_id', compact('id'));
     }
+
+    public function id_update($id, FormBuilder $formbuilder){
+		$form = $formbuilder->create(ShopIdForm::class);
+		return view('shop.shop_add_product', compact('form'));
+    }
+    
+    public function id_update_check(){
+		if($_FILES['image']['tmp_name'] === ""){
+			DB::table('product')
+			->where('product_id',$_POST['id'])
+			->update(['product_name' => $_POST['name'],'product_desc' => $_POST['description'],'product_price' => $_POST['price']]);
+		}else{
+			DB::table('product')
+			->where('product_id',$_POST['id'])
+			->update(['product_name' => $_POST['name'],'product_desc' => $_POST['description'],'product_img' => file_get_contents($_FILES['image']['tmp_name']),'product_price' => $_POST['price']]);
+		}
+		return redirect(route('shop'));
+	}
+
+	public function delete($id){
+        DB::table('link_member_product_cart')
+        ->where('product_id_fk',$id)
+        ->delete();
+
+        DB::table('link_orders_products')
+        ->where('product_id_fk',$id)
+        ->delete();
+
+        DB::table('product')
+		->where('product_id',$id)
+        ->delete();
+
+
+		return redirect(route('shop'));
+	}
 }

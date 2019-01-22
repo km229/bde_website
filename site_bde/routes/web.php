@@ -78,7 +78,18 @@ Route::get('shop/{id}', [
     'as' => 'shop_id',
     'uses' => 'ShopController@id'
 ]);
-
+Route::get('shop/{id}/update', [
+    'as' => 'shop_id_update',
+    'uses' => 'ShopController@id_update'
+]);
+Route::post('shop', [
+    'as' => 'shop_id_update_check',
+    'uses' => 'ShopController@id_update_check'
+]);
+Route::get('shop/{id}/delete', [
+    'as' => 'shop_delete',
+    'uses' => 'ShopController@delete'
+]);
 
 /*---IDEAS---*/
 
