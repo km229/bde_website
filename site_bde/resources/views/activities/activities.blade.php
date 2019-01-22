@@ -44,6 +44,8 @@ Activities
 						</h4>
 						<p>Date : <?php  echo $activity -> activity_date ?></p>
 						<p><?php  echo $activity -> activity_desc ?></p>
+						<p>Price : <?php  echo $activity -> activity_price ?> €</p>
+						<p>Type : <?php  echo $activity -> activity_recurrence ?></p>
 					</div>
 				</div>
 			</div>

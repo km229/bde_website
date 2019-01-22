@@ -11,6 +11,11 @@ if(!isset($_SESSION)){
 
 class CartController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('login');
+    }
+
 	public function index(){
         $id = $_SESSION['id'];
         $articles = DB::table('link_member_product_cart')->join('product','product_id_fk' ,'=','product_id')->get()->where('member_id_fk', $id);
