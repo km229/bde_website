@@ -63,7 +63,19 @@ if(!isset($_SESSION)){
     </header>
     <main>
         <div class="inner">
-            @yield('body')
+            @yield('body')    
+            <?php
+    if(session('error')){
+		echo '<div class="alert alert-danger">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>'.session('error').'</strong></div>';
+    } if(session('success')){
+	    echo '
+	    <div class="alert alert-success">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	    <strong>'.session('success').'</strong></div>';
+    }
+    ?>
         </div>
     </main>
     

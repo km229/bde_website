@@ -18,8 +18,11 @@
                 echo '<a href="/ideas/'.$idea[0]->idea_id.'/update" class="list-group-item black">Update idea</a>
                 <a href="/ideas/'.$idea[0]->idea_id.'/delete" class="list-group-item black">Delete idea</a>';
                 ?>
-                <a href="/ideas" class="list-group-item black">Back</a>
+                <a href="/activities/create?id=<?php echo $idea[0]->idea_id?>" class="list-group-item black">Create this activity</a>
             </div>
+                <div class="list-group card my-4 card-search black">
+					<a href="/ideas" class="list-group-item black">Back</a>
+				</div>
 
         </div>
         <div class="col-lg-9">

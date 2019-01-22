@@ -95,23 +95,4 @@ Site
 	</article>
 </section>
 
-
-<?php
-if(session('message')==="hello" && $_SESSION["name"]){
-	echo "
-	<div class=\"alert alert-success\">
-	<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-	<strong>Welcome ". $_SESSION["name"] ." !</strong>
-	</div>
-	";
-} if(session('message')==="welcome_back" && $_SESSION["name"]){
-	echo "
-	<div class=\"alert alert-success\">
-	<a href=\"#\" class=\"close\" data-dismiss=\"alert\" aria-label=\"close\">&times;</a>
-	<strong>Welcome back ". $_SESSION["name"] ." !</strong>
-	</div>
-	";
-}
-?>
-
 @endsection

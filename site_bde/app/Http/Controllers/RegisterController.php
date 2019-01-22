@@ -23,11 +23,11 @@ class RegisterController extends Controller
 		if(!empty($_POST)){
 
 			if(sizeof($test = DB::table('members')->get()->where('member_mail', $_POST['email'])) > 0){
-				return redirect(route('register'))->with('error', 'email_exists');
+				return redirect(route('register'))->with('error', 'The email you provided already exists !');
 			}
 
 			if(isset($_POST['password']) && !preg_match('/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}/', $_POST['password'])){
-				return redirect(route('register'))->with('error', 'mdp_error');
+				return redirect(route('register'))->with('error', 'The password entered does not meet the conditions !');
 			}
 			$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -50,7 +50,7 @@ class RegisterController extends Controller
 			$password = $member[$index]->member_password;
 			$_SESSION["name"]=$_POST["first_name"];
 			$_SESSION['id'] = $member[$index]->member_id;
-			return redirect(route('welcome'))->with('message', 'hello');
+			return redirect(route('welcome'))->with('success', 'Welcome '. $_SESSION["name"] .' !');
 		}
 	}
 }
