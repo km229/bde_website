@@ -48,6 +48,14 @@ Ideas
                 <div class="card-body card-body2">
                 <h2 class="card-title">'. $ideas[$i] -> idea_title .'</h2>
                 <p>'. $ideas[$i] -> idea_desc .'</p>
+                <div class="date">';
+                $val_like='0';
+                for($y=0; $y < sizeof($likes); $y++){
+                    if($ideas[$i]->idea_id==$likes[$y]->idea_id){
+                        $val_like = $likes[$y]->idea_likes;
+                    }
+                } 
+                echo $val_like.' <i class="fas fa-heart"></i></div>
                 <div class="date">Créée par '. $ideas[$i] -> member_firstname .' '. $ideas[$i] -> member_lastname .'</div>
                 </div>
                 <a href="ideas/'.$ideas[$i]->idea_id.'"></a>
