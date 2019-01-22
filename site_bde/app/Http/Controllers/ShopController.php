@@ -25,8 +25,15 @@ class ShopController extends Controller
     }
 
     public function add_product(FormBuilder $formbuilder){
+        if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+            $index = $table->keys()[0];
+        if($table[$index]->is_admin == 1){
         $form = $formbuilder->create(ShopProductForm::class);
         return view('shop.shop_add_product', compact('form'));
+            }
+        }
+        return redirect(route('shop'));
     }
 
     public function add_product_check(){
@@ -50,8 +57,15 @@ class ShopController extends Controller
     }
 
     public function add_category(FormBuilder $formbuilder){
+        if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+            $index = $table->keys()[0];
+        if($table[$index]->is_admin == 1){
         $form = $formbuilder->create(ShopCategoryForm::class);
         return view('shop.shop_add_category', compact('form'));
+            }
+        }
+        return redirect(route('shop'));
     }
 
     public function add_category_check(){
@@ -62,6 +76,7 @@ class ShopController extends Controller
     }
 
     public function add_to_cart($id){
+        if(sizeof($_SESSION) > 0){
         $test = DB::table('link_member_product_cart')->get()->where('member_id_fk', $_SESSION['id'])->where('product_id_fk', $id);
         //dd($test);
 
@@ -85,6 +100,7 @@ class ShopController extends Controller
 
         $articles = DB::table('link_member_product_cart')->get()->where('member_id_fk', $_SESSION['id']);
         return redirect(route('shop'));
+        }
     }
 
     public function id ($id){
@@ -92,8 +108,16 @@ class ShopController extends Controller
     }
 
     public function id_update($id, FormBuilder $formbuilder){
-		$form = $formbuilder->create(ShopIdForm::class);
-		return view('shop.shop_add_product', compact('form'));
+        if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
+
+			if($table[$index]->is_admin == 1){
+				$form = $formbuilder->create(ShopIdForm::class);
+				return view('shop.shop_add_product', compact('form'));
+			}
+		}
+		return redirect(route('shop'));
     }
     
     public function id_update_check(){
@@ -108,20 +132,27 @@ class ShopController extends Controller
 		}
 		return redirect(route('shop'));
 	}
-
+		
 	public function delete($id){
-        DB::table('link_member_product_cart')
-        ->where('product_id_fk',$id)
-        ->delete();
 
-        DB::table('link_orders_products')
-        ->where('product_id_fk',$id)
-        ->delete();
+        if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
 
-        DB::table('product')
-		->where('product_id',$id)
-        ->delete();
+			if($table[$index]->is_admin == 1){       
+                DB::table('link_member_product_cart')
+                ->where('product_id_fk',$id)
+                ->delete();
 
+                DB::table('link_orders_products')
+                ->where('product_id_fk',$id)
+                ->delete();
+
+                DB::table('product')
+                ->where('product_id',$id)
+                ->delete();
+            }
+		}
 
 		return redirect(route('shop'));
 	}

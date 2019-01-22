@@ -33,13 +33,22 @@ Shop
 
     </div>
 
-    <div class="list-group card my-4 card-search">
+    <?php
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
+
+			if($table[$index]->is_admin == 1){
+        echo '<div class="list-group card my-4 card-search">
         <h5 class="card-header black">Administration</h5>
         <a href="/shop/add/product" class="list-group-item black">New product</a>
         <a href="/shop/add/category" class="list-group-item black">New category</a>
 
-    </div>
+    </div>';
+            }
+        }
 
+    ?>
 
 
 

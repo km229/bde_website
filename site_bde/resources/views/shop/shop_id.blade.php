@@ -10,14 +10,22 @@ Shop
 		<div class="col-lg-3">
 
 			<h2 class="my-4">BDE CESI Saint-Nazaire</h2>
+            <?php
+			if(sizeof($_SESSION) > 0){
+				$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+				$index = $table->keys()[0];
 
-			<div class="list-group card my-4 card-search">
+				if($table[$index]->is_admin == 1){
+			    echo '<div class="list-group card my-4 card-search">
                 <h5 class="card-header black">Administration</h5>
                 <a href="/shop/{{$id}}/update" class="list-group-item black">Update the product</a>
 				<a href="/shop/{{$id}}/delete" class="list-group-item black">Delete</a>
 				<a href="/shop" class="list-group-item black">Back</a>
-			</div>
-
+            </div>';
+                }
+            }
+            ?> 
+                         
 		</div>
 		<div class="col-lg-9">
 
