@@ -19,6 +19,7 @@ if(!isset($_SESSION)){
     <link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
     <!-- Utilise LESS -->
     <link rel="stylesheet/less" type="text/css" href="{{ asset('less/styles.less') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
 </head>
 <body>
@@ -111,6 +112,11 @@ if(!isset($_SESSION)){
     <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
     @yield('script')
     <script>
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
         $(".burger").click(function(){
             if($("header").attr("class")===""){
                 $("header").addClass("menu-open");

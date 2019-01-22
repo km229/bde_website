@@ -38,7 +38,7 @@ Ideas
 <!-- /.col-lg-3 -->
 
 <div class="col-lg-9">
-
+    <div class="content">
     <div class="row">
     <?php
         if(sizeof($ideas)>0){
@@ -59,18 +59,6 @@ Ideas
     ?>
     </div>
     {!! $links !!}
+    </div>
 </div>
-@endsection
-
-@section('script')
-<script>
-    $("#ideas_page").change(function name(params) {
-        alert('test');
-        if($("option").attr('value')===18){
-            alert($("option").attr('value')=18);
-        }
-        $ab = $("option").attr('selected');
-        alert($ab);
-        });
-</script>
 @endsection
