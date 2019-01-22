@@ -44,6 +44,15 @@ class ActivitiesIdForm extends Form
 		->add('id', 'hidden',[
 			'value' => $id
 		])
+		->add('price', 'number',[
+			'value' => $activity->activity_price
+		])
+		->add('type', 'choice',[
+			'choices' => ['Punctual','Recurrent'],
+			'multiple' => false,
+			'expanded' => true,
+			'selected' => $activity->activity_recurrence
+		])
 		->add('submit', 'submit',[
 			'label' => 'Update'
 		]);

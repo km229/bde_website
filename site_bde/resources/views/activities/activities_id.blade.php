@@ -18,6 +18,10 @@ Activities
 				<a href="/activities" class="list-group-item black">Back</a>
 			</div>
 
+			<div class="list-group card my-4 card-search">
+				<a href="/activities/{{$id}}/update" class="list-group-item black">Join</a>
+			</div>
+
 		</div>
 		<div class="col-lg-9">
 
@@ -49,6 +53,10 @@ Activities
 					<p>{{$activity->activity_desc}}</p>
 					<h3 class="my-3">Date</h3>
 					<p>{{$activity->activity_date}}</p>
+					<h3 class="my-3">Type</h3>
+					<p>{{$activity->activity_recurrence}}</p>
+					<h3 class="my-3">Price</h3>
+					<p>{{$activity->activity_price}} €</p>
 				</div>
 
 			</div>

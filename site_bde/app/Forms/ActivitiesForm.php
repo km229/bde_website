@@ -26,6 +26,15 @@ class ActivitiesForm extends Form
 		->add('date', 'date',[
 			'rules' => 'required'
 		])
+		->add('price', 'number',[
+			'rules' => 'required'
+		])
+		->add('type', 'choice',[
+			'choices' => ['Punctual','Recurrent'],
+			'multiple' => false,
+			'expanded' => true,
+			'selected' => 0
+		])
 		->add('submit', 'submit');
 	}
 }

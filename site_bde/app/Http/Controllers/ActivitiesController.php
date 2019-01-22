@@ -32,7 +32,9 @@ class ActivitiesController extends Controller
 					'activity_title' => $_POST['name'],
 					'activity_desc' => $_POST['description'],
 					'activity_date' => $_POST['date'],
-					'activity_img' => file_get_contents($_FILES['image']['tmp_name'])
+					'activity_img' => file_get_contents($_FILES['image']['tmp_name']),
+					'activity_price' => $_POST['price'],
+					'activity_recurrence' => $_POST['type']
 				)
 			);
 			return redirect(route('activities'));
@@ -52,11 +54,11 @@ class ActivitiesController extends Controller
 		if($_FILES['image']['tmp_name'] === ""){
 			DB::table('activity')
 			->where('activity_id',$_POST['id'])
-			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_date' => $_POST['date']]);
+			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_date' => $_POST['date'],'activity_price' => $_POST['price'],'activity_recurrence' => $_POST['type']]);
 		}else{
 			DB::table('activity')
 			->where('activity_id',$_POST['id'])
-			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_img' => file_get_contents($_FILES['image']['tmp_name']),'activity_date' => $_POST['date']]);
+			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_img' => file_get_contents($_FILES['image']['tmp_name']),'activity_date' => $_POST['date'],'activity_price' => $_POST['price'],'activity_recurrence' => $_POST['type']]);
 		}
 		return redirect(route('activities'));
 	}
