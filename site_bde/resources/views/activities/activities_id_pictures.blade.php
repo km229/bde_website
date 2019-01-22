@@ -21,23 +21,25 @@ $table = $table->get();
 
 foreach ($table as $el) {
     echo '
-    <div class="row">
+    <div class="row ">
     <div class="col-sm-8">
-    <div class="panel panel-white post panel-shadow">
-    <div class="post-heading">
-    <div class="pull-left meta">
-    <div class="title h5">
+    <div class="card">
+    <div class="card-body card-body2">
+    <div class="">
+    <div class="">
+    <div class="h5">
     <a href="#"><b>'.$el->member_firstname.' '.$el->member_lastname.'</b></a>
     </div>
-    <h6 class="text-muted time"> Published : '.$el->comment_date.'</h6>
+    <i><h6 class=""> Published : '.$el->comment_date.'</h6></i>
     </div>
     </div> 
-    <div class="post-description"> 
+    <div class=""> 
     <p>'.$el->comment.'</p>
-    <div class="stats">
+    <div class="">
     <a href="#" class="btn btn-default stat-item">
     <i class="fa fa-thumbs-up icon"></i>
     </a>
+    </div>
     </div>
     </div>
     </div>
