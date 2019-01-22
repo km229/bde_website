@@ -42,8 +42,8 @@ Cart
 
         <div class="list-group card my-4 card-search">
             <h2 class="card-header ">Total</h2>
-            <h3 href="" class="list-group-item black"><?php echo $totalprice; ?> €</h3>
-            <a href="" class="list-group-item black btn btn-secondary">Buy</a>
+            <h3 class="list-group-item black"><?php echo $totalprice; ?> €</h3>
+            <a href="cart/buy" class="list-group-item black btn btn-secondary">Buy</a>
 
         </div>
 
