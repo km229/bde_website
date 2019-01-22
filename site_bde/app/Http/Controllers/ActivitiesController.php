@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Forms\ActivitiesForm;
+use App\Forms\ActivitiesCommentForm;
 use App\Forms\ActivitiesIdForm;
 use App\Forms\ActivitiesAddPictureForm;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class ActivitiesController extends Controller
 	}
 
 	public function create(FormBuilder $formbuilder){
+
 		if(sizeof($_SESSION) > 0){
 			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
 			$index = $table->keys()[0];
@@ -39,7 +41,6 @@ class ActivitiesController extends Controller
 	public function create_check(){
 		if(!empty($_POST)){
 
-            //dd($_FILES);
 
 			DB::table('activity')->insert(
 				array(
@@ -51,6 +52,7 @@ class ActivitiesController extends Controller
 					'activity_recurrence' => $_POST['type']
 				)
 			);
+
 			return redirect(route('activities'));
 		}
 	}
@@ -146,6 +148,27 @@ class ActivitiesController extends Controller
 			'activity_id_fk' => $id
 		));
 		return redirect(route('activities_id', ['id'=>$id]));
+
+	}
+
+	public function picture($id, $id2, FormBuilder $formbuilder){
+		$form = $formbuilder->create(ActivitiesCommentForm::class);
+		return view('activities.activities_id_pictures', compact('form'));
+
+	}
+
+	public function picture_check($id, $id2){
+
+		DB::table('comment_picture_member')->insert(array(
+
+			'picture_id_fk' => $id2,
+			'member_id_fk' => $_SESSION['id'],
+			'comment' => $_POST['commentary'],
+			'comment_date' => date ('y-m-d-H\hi')
+
+		));
+
+		return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]));
 
 	}
 }

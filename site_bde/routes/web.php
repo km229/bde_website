@@ -135,6 +135,10 @@ Route::get('activities/create', [
     'as' => 'activities_create',
     'uses' => 'ActivitiesController@create'
 ]);
+Route::post('activities/create', [
+    'as' => 'activities_create_check',
+    'uses' => 'ActivitiesController@create_check'
+]);
 Route::get('activities/{id}', [
     'as' => 'activities_id',
     'uses' => 'ActivitiesController@id'
@@ -163,10 +167,15 @@ Route::post('activities/{id}', [
     'as' => 'activities_add_picture_check',
     'uses' => 'ActivitiesController@add_picture_check'
 ]);
-Route::post('activities/create', [
-    'as' => 'activities_create_check',
-    'uses' => 'ActivitiesController@create_check'
+Route::get('activities/{id}/img_{id2}', [
+    'as' => 'activities_picture',
+    'uses' => 'ActivitiesController@picture'
 ]);
+Route::post('activities/{id}/img_{id2}', [
+    'as' => 'activities_picture_check',
+    'uses' => 'ActivitiesController@picture_check'
+]);
+
 
 
 /*---ACCOUNT---*/

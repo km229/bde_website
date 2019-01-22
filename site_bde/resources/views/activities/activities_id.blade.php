@@ -95,7 +95,7 @@ Activities
 
 				foreach ($table as $el) {
 					echo '<div class="col-md-3 col-sm-6 mb-4">
-					<a href="#">
+					<a href="/activities/'.$id.'/img_'.$el->picture_id.'">
 					<img class="img-fluid w-100" src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
 					</a>
 					</div>';
