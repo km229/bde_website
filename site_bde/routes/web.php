@@ -87,6 +87,10 @@ Route::get('ideas', [
     'as' => 'ideas',
     'uses' => 'IdeasController@index'
 ]);
+Route::get('ideas/{id}', [
+    'as' => 'idea',
+    'uses' => 'IdeasController@display_idea'
+]);
 Route::get('ideas/create', [
     'as' => 'ideas_create',
     'uses' => 'IdeasController@create'
