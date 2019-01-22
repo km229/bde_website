@@ -22,11 +22,22 @@ Activities
 			
 		</div>
 		
-		<div class="list-group card my-4 card-search">
-			<h5 class="card-header black">Administration</h5>
-			<a href="/activities/create" class="list-group-item black">New activity</a>
+		<?php
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
 
-		</div>
+			if($table[$index]->is_admin == 1){
+				echo '<div class="list-group card my-4 card-search">
+				<h5 class="card-header black">Administration</h5>
+				<a href="/activities/create" class="list-group-item black">New activity</a>
+
+				</div>';
+			}
+		}
+		
+		?>
+		
 
 	</div>
 	<!-- /.col-lg-3 -->

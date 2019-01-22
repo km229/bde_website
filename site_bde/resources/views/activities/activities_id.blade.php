@@ -11,29 +11,32 @@ Activities
 
 			<h2 class="my-4">BDE CESI Saint-Nazaire</h2>
 
-			<div class="list-group card my-4 card-search">
-				<h5 class="card-header black">Administration</h5>
-				<a href="/activities/{{$id}}/update" class="list-group-item black">Update activity</a>
-				<a href="/activities/{{$id}}/delete" class="list-group-item black">Delete</a>
-				<a href="/activities" class="list-group-item black">Back</a>
-			</div>
-
 			<?php
+			if(sizeof($_SESSION) > 0){
+				$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+				$index = $table->keys()[0];
 
-			$table = DB::table('link_members_activities')->get()->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id);
+				if($table[$index]->is_admin == 1){
+					echo '<div class="list-group card my-4 card-search">
+					<h5 class="card-header black">Administration</h5>
+					<a href="/activities/{{$id}}/update" class="list-group-item black">Update activity</a>
+					<a href="/activities/{{$id}}/delete" class="list-group-item black">Delete</a>
+					<a href="/activities" class="list-group-item black">Back</a>
+					</div>';
+				}
 
-			if(sizeof($table)==0){
-				echo'<div class="list-group card my-4 card-search">
-				<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>
-				</div>';
-			}else{
-				echo'<div class="list-group card my-4 card-search">
-				<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>
-				</div>';
+				$table = DB::table('link_members_activities')->get()->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id);
+
+				if(sizeof($table)==0){
+					echo'<div class="list-group card my-4 card-search">
+					<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>
+					</div>';
+				}else{
+					echo'<div class="list-group card my-4 card-search">
+					<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>
+					</div>';
+				}
 			}
-			
-
-			
 
 			?>
 

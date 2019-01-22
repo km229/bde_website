@@ -22,8 +22,17 @@ class ActivitiesController extends Controller
 	}
 
 	public function create(FormBuilder $formbuilder){
-		$form = $formbuilder->create(ActivitiesForm::class);
-		return view('activities.activities_create', compact('form'));
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
+
+			if($table[$index]->is_admin == 1){
+				$form = $formbuilder->create(ActivitiesForm::class);
+				return view('activities.activities_create', compact('form'));
+			}
+		}
+		
+		return redirect(route('activities'));
 	}
 
 	public function create_check(){
@@ -50,8 +59,16 @@ class ActivitiesController extends Controller
 	}
 
 	public function id_update(FormBuilder $formbuilder){
-		$form = $formbuilder->create(ActivitiesIdForm::class);
-		return view('activities.activities_create', compact('form'));
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
+
+			if($table[$index]->is_admin == 1){
+				$form = $formbuilder->create(ActivitiesIdForm::class);
+				return view('activities.activities_create', compact('form'));
+			}
+		}
+		return redirect(route('activities'));
 	}
 
 	public function id_update_check(){
@@ -68,32 +85,50 @@ class ActivitiesController extends Controller
 	}
 
 	public function delete($id){
-		DB::table('link_members_activities')
-		->where('activity_id_fk',$id)
-		->delete();
 
-		DB::table('activity')
-		->where('activity_id',$id)
-		->delete();
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
+
+			if($table[$index]->is_admin == 1){
+				DB::table('link_members_activities')
+				->where('activity_id_fk',$id)
+				->delete();
+
+				DB::table('activity')
+				->where('activity_id',$id)
+				->delete();
+				return redirect(route('activities'));
+			}
+		}
 		return redirect(route('activities'));
+		
 	}
 
 	public function join($id){
 
-		DB::table('link_members_activities')->insert(array(
-			'member_id_fk' => $_SESSION['id'],
-			'activity_id_fk' => $id
-		));
+		if(sizeof($_SESSION) > 0){
+			DB::table('link_members_activities')->insert(array(
+				'member_id_fk' => $_SESSION['id'],
+				'activity_id_fk' => $id
+			));
 
-		return redirect(route('activities_id',['id'=>$id]));
+			return redirect(route('activities_id',['id'=>$id]));
+		}
+		return redirect(route('activities'));
+		
 		
 	}
 
 	public function leave($id){
 
-		DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->delete();
+		if(sizeof($_SESSION) > 0){
+			DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->delete();
 
-		return redirect(route('activities_id',['id'=>$id]));
+			return redirect(route('activities_id',['id'=>$id]));
+		}
+
+		return redirect(route('activities'));
 
 	}
 }

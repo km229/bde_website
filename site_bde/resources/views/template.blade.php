@@ -88,6 +88,7 @@ if(!isset($_SESSION)){
                     <div class="footer-title">Shop</div>
                     <ul>
                         <li><a href="/shop">Check products</a></li>
+                        <li><a href="/shop/cart">Check my cart</a></li>
                     </ul>
                 </div>
                 <div class="footer-bloc">
