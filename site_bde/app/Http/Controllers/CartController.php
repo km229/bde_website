@@ -11,18 +11,13 @@ if(!isset($_SESSION)){
 
 class CartController extends Controller
 {
-
-    public function __construct(){
-        $this->middleware('login');
-    }
-
-	public function index(){
+    public function index(){
         $id = $_SESSION['id'];
         $articles = DB::table('link_member_product_cart')->join('product','product_id_fk' ,'=','product_id')->get()->where('member_id_fk', $id);
         return view('cart', compact("articles"));
-	}
+    }
 
-	public function remove($article){
+    public function remove($article){
         $r = $_SERVER['REQUEST_URI'];
         $id = explode('_', $r)[1];
 
@@ -38,6 +33,45 @@ class CartController extends Controller
         }else{
             DB::table('link_member_product_cart')->where('member_id_fk','=', $_SESSION['id'])->where('product_id_fk','=', $id)->delete();
         }
+
+
+        return redirect(route('cart'));
+    }
+
+    public function buy(){
+
+        $id = $_SESSION['id'];
+        $member = DB::table('members')->get()->where('member_id', $id);
+        $cart = DB::table('link_member_product_cart')->join('product','product_id_fk' ,'=','product_id')->get()->where('member_id_fk', $id);
+        $totalprice = 0;
+        $date = date ('y-m-d-H\hi');
+
+        foreach ($cart as $item){
+            $totalprice += $item -> number * $item -> product_price;
+        }
+
+        DB::table('orders')->insert(
+            array(
+                'order_price' => $totalprice,
+                'order_date' =>  $date,
+                'member_id_fk' => $id
+            )
+        );
+        $order = DB::table('orders')->get()->where('order_date',  $date)->where('member_id_fk', $id);
+        $orderindex = $order->keys()[0];
+        $orderid = $order[$orderindex] -> order_id;
+
+        foreach ($cart as $product){
+            DB::table('link_orders_products')->insert(
+                array(
+                    'order_id_fk' => $orderid,
+                    'product_id_fk' =>  $product -> product_id,
+                    'number' => $product -> number
+                )
+            );
+        }
+
+        DB::table('link_member_product_cart')->where('member_id_fk', $id)->delete();
 
 
         return redirect(route('cart'));
