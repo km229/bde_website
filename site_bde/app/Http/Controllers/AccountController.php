@@ -24,7 +24,7 @@ class AccountController extends Controller
 	}
 
 	public function check(){
-	if(!empty($_POST)){
+		if(!empty($_POST)){
 			
 			$member = DB::table('members')->get()->where('member_mail', $_POST['email']);
 			$index = $member->keys()[0];
@@ -35,13 +35,13 @@ class AccountController extends Controller
 				return redirect(route('account'))->with('error', 'login_error');
 			}
 
-		if($_POST['new_password'] !== ""){
-			$password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-		}
-		DB::table('members')
+			if($_POST['new_password'] !== ""){
+				$password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+			}
+			DB::table('members')
 			->where('member_id',$_SESSION["id"] )
 			->update(['member_firstname' => $_POST["first_name"],'member_lastname' => $_POST["last_name"],'member_mail' => $_POST['email'],'member_password' => $password,'location_id_fk'=> ($_POST['location']+1)]);
-		return redirect(route('welcome'));
+			return redirect(route('welcome'));
 		}
 	}
 }

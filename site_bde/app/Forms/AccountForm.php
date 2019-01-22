@@ -19,25 +19,25 @@ class AccountForm extends Form
 		];
 
 		$table = DB::table('members')
-			->join('location', 'location_id_fk', '=', 'location_id')
-			->get()->where('member_id', $_SESSION['id']);
+		->join('location', 'location_id_fk', '=', 'location_id')
+		->get()->where('member_id', $_SESSION['id']);
 
-			$db = DB::table('location')->get();
-			$array = [];
-			foreach($db as $choice){
-				$array[] = $choice;
-	
-			}
-			$table2 = [];
-	
-			for($i = 0; $i < sizeof($array); $i++){
-				$table2[] =  $array[$i] -> location_center;
-			}
+		$db = DB::table('location')->get();
+		$array = [];
+		foreach($db as $choice){
+			$array[] = $choice;
 
-			$index = $table->keys()[0];
+		}
+		$table2 = [];
+
+		for($i = 0; $i < sizeof($array); $i++){
+			$table2[] =  $array[$i] -> location_center;
+		}
 		$index = $table->keys()[0];
 		//dd($table[$index] -> location_id);
 		$member = $table[$index];
+
+
 		$this
 		->add('first_name', 'text',[
 			'value' => $member->member_firstname
