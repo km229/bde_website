@@ -98,6 +98,20 @@ class ActivitiesController extends Controller
 				->where('activity_id_fk',$id)
 				->delete();
 
+				$test = DB::table('activity_pictures')
+				->join('comment_picture_member', 'picture_id', '=', 'picture_id_fk')
+				->where('activity_id_fk',$id);
+
+				foreach ($test->get() as $el) {
+					DB::table('comment_picture_member')
+					->where('picture_id_fk',$el->picture_id)
+					->delete();
+				}
+				
+				DB::table('activity_pictures')
+				->where('activity_id_fk',$id)
+				->delete();
+
 				DB::table('activity')
 				->where('activity_id',$id)
 				->delete();

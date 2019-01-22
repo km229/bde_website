@@ -19,8 +19,8 @@ Activities
 				if($table[$index]->is_admin == 1){
 					echo '<div class="list-group card my-4 card-search">
 					<h5 class="card-header black">Administration</h5>
-					<a href="/activities/{{$id}}/update" class="list-group-item black">Update activity</a>
-					<a href="/activities/{{$id}}/delete" class="list-group-item black">Delete</a>
+					<a href="/activities/'.$id.'/update" class="list-group-item black">Update activity</a>
+					<a href="/activities/'.$id.'/delete" class="list-group-item black">Delete</a>
 					<a href="/activities" class="list-group-item black">Back</a>
 					</div>';
 				}
