@@ -102,14 +102,6 @@ Route::get('ideas', [
     'as' => 'ideas',
     'uses' => 'IdeasController@index'
 ]);
-Route::get('ideas/{id}', [
-    'as' => 'idea',
-    'uses' => 'IdeasController@display_idea'
-]);
-Route::post('ideas/{id}', [
-    'as' => 'change_like',
-    'uses' => 'IdeasController@change_like'
-]);
 Route::get('ideas/create', [
     'as' => 'ideas_create',
     'uses' => 'IdeasController@create'
@@ -117,6 +109,14 @@ Route::get('ideas/create', [
 Route::post('ideas/create', [
     'as' => 'ideas_create_check',
     'uses' => 'IdeasController@create_check'
+]);
+Route::get('ideas/{id}', [
+    'as' => 'idea',
+    'uses' => 'IdeasController@display_idea'
+]);
+Route::post('ideas/{id}', [
+    'as' => 'change_like',
+    'uses' => 'IdeasController@change_like'
 ]);
 
 

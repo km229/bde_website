@@ -13,6 +13,10 @@ if(!isset($_SESSION)){
 
 class AccountController extends Controller
 {
+
+	public function __construct(){
+		$this->middleware('login');
+	}
     //
 	public function index(FormBuilder $formbuilder){
 		$form = $formbuilder->create(AccountForm::class);
