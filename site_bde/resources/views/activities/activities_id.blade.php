@@ -26,16 +26,15 @@ Activities
 				}
 
 				$table = DB::table('link_members_activities')->get()->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id);
-
+				echo'<div class="list-group card my-4 card-search">';
 				if(sizeof($table)==0){
-					echo'<div class="list-group card my-4 card-search">
-					<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>
-					</div>';
+					echo'<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>';
 				}else{
-					echo'<div class="list-group card my-4 card-search">
-					<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>
-					</div>';
+					echo'<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>';
+
 				}
+				echo '<a href="/activities/'.$id.'/add_picture" class="list-group-item black">Add picture</a>';
+				echo '</div>';
 			}
 
 			?>
@@ -87,32 +86,24 @@ Activities
 		</div>
 		<h3 class="my-4">Related Projects</h3>
 
-		<div class="row">
+		<div class="col-lg-12">
+			<div class="row">
 
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="#">
-					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-				</a>
+				<?php
+
+				$table = DB::table('activity_pictures')->get()->where('activity_id_fk', $id);
+
+				foreach ($table as $el) {
+					echo '<div class="col-md-3 col-sm-6 mb-4">
+					<a href="#">
+					<img class="img-fluid w-100" src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
+					</a>
+					</div>';
+				}
+
+				?>
+
 			</div>
-
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="#">
-					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
-
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="#">
-					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
-
-			<div class="col-md-3 col-sm-6 mb-4">
-				<a href="#">
-					<img class="img-fluid" src="http://placehold.it/500x300" alt="">
-				</a>
-			</div>
-
 		</div>
 	</div>
 </div>

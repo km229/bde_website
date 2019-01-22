@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Forms\ActivitiesForm;
 use App\Forms\ActivitiesIdForm;
+use App\Forms\ActivitiesAddPictureForm;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
@@ -129,6 +130,22 @@ class ActivitiesController extends Controller
 		}
 
 		return redirect(route('activities'));
+
+	}
+
+	public function add_picture($id, FormBuilder $formbuilder){
+
+		$form = $formbuilder->create(ActivitiesAddPictureForm::class);
+		return view('activities.activities_create', compact('form'));
+
+	}
+
+	public function add_picture_check($id){
+		DB::table('activity_pictures')->insert(array(
+			'picture_img' => file_get_contents($_FILES['image']['tmp_name']),
+			'activity_id_fk' => $id
+		));
+		return redirect(route('activities_id', ['id'=>$id]));
 
 	}
 }

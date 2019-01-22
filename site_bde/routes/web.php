@@ -155,6 +155,14 @@ Route::get('activities/{id}/leave', [
     'as' => 'activities_leave',
     'uses' => 'ActivitiesController@leave'
 ]);
+Route::get('activities/{id}/add_picture', [
+    'as' => 'activities_add_picture',
+    'uses' => 'ActivitiesController@add_picture'
+]);
+Route::post('activities/{id}', [
+    'as' => 'activities_add_picture_check',
+    'uses' => 'ActivitiesController@add_picture_check'
+]);
 Route::post('activities/create', [
     'as' => 'activities_create_check',
     'uses' => 'ActivitiesController@create_check'
