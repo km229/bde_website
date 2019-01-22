@@ -18,9 +18,25 @@ Activities
 				<a href="/activities" class="list-group-item black">Back</a>
 			</div>
 
-			<div class="list-group card my-4 card-search">
-				<a href="/activities/{{$id}}/update" class="list-group-item black">Join</a>
-			</div>
+			<?php
+
+			$table = DB::table('link_members_activities')->get()->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id);
+
+			if(sizeof($table)==0){
+				echo'<div class="list-group card my-4 card-search">
+				<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>
+				</div>';
+			}else{
+				echo'<div class="list-group card my-4 card-search">
+				<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>
+				</div>';
+			}
+			
+
+			
+
+			?>
+
 
 		</div>
 		<div class="col-lg-9">
@@ -63,7 +79,7 @@ Activities
 			<!-- /.row -->
 
 			<!-- Related Projects Row -->
-			
+
 			<!-- /.row -->
 		</div>
 		<h3 class="my-4">Related Projects</h3>

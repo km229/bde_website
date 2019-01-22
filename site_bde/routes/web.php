@@ -116,18 +116,25 @@ Route::get('activities/create', [
     'as' => 'activities_create',
     'uses' => 'ActivitiesController@create'
 ]);
-Route::get('activities/{id}/update', [
-    'as' => 'activities_id_update',
-    'uses' => 'ActivitiesController@id_update'
-]);
-
 Route::get('activities/{id}', [
     'as' => 'activities_id',
     'uses' => 'ActivitiesController@id'
 ]);
+Route::get('activities/{id}/update', [
+    'as' => 'activities_id_update',
+    'uses' => 'ActivitiesController@id_update'
+]);
 Route::get('activities/{id}/delete', [
     'as' => 'activities_delete',
     'uses' => 'ActivitiesController@delete'
+]);
+Route::get('activities/{id}/join', [
+    'as' => 'activities_join',
+    'uses' => 'ActivitiesController@join'
+]);
+Route::get('activities/{id}/leave', [
+    'as' => 'activities_leave',
+    'uses' => 'ActivitiesController@leave'
 ]);
 Route::post('activities/create', [
     'as' => 'activities_create_check',

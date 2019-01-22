@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
 
+if(!isset($_SESSION)){
+	session_start();
+}
+
 class ActivitiesController extends Controller
 {
     //
@@ -64,9 +68,32 @@ class ActivitiesController extends Controller
 	}
 
 	public function delete($id){
+		DB::table('link_members_activities')
+		->where('activity_id_fk',$id)
+		->delete();
+
 		DB::table('activity')
 		->where('activity_id',$id)
 		->delete();
 		return redirect(route('activities'));
+	}
+
+	public function join($id){
+
+		DB::table('link_members_activities')->insert(array(
+			'member_id_fk' => $_SESSION['id'],
+			'activity_id_fk' => $id
+		));
+
+		return redirect(route('activities_id',['id'=>$id]));
+		
+	}
+
+	public function leave($id){
+
+		DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->delete();
+
+		return redirect(route('activities_id',['id'=>$id]));
+
 	}
 }
