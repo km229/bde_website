@@ -62,7 +62,7 @@ class IdeasController extends Controller
                     'member_id_fk' => $_SESSION['id']
                 )
             );
-            return redirect(route('ideas'))->with('success', 'Idea created');
+            return redirect(route('ideas'))->with('success', 'Your idea has been added !');
         }
     }
 }

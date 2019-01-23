@@ -41,10 +41,7 @@ class RegisterController extends Controller
 					'location_id_fk' => ($_POST['location']+1)
 				)
 			);
-			if(sizeof($member = DB::table('members')->get()->where('member_mail', $_POST['email'])) == 0){
-				return redirect(route('login'))->with('error', 'no_email');
-			}
-
+			$member = DB::table('members')->get()->where('member_mail', $_POST['email']);
 			$index = $member->keys()[0];
 
 			$password = $member[$index]->member_password;

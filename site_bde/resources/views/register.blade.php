@@ -8,7 +8,7 @@ Sign up
 <h1>Register</h1>
 
 <p>If you already have an account, <a href="login">please login here</a></p>
-
+<div class="conditions">
 	<p>The password must :</p>
 	<ul>
 		<li class="eight">contain 8 characters</li>
@@ -16,7 +16,7 @@ Sign up
 		<li class="capital">contain a capital letter</li>
 		<li class="number">contain a number</li>
 	</ul>
-
+</div>
 
 <div class="container">
 	{!! form($form) !!}

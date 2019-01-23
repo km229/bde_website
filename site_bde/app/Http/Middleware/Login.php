@@ -20,7 +20,7 @@ class Login
     public function handle($request, Closure $next)
     {
         if(empty($_SESSION)){
-            return redirect(route('login'));
+            return redirect(route('login'))->with('error', 'You must be connected to access to your account !');
         }
         
         return $next($request);

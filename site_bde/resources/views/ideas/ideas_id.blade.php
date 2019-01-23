@@ -12,17 +12,31 @@
 
 			<h2 class="my-4">Idea box</h2>
 
-			<div class="list-group card my-4 card-search">
-				<h5 class="card-header black">Administration</h5>
+			
 				<?php
-				echo '<a href="/ideas/'.$idea[0]->idea_id.'/update" class="list-group-item black">Update idea</a>
-				<a href="/ideas/'.$idea[0]->idea_id.'/delete" class="list-group-item black">Delete idea</a>';
-				?>
-				<a href="/activities/create?id=<?php echo $idea[0]->idea_id?>" class="list-group-item black">Create this activity</a>
-			</div>
-			<div class="list-group card my-4 card-search black">
-				<a href="/ideas" class="list-group-item black">Back</a>
-			</div>
+                
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+            $index = $table->keys()[0];
+            
+            if(($_SESSION['id']===$idea[0]->member_id_fk) || ($table[$index]->is_admin == 1)){
+				echo '<div class="list-group card my-4 card-search">
+				<h3 class="card-header black">Manage idea</h3>
+				<a href="/ideas/'.$idea[0]->idea_id.'/update" class="list-group-item black">Update idea</a>
+                <a href="/ideas/'.$idea[0]->idea_id.'/delete" class="list-group-item black">Delete idea</a>
+				</div>';
+            }
+			if($table[$index]->is_admin == 1){
+				echo '<div class="list-group card my-4 card-search">
+				<h3 class="card-header black">Administration</h3>
+				<a href="/activities/create?id='.$idea[0]->idea_id.'" class="list-group-item black">Create this activity</a>
+				</div>';
+			}
+		}
+                ?>
+                <div class="list-group card my-4 card-search black">
+					<a href="/ideas" class="list-group-item black">Back</a>
+				</div>
 
 		</div>
 		<div class="col-lg-9">
