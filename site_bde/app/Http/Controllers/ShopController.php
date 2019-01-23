@@ -49,7 +49,8 @@ class ShopController extends Controller
 					'product_desc' => $_POST['description'],
 					'product_price' => $_POST['price'],
 					'category_id_fk' => $cat,
-					'product_img' => file_get_contents($_FILES['image']['tmp_name'])
+					'product_img' => file_get_contents($_FILES['image']['tmp_name']),
+                    'product_sales_number' => 0
 				)
 			);
 			return redirect(route('shop'))->with('success', 'Product added');

@@ -65,10 +65,14 @@ class CartController extends Controller
         $cart = DB::table('link_member_product_cart')->join('product','product_id_fk' ,'=','product_id')->get()->where('member_id_fk', $id);
         $totalprice = 0;
         $date = date ('y-m-d-H\hi');
-        $message = '';
 
         foreach ($cart as $item){
             $totalprice += $item -> number * $item -> product_price;
+            $salesnumber = $item -> product_sales_number + $item -> number;
+            DB::table('product')->where('product_id', $item -> product_id)->update(
+                array(
+                    'product_sales_number' => $salesnumber
+            ));
         }
 
         if ($totalprice == 0){
@@ -97,6 +101,7 @@ class CartController extends Controller
                     'number' => $product -> number
                 )
             );
+
 
             $productmsg = "{productname} : {quantity} x {price} = {totalprice}€\n";
             $productmsg = str_replace('{productname}', $product -> product_name, $productmsg);
