@@ -56,7 +56,10 @@ class ActivitiesController extends Controller
 	}
 
 	public function id($id){
-		return view('activities.activities_id', compact('id'));
+		$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+		$verif = DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->get();
+		$activity = DB::table('activity')->where('activity_id',$id)->get();
+		return view('activities.activities_id', compact('id', 'table', 'verif', 'activity'));
 	}
 
 	public function id_update(FormBuilder $formbuilder){

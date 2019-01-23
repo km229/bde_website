@@ -16,17 +16,16 @@
 				<?php
                 
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-            $index = $table->keys()[0];
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
             
-            if(($_SESSION['id']===$idea[0]->member_id_fk) || ($table[$index]->is_admin == 1)){
+            if(($_SESSION['id']===$idea[0]->member_id_fk) || ($table[0]->is_admin == 1)){
 				echo '<div class="list-group card my-4 card-search">
 				<h3 class="card-header black">Manage idea</h3>
 				<a href="/ideas/'.$idea[0]->idea_id.'/update" class="list-group-item black">Update idea</a>
                 <a href="/ideas/'.$idea[0]->idea_id.'/delete" class="list-group-item black">Delete idea</a>
 				</div>';
             }
-			if($table[$index]->is_admin == 1){
+			if($table[0]->is_admin == 1){
 				echo '<div class="list-group card my-4 card-search">
 				<h3 class="card-header black">Administration</h3>
 				<a href="/activities/create?id='.$idea[0]->idea_id.'" class="list-group-item black">Create this activity</a>
