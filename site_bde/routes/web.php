@@ -208,7 +208,11 @@ Route::get('account/orders', 'AccountController@orders');
 /*---MENTIONS---*/
 
 
-Route::get('legal', [
+Route::get('legal_terms', [
     'as' => 'legal',
-    'uses' => 'LegalController@index'
+    'uses' => 'LegalController@legal'
+]);
+Route::get('terms_conditions', [
+    'as' => 'legal',
+    'uses' => 'LegalController@terms'
 ]);

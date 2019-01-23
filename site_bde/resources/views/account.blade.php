@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-Ideas
+My informations | Account
 @endsection
 
 @section('body')

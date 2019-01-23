@@ -1,10 +1,10 @@
 @extends('template')
 
 @section('title')
-Legal terms
+Terms and conditions
 @endsection
 
 @section('body')
-Legal terms
+<h1>General terms and conditions of sale</h1>
 @endsection
 

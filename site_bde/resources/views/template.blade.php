@@ -24,10 +24,10 @@ if(!isset($_SESSION)){
 </head>
 <body>
 
-    <header class="">
+    <header>
         <div class="inner">
             <div class="logo">
-                <a href="/"><img src='{{ asset('img/logo.jpg') }}'></a>
+                <a href="/"><img src='{{ asset('img/logo.jpg') }}' alt="Logo"></a>
             </div>
             <div class="burger"><i class="fas fa-bars"></i></div>
             <nav>
@@ -113,7 +113,8 @@ if(!isset($_SESSION)){
         </div>
         <div class="footer-menu">
             <div class="footer-bloc"><a href="">Sitemap</a></div>
-            <div class="footer-bloc"><a href="/legal">Legal terms</a></div>
+            <div class="footer-bloc"><a href="/legal_terms">Legal terms</a></div>
+            <div class="footer-bloc"><a href="/terms_conditions">Terms and conditions</a></div>
             <div class="footer-bloc"><a href="">Contact</a></div>
             <div class="footer-bloc"><div>Developped by Group 1</div></div>
         </div>
@@ -131,7 +132,7 @@ if(!isset($_SESSION)){
         }
     });
     $(".burger").click(function(){
-        if($("header").attr("class")===""){
+        if(!$("header").hasClass("menu-open")){
             $("header").addClass("menu-open");
             $(".fa-bars").addClass("fa-times");
             $(".fa-times").removeClass("fa-bars");
@@ -141,6 +142,20 @@ if(!isset($_SESSION)){
             $(".fa-bars").removeClass("fa-times");
         }
     });
+    $(window).scroll(function (params) {
+        if ($(window).scrollTop() !== 0) {
+            if($(window).scrollTop() > val){
+                $('body').removeClass("scroll-up");
+                $('body').addClass("scroll-down");
+            } else {
+                $('body').removeClass("scroll-down");
+                $('body').addClass("scroll-up");
+            }
+        } else {
+            $('body').removeClass("scroll-up");
+        }
+        val=$(window).scrollTop();
+    })
 </script>
 </body>
 </html>

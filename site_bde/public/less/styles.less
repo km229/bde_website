@@ -29,6 +29,9 @@ ul { margin-block-start: 0; margin-block-end: 0; margin-inline-start: 0; margin-
 .date { text-align: right; font-family: 'MontserratThinItalic', sans-serif }
 
 /* ------ HEADER ------ */
+.scroll-up main, .scroll-down main { padding-top: 95px }
+.scroll-up header { z-index: 3; position: fixed; top:0; width: 100%; transition: top 0.3s }
+.scroll-down header { z-index: 3; position: fixed; top:-95px; width: 100%; transition: top 0.3s }
 header {
     background: @dark; height: 100px; border-bottom: 5px #FFF dotted;
     .inner { display: flex; flex-wrap: wrap; justify-content: space-between }
