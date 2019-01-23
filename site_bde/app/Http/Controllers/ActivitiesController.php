@@ -53,7 +53,7 @@ class ActivitiesController extends Controller
 				)
 			);
 
-			return redirect(route('activities'));
+			return redirect(route('activities'))->with('success', 'Activity "'.$_POST['name'].'" has been created');
 		}
 	}
 
@@ -63,10 +63,9 @@ class ActivitiesController extends Controller
 
 	public function id_update(FormBuilder $formbuilder){
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-			if($table[$index]->is_admin == 1){
+			if($table[0]->is_admin == 1){
 				$form = $formbuilder->create(ActivitiesIdForm::class);
 				return view('activities.activities_create', compact('form'));
 			}
@@ -84,16 +83,15 @@ class ActivitiesController extends Controller
 			->where('activity_id',$_POST['id'])
 			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_img' => file_get_contents($_FILES['image']['tmp_name']),'activity_date' => $_POST['date'],'activity_price' => $_POST['price'],'activity_recurrence' => $_POST['type']]);
 		}
-		return redirect(route('activities'));
+		return redirect(route('activities'))->with('success', 'Activity "'.$_POST['name'].'" updated');
 	}
 
 	public function delete($id){
 
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-			if($table[$index]->is_admin == 1){
+			if($table[0]->is_admin == 1){
 
 				DB::table('link_members_activities')
 				->where('activity_id_fk',$id)
@@ -123,10 +121,15 @@ class ActivitiesController extends Controller
 				->where('activity_id_fk',$id)
 				->delete();
 
+				$name = DB::table('activity')
+				->where('activity_id',$id)
+				->get();
+
 				DB::table('activity')
 				->where('activity_id',$id)
 				->delete();
-				return redirect(route('activities'));
+
+				return redirect(route('activities'))->with('success', 'Activity "'.$name[0]->activity_title.'" has been deleted');
 			}
 		}
 		return redirect(route('activities'));
@@ -140,20 +143,18 @@ class ActivitiesController extends Controller
 				'member_id_fk' => $_SESSION['id'],
 				'activity_id_fk' => $id
 			));
-
-			return redirect(route('activities_id',['id'=>$id]));
+			$test = DB::table('activity')->where('activity_id', $id)->get();
+			return redirect(route('activities_id',['id'=>$id]))->with('success', 'You joined the activity "'.$test[0]->activity_title.'"');
 		}
 		return redirect(route('activities'));
-		
-		
 	}
 
 	public function leave($id){
 
 		if(sizeof($_SESSION) > 0){
 			DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->delete();
-
-			return redirect(route('activities_id',['id'=>$id]));
+			$test = DB::table('activity')->where('activity_id', $id)->get();
+			return redirect(route('activities_id',['id'=>$id]))->with('success', 'You left the activity "'.$test[0]->activity_title.'"');
 		}
 
 		return redirect(route('activities'));
@@ -172,7 +173,7 @@ class ActivitiesController extends Controller
 			'picture_img' => file_get_contents($_FILES['image']['tmp_name']),
 			'activity_id_fk' => $id
 		));
-		return redirect(route('activities_id', ['id'=>$id]));
+		return redirect(route('activities_id', ['id'=>$id]))->with('success', 'Picture added');
 
 	}
 
@@ -228,7 +229,7 @@ class ActivitiesController extends Controller
 				DB::table('activity_pictures')
 				->where('picture_id',$id2)
 				->delete();
-
+				return redirect(route('activities_id', ['id'=> $id]))->with('success', 'Picture deleted');
 			}
 		}
 		return redirect(route('activities_id', ['id'=> $id]));
