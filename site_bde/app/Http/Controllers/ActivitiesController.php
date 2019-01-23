@@ -94,6 +94,7 @@ class ActivitiesController extends Controller
 			$index = $table->keys()[0];
 
 			if($table[$index]->is_admin == 1){
+
 				DB::table('link_members_activities')
 				->where('activity_id_fk',$id)
 				->delete();
@@ -104,6 +105,16 @@ class ActivitiesController extends Controller
 
 				foreach ($test->get() as $el) {
 					DB::table('comment_picture_member')
+					->where('picture_id_fk',$el->picture_id)
+					->delete();
+				}
+
+				$test = DB::table('activity_pictures')
+				->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')
+				->where('activity_id_fk',$id);
+
+				foreach ($test->get() as $el) {
+					DB::table('like_picture_member')
 					->where('picture_id_fk',$el->picture_id)
 					->delete();
 				}
@@ -183,6 +194,38 @@ class ActivitiesController extends Controller
 		));
 
 		return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]));
+
+	}
+
+	public function picture_delete($id, $id2){
+
+
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
+			$index = $table->keys()[0];
+
+			if($table[$index]->is_admin == 1){
+				DB::table('like_picture_member')
+				->where('picture_id_fk',$id2)
+				->delete();
+
+				$test = DB::table('activity_pictures')
+				->join('comment_picture_member', 'picture_id', '=', 'picture_id_fk')
+				->where('activity_id_fk',$id);
+
+				foreach ($test->get() as $el) {
+					DB::table('comment_picture_member')
+					->where('picture_id_fk',$el->picture_id)
+					->delete();
+				}
+				
+				DB::table('activity_pictures')
+				->where('picture_id',$id2)
+				->delete();
+
+			}
+		}
+		return redirect(route('activities_id', ['id'=> $id]));
 
 	}
 }

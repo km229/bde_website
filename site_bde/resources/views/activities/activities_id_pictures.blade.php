@@ -28,18 +28,13 @@ foreach ($table as $el) {
     <div class="">
     <div class="">
     <div class="h5">
-    <a href="#"><b>'.$el->member_firstname.' '.$el->member_lastname.'</b></a>
+    <b>'.$el->member_firstname.' '.$el->member_lastname.'</b>
     </div>
     <i><h6 class=""> Published : '.$el->comment_date.'</h6></i>
     </div>
     </div> 
     <div class=""> 
     <p>'.$el->comment.'</p>
-    <div class="">
-    <a href="#" class="btn btn-default stat-item">
-    <i class="fa fa-thumbs-up icon"></i>
-    </a>
-    </div>
     </div>
     </div>
     </div>

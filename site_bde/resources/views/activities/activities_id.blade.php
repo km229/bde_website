@@ -98,7 +98,9 @@ Activities
 					<a href="/activities/'.$id.'/img_'.$el->picture_id.'">
 					<img class="img-fluid w-100" src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
 					</a>
-					</div>';
+					<div class="list-group-item">
+					<a href="'.$id.'/img_'.$el ->picture_id.'/delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+					</div></div>';
 				}
 
 				?>
