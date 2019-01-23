@@ -65,82 +65,82 @@ if(!isset($_SESSION)){
         <div class="inner">
             @yield('body')    
             <?php
-    if(session('error')){
-		echo '<div class="alert alert-danger">
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>'.session('error').'</strong></div>';
-    } if(session('success')){
-	    echo '
-	    <div class="alert alert-success">
-	    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-	    <strong>'.session('success').'</strong></div>';
-    }
-    ?>
-        </div>
-    </main>
-    
-    <footer>
-        <div class="inner">
-            <div class="footer-menu">
-                <div class="footer-bloc">
-                    <div class="footer-title">Idea box</div>
-                    <ul>
-                        <li><a href="/ideas">Check ideas</a></li>
-                        <li><a href="/ideas/create">New idea</a></li>
-                    </ul>
-                </div>
-                <div class="footer-bloc">
-                    <div class="footer-title">Activities</div>
-                    <ul>
-                        <li><a href="/activities">Check activities</a></li>
-                        <li><a href="/activities/create">New activity</a></li>
-                    </ul>
-                </div>
-                <div class="footer-bloc">
-                    <div class="footer-title">Shop</div>
-                    <ul>
-                        <li><a href="/shop">Check products</a></li>
-                        <li><a href="/shop/cart">Check my cart</a></li>
-                    </ul>
-                </div>
-                <div class="footer-bloc">
-                    <div class="footer-title">Follow us</div>
-                    <ul class="social">
-                        <li><a href=""><i class="fab fa-facebook"></i></a></li>
-                        <li><a href=""><i class="fab fa-twitter"></i></a></li>
-                    </ul>
-                </div>
+            if(session('error')){
+              echo '<div class="alert alert-danger">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <strong>'.session('error').'</strong></div>';
+          } if(session('success')){
+             echo '
+             <div class="alert alert-success">
+             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>'.session('success').'</strong></div>';
+         }
+         ?>
+     </div>
+ </main>
+
+ <footer>
+    <div class="inner">
+        <div class="footer-menu">
+            <div class="footer-bloc">
+                <div class="footer-title">Idea box</div>
+                <ul>
+                    <li><a href="/ideas">Check ideas</a></li>
+                    <li><a href="/ideas/create">New idea</a></li>
+                </ul>
             </div>
-            <div class="footer-menu">
-                <div class="footer-bloc"><a href="">Sitemap</a></div>
-                <div class="footer-bloc"><a href="/legal">Legal terms</a></div>
-                <div class="footer-bloc"><a href="">Contact</a></div>
-                <div class="footer-bloc"><div>Developped by Group 1</div></div>
+            <div class="footer-bloc">
+                <div class="footer-title">Activities</div>
+                <ul>
+                    <li><a href="/activities">Check activities</a></li>
+                    <li><a href="/activities/create">New activity</a></li>
+                </ul>
+            </div>
+            <div class="footer-bloc">
+                <div class="footer-title">Shop</div>
+                <ul>
+                    <li><a href="/shop">Check products</a></li>
+                    <li><a href="/shop/cart">Check my cart</a></li>
+                </ul>
+            </div>
+            <div class="footer-bloc">
+                <div class="footer-title">Follow us</div>
+                <ul class="social">
+                    <li><a href=""><i class="fab fa-facebook"></i></a></li>
+                    <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                </ul>
             </div>
         </div>
-    </footer>
-    
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
-    @yield('script')
-    <script>
+        <div class="footer-menu">
+            <div class="footer-bloc"><a href="">Sitemap</a></div>
+            <div class="footer-bloc"><a href="/legal">Legal terms</a></div>
+            <div class="footer-bloc"><a href="">Contact</a></div>
+            <div class="footer-bloc"><div>Developped by Group 1</div></div>
+        </div>
+    </div>
+</footer>
+
+<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
+@yield('script')
+<script>
     $.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
     });
-        $(".burger").click(function(){
-            if($("header").attr("class")===""){
-                $("header").addClass("menu-open");
-                $(".fa-bars").addClass("fa-times");
-                $(".fa-times").removeClass("fa-bars");
-            } else {
-                $("header").removeClass("menu-open");
-                $(".fa-times").addClass("fa-bars");
-                $(".fa-bars").removeClass("fa-times");
-            }
-        });
-    </script>
+    $(".burger").click(function(){
+        if($("header").attr("class")===""){
+            $("header").addClass("menu-open");
+            $(".fa-bars").addClass("fa-times");
+            $(".fa-times").removeClass("fa-bars");
+        } else {
+            $("header").removeClass("menu-open");
+            $(".fa-times").addClass("fa-bars");
+            $(".fa-bars").removeClass("fa-times");
+        }
+    });
+</script>
 </body>
 </html>

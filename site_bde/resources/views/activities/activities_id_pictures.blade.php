@@ -7,13 +7,27 @@ Activities
 @section('body')
 <?php 
 
-
-$r = $_SERVER['REQUEST_URI']; 
-$id2 = explode('_', $r)[1];
 $table = DB::table('activity_pictures')->get()->where('picture_id', $id2);
 $index = $table->keys()[0];
 echo '<img class="w-100" src="data:image/png;base64,'.base64_encode($table[$index] -> picture_img) .'" />'; 
 
+echo'
+<span class="nb_like">';
+if(isset($like[0]->picture_likes)){ 
+    echo $like[0]->picture_likes; 
+} else { 
+    echo '0'; 
+}
+echo'</span>
+<i class="fas fa-heart"></i>
+<div class="button">';
+if(empty($verif_like[0])){
+    echo'<a class="like">Like</a>';
+} else {
+    echo '<a class="like">Dislike</a>';
+}
+
+echo'</div>';
 
 $table = DB::table('comment_picture_member')->join('members', 'member_id_fk','=','member_id')->where('picture_id_fk', $id2);
 
@@ -50,3 +64,6 @@ foreach ($table as $el) {
 </div>
 @endsection
 
+@section('script')
+
+@endsection

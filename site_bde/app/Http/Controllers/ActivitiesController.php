@@ -177,8 +177,14 @@ class ActivitiesController extends Controller
 	}
 
 	public function picture($id, $id2, FormBuilder $formbuilder){
+
 		$form = $formbuilder->create(ActivitiesCommentForm::class);
-		return view('activities.activities_id_pictures', compact('form'));
+
+		$idea = DB::table('activity_pictures')->where('picture_id', '=', $id2)->get();
+		$like = DB::table('activity_pictures')->select(DB::raw('picture_id, COUNT(picture_id) as picture_likes'))->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->groupBy('picture_id')->where('picture_id', '=', $id2)->get();
+		$verif_like = DB::table('activity_pictures')->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->where('member_id_fk', $_SESSION['id'])->where('picture_id', $id2)->get();
+		return view('activities.activities_id_pictures', compact('idea', 'like', 'verif_like', 'id', 'id2', 'form'));
+
 
 	}
 
