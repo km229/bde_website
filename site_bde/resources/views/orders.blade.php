@@ -20,10 +20,14 @@ My orders | Account
 		$test = DB::table('orders')->where('member_id_fk', $_SESSION['id'])->get();
 
 		foreach ($test as $order) {
+			$date_explode = explode("-", $order->order_date);
+
+			$date = $date_explode[2].'/'.$date_explode[1].'/'.$date_explode[0].' at '.$date_explode[3];
+
 			echo'<br><div class="card">
 			<div class="card-header black">
 			<h5>Order '.$order->order_id.'</h5>
-			<i>'.$order->order_date.'</i>
+			<i>'.$date.'</i>
 			</div>
 			<table class="table table-striped table-hover table-bordered black">
 			<tbody>

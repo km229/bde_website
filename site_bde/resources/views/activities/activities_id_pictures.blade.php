@@ -50,6 +50,7 @@ foreach ($table as $el) {
     <div class=""> 
     <p>'.$el->comment.'</p>
     </div>
+    <a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
     </div>
     </div>
     </div>
