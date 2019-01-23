@@ -40,8 +40,6 @@ class ActivitiesController extends Controller
 
 	public function create_check(){
 		if(!empty($_POST)){
-
-
 			DB::table('activity')->insert(
 				array(
 					'activity_title' => $_POST['name'],

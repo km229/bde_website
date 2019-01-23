@@ -20,7 +20,7 @@ if(!isset($_SESSION)){
     <!-- Utilise LESS -->
     <link rel="stylesheet/less" type="text/css" href="{{ asset('less/styles.less') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title')</title>
+    <title>@yield('title') | BDE CESI</title>
 </head>
 <body>
 

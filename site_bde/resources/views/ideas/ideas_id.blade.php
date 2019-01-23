@@ -30,6 +30,7 @@
 				echo '<div class="list-group card my-4 card-search">
 				<h3 class="card-header black">Administration</h3>
 				<a href="/activities/create?id='.$idea[0]->idea_id.'" class="list-group-item black">Create this activity</a>
+                <a href="/ideas/'.$idea[0]->idea_id.'/delete" class="list-group-item black">Delete idea</a>
 				</div>';
 			}
 		}

@@ -8,15 +8,14 @@ Sign up
 <h1>Register</h1>
 
 <p>If you already have an account, <a href="login">please login here</a></p>
-<div class="conditions">
-	<p>The password must :</p>
+<p>The password must :
 	<ul>
 		<li class="eight">contain 8 characters</li>
 		<li class="lowercase">contain a lowercase letter</li>
 		<li class="capital">contain a capital letter</li>
 		<li class="number">contain a number</li>
 	</ul>
-</div>
+</p>
 
 <div class="container">
 	{!! form($form) !!}

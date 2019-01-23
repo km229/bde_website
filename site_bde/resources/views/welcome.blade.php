@@ -7,7 +7,7 @@ if(!isset($_SESSION)){
 @extends('template')
 
 @section('title')
-Site
+Homepage
 @endsection
 
 @section('body')
@@ -57,7 +57,7 @@ Site
 					for ($i=0; $i < $size; $i++) { 
 						echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
 						<h3>'. $activities[$i] -> activity_title .'</h3>
-						<img class="d-block w-100" src="';
+						<img class="d-block w-100" alt="'.$activities[$i] -> activity_title.'" src="';
 						if(isset($activities[$i] -> activity_img)){
 							echo 'data:image/jpeg;base64,'. base64_encode($activities[$i] -> activity_img) .'" >';
 						} else { echo asset('img/noimg.jpg').'" >'; }
