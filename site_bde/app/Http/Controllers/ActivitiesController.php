@@ -140,22 +140,40 @@ class ActivitiesController extends Controller
 	public function join($id){
 
 		if(sizeof($_SESSION) > 0){
-			DB::table('link_members_activities')->insert(array(
-				'member_id_fk' => $_SESSION['id'],
-				'activity_id_fk' => $id
-			));
-			$test = DB::table('activity')->where('activity_id', $id)->get();
-			return redirect(route('activities_id',['id'=>$id]))->with('success', 'You joined the activity "'.$test[0]->activity_title.'"');
+
+			$verif = DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->get();
+			
+			$activity = DB::table('activity')->where('activity_id',$id)->get();
+
+			if($activity[0]->activity_date > date('Y-m-d')){
+				if(sizeof($verif)==0){
+					DB::table('link_members_activities')->insert(array(
+						'member_id_fk' => $_SESSION['id'],
+						'activity_id_fk' => $id
+					));
+					return redirect(route('activities_id',['id'=>$id]))->with('success', 'You joined the activity "'.$activity[0]->activity_title.'"');
+				}
+			}
 		}
+		
 		return redirect(route('activities'));
 	}
 
 	public function leave($id){
 
 		if(sizeof($_SESSION) > 0){
-			DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->delete();
-			$test = DB::table('activity')->where('activity_id', $id)->get();
-			return redirect(route('activities_id',['id'=>$id]))->with('success', 'You left the activity "'.$test[0]->activity_title.'"');
+
+			$verif = DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->get();
+			
+			$activity = DB::table('activity')->where('activity_id',$id)->get();
+
+			if($activity[0]->activity_date > date('Y-m-d')){
+				if(sizeof($verif)!=0){
+					DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->delete();
+					$test = DB::table('activity')->where('activity_id', $id)->get();
+					return redirect(route('activities_id',['id'=>$id]))->with('success', 'You left the activity "'.$test[0]->activity_title.'"');
+				}
+			}
 		}
 
 		return redirect(route('activities'));
@@ -163,10 +181,12 @@ class ActivitiesController extends Controller
 	}
 
 	public function add_picture($id, FormBuilder $formbuilder){
-
-		$form = $formbuilder->create(ActivitiesAddPictureForm::class);
-		return view('activities.activities_create', compact('form'));
-
+		$activity = DB::table('activity')->where('activity_id',$id)->get();
+		if($activity[0]->activity_date < date('Y-m-d')){
+			$form = $formbuilder->create(ActivitiesAddPictureForm::class);
+			return view('activities.activities_create', compact('form'));
+		}
+		return redirect(route('activities_id',['id'=>$id]));
 	}
 
 	public function add_picture_check($id){
