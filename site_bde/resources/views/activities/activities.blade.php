@@ -96,6 +96,7 @@ Activities
 	//content=last value
 	content='';
 	$("#search").keyup(function () {
+		console.log(unescape(encodeURIComponent($('#search').val())));
 		//si on entre une valeur différente
 		if(content!==$("#search").val() && $("#search").val()!==''){
 			//ajax
