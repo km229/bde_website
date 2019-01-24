@@ -168,7 +168,7 @@ Route::post('activities', [
     'uses' => 'ActivitiesController@id_update_check'
 ]);
 Route::get('activities/search', [
-    'as' => 'activities',
+    'as' => 'activities_search',
     'uses' => 'ActivitiesController@search'
 ]);
 
