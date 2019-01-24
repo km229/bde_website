@@ -66,5 +66,34 @@ foreach ($table as $el) {
 @endsection
 
 @section('script')
-
+<script>
+	$(".like").click(function name(params) {
+		urlValue = <?php echo "'/activities/".$id."/img_".$id2."/like'"; ?>;
+		$.ajax({
+			method: 'POST',
+			url: urlValue,
+			data: { affect: $(".like").html() }
+		}).then(function name(data) {
+			if(data==="ok"){
+				oldval=parseInt($(".nb_like").text());
+				switch ($(".like").text()) {
+					case "Like":
+					oldval++;
+					$(".nb_like").text(oldval++);
+					$(".like").text("Dislike");
+					break;
+					case "Dislike":
+					oldval--;
+					$(".nb_like").text(oldval--);
+					$(".like").text("Like");
+					break;
+					default:
+					break;
+				}
+			} if(data==="ko"){
+				alert('Error like/dislike');
+			}
+		});
+	});
+</script>
 @endsection

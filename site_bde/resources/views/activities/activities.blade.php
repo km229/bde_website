@@ -96,7 +96,6 @@ Activities
 	//content=last value
 	content='';
 	$("#search").keyup(function () {
-		console.log(unescape(encodeURIComponent($('#search').val())));
 		//si on entre une valeur différente
 		if(content!==$("#search").val() && $("#search").val()!==''){
 			//ajax
@@ -122,21 +121,31 @@ Activities
 						);
 					//hover pour le texte dans la barre
 					bar_val=$("#search").val();
-					$(".dropdown-item:eq("+i+")").hover(
-						function on(data) {
+					/*$(".dropdown-item:eq("+i+")").hover(
+						function on() {
 							$(this).addClass("active");
 						//$("#search").val(data[i].activity_title);
-					}, function off(data, bar_val) {
+					}, function off() {
 						$(this).removeClass("active");
 						//$("#search").val(bar_val);
+					});*/
+					val=i;
+					$(".dropdown-item:eq("+i+")").on("click", function () {
+						console.log(val);
+						$("#search").val(data[val].activity_title);
+						$(".search").css('display', 'none');
 					});
-				} 
+					/*$(".dropdown-item:eq("+i+")").click(function () {
+						$("#search").val(data[i].activity_title);
+						$(".search").css('display', 'none');
+					});*/
+				}
 				//si activites < 5 on cache les autres div
 				for(size; size<5; size++){
 					$(".dropdown-item:eq("+size+")").css('display', 'none');
 				}
 				//si aucune activite
-				if(data.length===0){
+				if(size===0){
 					$(".dropdown-item:eq(5)").css('display', 'block');
 					$(".dropdown-item:eq(5)").html(
 						'<div class="dropdown-item"><h3>No content</h3>'+
