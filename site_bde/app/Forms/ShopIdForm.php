@@ -19,16 +19,13 @@ class ShopIdForm extends Form
 
 		$this->formOptions = [
 			'method' => 'POST',
-			'url' => route('shop_id_update_check')
+			'url' => route('shop_id_update_check',['id'=>$id])
 		];
 
-		$table = DB::table('product')->get()->where('product_id', $id);
-
-		$index = $table->keys()[0];
+		$table = DB::table('product')->where('product_id', $id)->get();
 
 
-
-		$product = $table[$index];
+		$product = $table[0];
 
 		$this
 		->add('name', 'text',[

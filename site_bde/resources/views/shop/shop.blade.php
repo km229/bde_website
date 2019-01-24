@@ -20,8 +20,6 @@ Shop
 					</span>
 				</div>
 			</div>
-			<div>
-			</div>
 		</div>
 		<div class="list-group card my-4 card-search">
 			<h5 class="card-header black">Categories</h5>
@@ -35,25 +33,27 @@ Shop
 
 		<div class="list-group card my-4 card-search black">
 			<h5 class="card-header black">Price</h5>
-			<div class="dropdown">
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Dropdown button
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<a class="dropdown-item" href="#">none</a>
-					<a class="dropdown-item" href="#">Asc</a>
-					<a class="dropdown-item" href="#">Desc</a>
+			<form action="{{route('shop_price')}}" method="post">
+				@csrf
+				<div class="list-group-item">
+					Min
+					<input type="range" name="min">
 				</div>
-			</div>
-
+				<div class="list-group-item">
+					Max
+					<input type="range" name="max">
+				</div>
+				<div class="list-group-item">
+					<input type="submit" name="submit">
+				</div>
+			</form>
 		</div>
 
 		<?php
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-			if($table[$index]->is_admin == 1){
+			if($table[0]->is_admin == 1){
 				echo '<div class="list-group card my-4 card-search">
 				<h5 class="card-header black">Administration</h5>
 				<a href="/shop/add/product" class="list-group-item black">New product</a>
@@ -62,7 +62,6 @@ Shop
 				</div>';
 			}
 		}
-
 		?>
 
 
@@ -71,43 +70,43 @@ Shop
 	<!-- /.col-lg-3 -->
 
 	<div class="col-lg-9">
-        <?php
+		<?php
 
-        $bestsellers = DB::table('product')->orderBy('product.product_sales_number', 'DESC')->limit(3)->get();
-        $size = sizeof($bestsellers);
+		$bestsellers = DB::table('product')->orderBy('product.product_sales_number', 'DESC')->limit(3)->get();
+		$size = sizeof($bestsellers);
 
-        if ($size > 0) {
-            echo "<div id=\"carouselExampleIndicators\" class=\"carousel slide my-4\" data-ride=\"carousel\">
+		if ($size > 0) {
+			echo "<div id=\"carouselExampleIndicators\" class=\"carousel slide my-4\" data-ride=\"carousel\">
 			<ol class=\"carousel-indicators\">";
 
 
-            for ($i = 0; $i < $size; $i++) {
-                if ($i == 0) {
-                    echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\" class=\"active\"></li>";
-                } else {
-                    echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\"></li>";
-                }
-            }
+			for ($i = 0; $i < $size; $i++) {
+				if ($i == 0) {
+					echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\" class=\"active\"></li>";
+				} else {
+					echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\"></li>";
+				}
+			}
 
-            echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"First slide\"></div>";
+			echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"First slide\"></div>";
 
-            for ($j = 1; $j < $size; $j++) {
-                if ($j == 1){
-                    echo "<div class=\"carousel-item\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Second slide\"></div>";
-                }
-                elseif ($j == 2){
-                    echo "<div class=\"carousel-item\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Third slide\"></div>";
-                }
-            }
+			for ($j = 1; $j < $size; $j++) {
+				if ($j == 1){
+					echo "<div class=\"carousel-item\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Second slide\"></div>";
+				}
+				elseif ($j == 2){
+					echo "<div class=\"carousel-item\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Third slide\"></div>";
+				}
+			}
 
-        }
+		}
 
-        if ($size > 1){
-            echo "</div><a class=\"carousel-control-prev\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"prev\"><span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Previous</span></a><a class=\"carousel-control-next\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"next\"><span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Next</span></a></div>";
-        } else {
-            echo "</div></div></div>";
-        }
-        ?>
+		if ($size > 1){
+			echo "</div><a class=\"carousel-control-prev\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"prev\"><span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Previous</span></a><a class=\"carousel-control-next\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"next\"><span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Next</span></a></div>";
+		} else {
+			echo "</div></div></div>";
+		}
+		?>
 
 		<div class="row">
 

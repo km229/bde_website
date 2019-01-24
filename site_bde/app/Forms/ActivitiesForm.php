@@ -44,7 +44,7 @@ class ActivitiesForm extends Form
 			'rules' => 'required'
 		])
 		->add('type', 'choice',[
-			'choices' => ['Punctual','Recurrent'],
+			'choices' => ['Punctual','Weekly','Monthly','Yearly'],
 			'multiple' => false,
 			'expanded' => true,
 			'selected' => 0

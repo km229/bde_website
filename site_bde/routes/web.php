@@ -67,6 +67,10 @@ Route::get('shop', [
     'as' => 'shop',
     'uses' => 'ShopController@index'
 ]);
+Route::post('shop', [
+    'as' => 'shop_price',
+    'uses' => 'ShopController@index'
+]);
 Route::get('shop/add/product', [
     'as' => 'shop_add_product',
     'uses' => 'ShopController@add_product'
@@ -95,7 +99,7 @@ Route::get('shop/{id}/update', [
     'as' => 'shop_id_update',
     'uses' => 'ShopController@id_update'
 ]);
-Route::post('shop', [
+Route::post('shop/{id}/update', [
     'as' => 'shop_id_update_check',
     'uses' => 'ShopController@id_update_check'
 ]);
