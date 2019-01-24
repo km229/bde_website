@@ -104,7 +104,7 @@ Activities
 			$.ajax({
 				method: 'POST',
 				url: urlValue,
-				data: { search: mb_convert_encoding($("#search").val(), 'UTF-8', 'UTF-8') }
+				data: { search: $("#search").val() }
 			}).then(function (data) {
 				//success - affiche les activites
 				$(".search").css('display', 'block');

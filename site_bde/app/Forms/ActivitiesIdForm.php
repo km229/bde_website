@@ -48,7 +48,7 @@ class ActivitiesIdForm extends Form
 			'value' => $activity->activity_price
 		])
 		->add('type', 'choice',[
-			'choices' => ['Punctual','Recurrent'],
+			'choices' => ['Punctual','Weekly','Monthly','Yearly'],
 			'multiple' => false,
 			'expanded' => true,
 			'selected' => $activity->activity_recurrence
