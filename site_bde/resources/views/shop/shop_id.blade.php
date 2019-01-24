@@ -12,10 +12,10 @@ Shop
 			<h2 class="my-4">BDE CESI Saint-Nazaire</h2>
             <?php
 			if(sizeof($_SESSION) > 0){
-				$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-				$index = $table->keys()[0];
+				$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-				if($table[$index]->is_admin == 1){
+
+				if($table[0]->is_admin == 1){
 			    echo '<div class="list-group card my-4 card-search">
                 <h5 class="card-header black">Administration</h5>
                 <a href="/shop/{{$id}}/update" class="list-group-item black">Update the product</a>
@@ -31,15 +31,14 @@ Shop
 
 			<?php
 
-			$r = $_SERVER['REQUEST_URI']; 
+			$r = $_SERVER['REQUEST_URI'];
 			$id = explode('/', $r)[2];
 
 			$table = DB::table('product')->get()->where('product_id',$id);
-
 			$index = $table->keys()[0];
 
 			$product = $table[$index];
- 
+
 			?>
 
 			<!-- Portfolio Item Heading -->

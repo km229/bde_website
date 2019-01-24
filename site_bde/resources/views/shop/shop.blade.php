@@ -71,33 +71,43 @@ Shop
 	<!-- /.col-lg-3 -->
 
 	<div class="col-lg-9">
+        <?php
 
-		<div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner" role="listbox">
-				<div class="carousel-item active">
-					<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="First slide">
-				</div>
-				<div class="carousel-item">
-					<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Second slide">
-				</div>
-				<div class="carousel-item">
-					<img class="d-block img-fluid" src="http://placehold.it/900x350" alt="Third slide">
-				</div>
-			</div>
-			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
-		</div>
+        $bestsellers = DB::table('product')->orderBy('product.product_sales_number', 'DESC')->limit(3)->get();
+        $size = sizeof($bestsellers);
+
+        if ($size > 0) {
+            echo "<div id=\"carouselExampleIndicators\" class=\"carousel slide my-4\" data-ride=\"carousel\">
+			<ol class=\"carousel-indicators\">";
+
+
+            for ($i = 0; $i < $size; $i++) {
+                if ($i == 0) {
+                    echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\" class=\"active\"></li>";
+                } else {
+                    echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\"></li>";
+                }
+            }
+
+            echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"First slide\"></div>";
+
+            for ($j = 1; $j < $size; $j++) {
+                if ($j == 1){
+                    echo "<div class=\"carousel-item\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Second slide\"></div>";
+                }
+                elseif ($j == 2){
+                    echo "<div class=\"carousel-item\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Third slide\"></div>";
+                }
+            }
+
+        }
+
+        if ($size > 1){
+            echo "</div><a class=\"carousel-control-prev\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"prev\"><span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Previous</span></a><a class=\"carousel-control-next\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"next\"><span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Next</span></a></div>";
+        } else {
+            echo "</div></div></div>";
+        }
+        ?>
 
 		<div class="row">
 

@@ -77,7 +77,6 @@ class CartController extends Controller
             DB::table('link_member_product_cart')->where('member_id_fk','=', $_SESSION['id'])->where('product_id_fk','=', $id)->delete();
         }
 
-
         return redirect(route('cart'));
     }
 
