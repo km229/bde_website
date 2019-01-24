@@ -24,7 +24,10 @@ class ActivitiesController extends Controller
 	}
 	
 	public function search(){
-		$search=$_GET['request'];
+		if(isset($_GET['request'])){
+			$_SESSION['request']=$_GET['request'];
+		}
+		$search=$_SESSION['request'];
 		$activities = DB::table('activity')->whereRaw("activity_title REGEXP '".$search."' OR activity_desc REGEXP '".$search."'")->paginate(9);
 		$verif_activity = DB::table('activity')->whereRaw("activity_title REGEXP '".$search."' OR activity_desc REGEXP '".$search."'")->get();
 		$links = $activities->render();
