@@ -116,12 +116,16 @@ Shop
 			$min = 0;
 			$max = 1000;
 
-			if($_POST['min'] != ""){
-				$min = $_POST['min'];
+			if(isset($_POST['min'])){
+				if($_POST['min'] != ""){
+					$min = $_POST['min'];
+				}
 			}
-
-			if($_POST['max'] != ""){
-				$max = $_POST['max'];
+			
+			if(isset($_POST['max'])){
+				if($_POST['max'] != ""){
+					$max = $_POST['max'];
+				}
 			}
 
 			if($product->product_price >= $min && $product->product_price <= $max){
