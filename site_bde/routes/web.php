@@ -62,18 +62,6 @@ Route::post('shop/add/category', [
     'as' => 'shop_add_category_check',
     'uses' => 'ShopController@add_category_check'
 ]);
-Route::get('shop/cart', [
-    'as' => 'cart',
-    'uses' => 'CartController@index'
-]);
-Route::get('shop/cart/remove_{id}', [
-    'as' => 'remove',
-    'uses' => 'CartController@remove'
-]);
-Route::get('shop/cart/buy', [
-    'as' => 'buy',
-    'uses' => 'CartController@buy'
-]);
 Route::get('shop/add_{id}', [
     'as' => 'shop_add_to_cart',
     'uses' => 'ShopController@add_to_cart'
@@ -93,6 +81,29 @@ Route::post('shop', [
 Route::get('shop/{id}/delete', [
     'as' => 'shop_delete',
     'uses' => 'ShopController@delete'
+]);
+
+/*---CART---*/
+
+Route::get('shop/cart', [
+    'as' => 'cart',
+    'uses' => 'CartController@index'
+]);
+Route::get('shop/cart/remove_{id}', [
+    'as' => 'remove',
+    'uses' => 'CartController@remove'
+]);
+Route::get('shop/cart/buy', [
+    'as' => 'buy',
+    'uses' => 'CartController@buy'
+]);
+Route::get('shop/cart/plus_{id}', [
+    'as' => 'increment',
+    'uses' => 'CartController@increment'
+]);
+Route::get('shop/cart/minus_{id}', [
+    'as' => 'decrement',
+    'uses' => 'CartController@decrement'
 ]);
 
 /*---IDEAS---*/

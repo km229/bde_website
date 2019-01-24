@@ -36,7 +36,31 @@ class CartController extends Controller
         return view('cart', compact("articles"));
     }
 
-    public function remove($article){
+    public function remove(){
+        $r = $_SERVER['REQUEST_URI'];
+        $id = explode('_', $r)[1];
+
+        DB::table('link_member_product_cart')->where('member_id_fk','=', $_SESSION['id'])->where('product_id_fk','=', $id)->delete();
+
+        return redirect(route('cart'));
+    }
+
+    public function increment(){
+        $r = $_SERVER['REQUEST_URI'];
+        $id = explode('_', $r)[1];
+
+        $table = DB::table('link_member_product_cart')->get()->where('member_id_fk', $_SESSION['id'])->where('product_id_fk', $id);
+        $index = $table->keys()[0];
+        $quantity = $table[$index] -> number + 1;
+
+        DB::table('link_member_product_cart')->where('member_id_fk', $_SESSION['id'])->where('product_id_fk', $id)->update(
+            ['number' => $quantity ]
+        );
+
+        return redirect(route('cart'));
+    }
+
+    public function decrement(){
         $r = $_SERVER['REQUEST_URI'];
         $id = explode('_', $r)[1];
 
