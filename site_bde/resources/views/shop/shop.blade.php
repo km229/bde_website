@@ -37,11 +37,11 @@ Shop
 				@csrf
 				<div class="list-group-item">
 					Min
-					<input type="range" name="min">
+					<input type="number" name="min">
 				</div>
 				<div class="list-group-item">
 					Max
-					<input type="range" name="max">
+					<input type="number" name="max">
 				</div>
 				<div class="list-group-item">
 					<input type="submit" name="submit">
@@ -112,15 +112,39 @@ Shop
 
 			@foreach ($products as $product)
 			<?php
-			$table = DB::table('category')->get()->where('category_id',$product -> category_id_fk);
 
-			$index = $table->keys()[0];
+			$min = 0;
+			$max = 1000;
 
-			$category = $table[$index];
+			if($_POST['min'] != ""){
+				$min = $_POST['min'];
+			}
 
-			if (isset($_GET['category'])){
-				if ($product -> category_id_fk == $_GET['category']){
-					echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
+			if($_POST['max'] != ""){
+				$max = $_POST['max'];
+			}
+
+			if($product->product_price >= $min && $product->product_price <= $max){
+				$table = DB::table('category')->where('category_id',$product -> category_id_fk)->get();
+
+				$category = $table[0];
+
+				if (isset($_GET['category'])){
+					if ($product -> category_id_fk == $_GET['category']){
+						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
+						echo $product -> product_name;
+						echo '</a></h4><h5>';
+						echo $category -> category_name;
+						echo '</h5><p>';
+						echo $product -> product_desc;
+						echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>Price : '.$product -> product_price.' €</div></div></div>';
+
+					}
+				} else {
+
+
+
+					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img).'" />'; echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
 					echo $product -> product_name;
 					echo '</a></h4><h5>';
 					echo $category -> category_name;
@@ -129,18 +153,6 @@ Shop
 					echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>Price : '.$product -> product_price.' €</div></div></div>';
 
 				}
-			} else {
-
-
-
-				echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img).'" />'; echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
-				echo $product -> product_name;
-				echo '</a></h4><h5>';
-				echo $category -> category_name;
-				echo '</h5><p>';
-				echo $product -> product_desc;
-				echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>Price : '.$product -> product_price.' €</div></div></div>';
-
 			}
 			?>
 			@endforeach
