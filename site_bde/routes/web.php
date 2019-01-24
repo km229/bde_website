@@ -155,6 +155,10 @@ Route::post('search/activities', [
     'as' => 'search_activities',
     'uses' => 'AjaxController@search_activities'
 ]);
+Route::put('notif', [
+    'as' => 'notif',
+    'uses' => 'AjaxController@notif'
+]);
 
 /*---ACTIVITIES---*/
 
