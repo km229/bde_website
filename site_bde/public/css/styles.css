@@ -23,3 +23,20 @@
 	margin-bottom: 0px;
 }
 
+.notif {
+	background-color: black; 
+	border-color: black; 
+}
+
+.notif:hover{
+	background-color: black; 
+	border-color: black; 
+	color:rgb(255,194,82);
+}
+
+.notif:active{
+	background-color: black; 
+	border-color: black; 
+	color:rgb(255,194,82);
+}
+
