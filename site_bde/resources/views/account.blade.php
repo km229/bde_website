@@ -31,7 +31,7 @@ My informations | Account
 
 @section('script')
 <script>
-	$("#new_password").change(function(){
+	$("#new_password").keyup(function(){
 		$pass=$("#new_password").val();
 		if ($pass.match(/[a-zA-Z\d]{8,}$/)){ $(".eight").css('color', 'green'); } 
 		else { $(".eight").css('color', 'red'); };

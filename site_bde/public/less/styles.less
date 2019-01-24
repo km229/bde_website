@@ -13,7 +13,7 @@ a {
     &:hover { color: @yellow; text-decoration: underline }
 }
 .bloc-link {
-    margin-bottom: 15px;
+    position: relative; margin-bottom: 15px;
     a { display: block; position: absolute; top: 0; left: 0; width: 100%; height: 100% }
 }
 .button {
@@ -78,6 +78,19 @@ main .inner { padding: 50px 0 }
 main {
     section { margin: 0 0 30px }
     article { margin: 0 0 20px }
+}
+
+
+/* ------ SEARCH-AJAX ------ */
+#search { z-index: 2 }
+.form-search { width: 100% }
+.search {
+    z-index: 2; width: 100%;
+    .dropdown-item { white-space: pre-wrap }
+    .dropdown-item:hover {
+        filter: drop-shadow(5px 5px 10px black);
+    }
+    .dropdown-item &.number { font-family: 'MontserratBold', sans-serif }
 }
 
 /* ------ FOOTER ------ */

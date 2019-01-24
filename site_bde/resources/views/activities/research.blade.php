@@ -13,7 +13,7 @@ Activities
 			<h3 class="card-header black">Search</h3>
 			<div class="card-body">
 				<div class="input-group">
-					<form action="/activities/search" method="GET" class="form-search">
+                    <form action="/activities/search" method="GET" class="form-search">
 					<div class="input-group">
 					<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
 					<span class="input-group-btn">
@@ -48,9 +48,13 @@ Activities
 	<!-- /.col-lg-3 -->
 
 	<div class="col-lg-9">
-		<?php if(empty($activities)){
-			echo '<h2>No activity</h2><p>Contact your BDE if necessary</p>';
-		}?>
+        <?php 
+        if(!empty($verif_activity[0])){
+            echo '<h2>Your research for : '.$search.'</h2>';
+        } else {
+			echo '<h2>No activity found with : '.$search.'</h2><p>Try with other words</p>';
+        }
+        ?>
 		<div class="row">
 			<?php
 			foreach($activities as $activity){

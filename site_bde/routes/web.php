@@ -142,6 +142,16 @@ Route::post('ideas/{id}/update', [
     'uses' => 'IdeasController@idea_update_check'
 ]);
 
+/*---AJAX---*/
+Route::post('ideas/{id}', [
+    'as' => 'change_like',
+    'uses' => 'IdeasController@change_like'
+]);
+Route::post('search/activities', [
+    'as' => 'search_activities',
+    'uses' => 'AjaxController@search_activities'
+]);
+
 /*---ACTIVITIES---*/
 
 
@@ -153,7 +163,10 @@ Route::post('activities', [
     'as' => 'activities_id_update_check',
     'uses' => 'ActivitiesController@id_update_check'
 ]);
-
+Route::get('activities/search', [
+    'as' => 'activities',
+    'uses' => 'ActivitiesController@search'
+]);
 
 Route::get('activities/create', [
     'as' => 'activities_create',

@@ -25,7 +25,7 @@ Sign up
 
 @section('script')
 <script>
-	$("#password").change(function(){
+	$("#password").keyup(function(){
 		$pass=$("#password").val();
 		if ($pass.match(/[a-zA-Z\d]{8,}$/)){ $(".eight").css('color', 'green'); } 
 		else { $(".eight").css('color', 'red'); };
