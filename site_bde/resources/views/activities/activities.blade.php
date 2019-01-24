@@ -14,21 +14,21 @@ Activities
 			<div class="card-body">
 				<div class="input-group">
 					<form action="/activities/search" method="GET" class="form-search">
-					<div class="input-group">
-					<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
-					<span class="input-group-btn">
-						<input class="btn btn-secondary" type="submit" value="Go!">
-					</span>
-					</div>
+						<div class="input-group">
+							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
+							<span class="input-group-btn">
+								<input class="btn btn-secondary" type="submit" value="Go!">
+							</span>
+						</div>
 					</form>
-				<div class="dropdown-menu search">
-					<div class="dropdown-item"></div>
-					<div class="dropdown-item"></div>
-					<div class="dropdown-item"></div>
-					<div class="dropdown-item"></div>
-					<div class="dropdown-item"></div>
-					<div class="dropdown-item"></div>
-				</div>
+					<div class="dropdown-menu search">
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -62,19 +62,19 @@ Activities
 			foreach($activities as $activity){
 				echo '<div class="col-lg-4 col-md-6 mb-4 bloc-link">
 				<div class="card h-100">';
-						if(isset($activity -> activity_img)){
-							echo '<img class="w-100" src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" />';
-						} else { echo '<img class="w-100" src="'.asset('img/noimg.jpg').'" />'; }
-					echo '<div class="card-body card-body2">
-						<h2 class="card-title">'.$activity -> activity_title.'</h2>
-						<p>Date : '.$activity -> activity_date.'</p>
-						<p>'.$activity -> activity_desc.'</p>
-						<p>Price : '.$activity -> activity_price.' €</p>
-						<p>Type : '.$activity -> activity_recurrence.'</p>
-					</div>
-					<a href="/activities/'.$activity -> activity_id.'"></a>
+				if(isset($activity -> activity_img)){
+					echo '<img class="w-100" src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" />';
+				} else { echo '<img class="w-100" src="'.asset('img/noimg.jpg').'" />'; }
+				echo '<div class="card-body card-body2">
+				<h2 class="card-title">'.$activity -> activity_title.'</h2>
+				<p>Date : '.$activity -> activity_date.'</p>
+				<p>'.$activity -> activity_desc.'</p>
+				<p>Price : '.$activity -> activity_price.' €</p>
+				<p>Type : '.$activity -> activity_recurrence.'</p>
 				</div>
-			</div>';
+				<a href="/activities/'.$activity -> activity_id.'"></a>
+				</div>
+				</div>';
 			}?>
 		</div>
 		{{ $links }}
@@ -101,9 +101,9 @@ Activities
 			//ajax
 			urlValue = "/search/activities";
 			$.ajax({
-			method: 'POST',
-			url: urlValue,
-			data: { search: $("#search").val() }
+				method: 'POST',
+				url: urlValue,
+				data: { search: mb_convert_encoding($("#search").val(), 'UTF-8', 'UTF-8') }
 			}).then(function (data) {
 				//success - affiche les activites
 				$(".search").css('display', 'block');
@@ -114,16 +114,16 @@ Activities
 				//insertion activites
 				for(i=0; i<size; i++){
 					$(".dropdown-item:eq("+i+")").css('display', 'block');
-						$(".dropdown-item:eq("+i+")").html(
+					$(".dropdown-item:eq("+i+")").html(
 						'<h3>'+data[i].activity_title+'</h3>'+
 						'<div>'+data[i].activity_desc+'</div>'+
 						'<a href="/activities/'+data[i].activity_id+'" class="number">See the activity >></a>'
-					);
+						);
 					//hover pour le texte dans la barre
 					bar_val=$("#search").val();
 					$(".dropdown-item:eq("+i+")").hover(
 						function on(data) {
-						$(this).addClass("active");
+							$(this).addClass("active");
 						//$("#search").val(data[i].activity_title);
 					}, function off(data, bar_val) {
 						$(this).removeClass("active");
@@ -138,9 +138,9 @@ Activities
 				if(data.length===0){
 					$(".dropdown-item:eq(5)").css('display', 'block');
 					$(".dropdown-item:eq(5)").html(
-					'<div class="dropdown-item"><h3>No content</h3>'+
+						'<div class="dropdown-item"><h3>No content</h3>'+
 						'<div>Try with other key words</div>'
-					);
+						);
 				} else { 
 					$(".dropdown-item:eq(5)").css('display', 'none');
 					$(".dropdown-item:eq(5)").html(''); 
@@ -163,7 +163,7 @@ Activities
 				$(".dropdown-item:eq(5)").html(
 					'<h3>Error</h3>'+
 					'<p>Try again</p>'
-				);
+					);
 			});
 		} 
 		if($("#search").val()==='') { 
