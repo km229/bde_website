@@ -129,7 +129,18 @@ Route::post('ideas/{id}', [
     'as' => 'change_like',
     'uses' => 'IdeasController@change_like'
 ]);
-
+Route::get('ideas/{id}/delete', [
+    'as' => 'idea_delete',
+    'uses' => 'IdeasController@idea_delete'
+]);
+Route::get('ideas/{id}/update', [
+    'as' => 'idea_update',
+    'uses' => 'IdeasController@idea_update'
+]);
+Route::post('ideas/{id}/update', [
+    'as' => 'idea_update_check',
+    'uses' => 'IdeasController@idea_update_check'
+]);
 
 /*---ACTIVITIES---*/
 
