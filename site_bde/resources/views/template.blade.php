@@ -35,12 +35,14 @@ if(!isset($_SESSION)){
 				</button>
 				<div class="dropdown-menu">
 					<?php
-					
-					$table_notif = DB::table('notifications')->where('member_id_fk', $_SESSION['id'])->get();
+					if(sizeof($_SESSION)>0){
+						$table_notif = DB::table('notifications')->where('member_id_fk', $_SESSION['id'])->get();
 
-					foreach ($table_notif as $notif) {
-						echo($notif->notif_desc.'<div class="dropdown-divider" ></div>');
+						foreach ($table_notif as $notif) {
+							echo($notif->notif_desc.'<div class="dropdown-divider" ></div>');
+						}
 					}
+					
 					?>
 					
 				</div>
