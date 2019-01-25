@@ -61,4 +61,10 @@ class AjaxController extends Controller
 		return 'ko';
     }
 
+    public function search_acticles()
+    {
+        $articles = DB::table('product')->select('product_id', 'product_name', 'product_desc', 'product_price')->whereRaw("product_name REGEXP '".$_POST['search']."' OR product_desc REGEXP '".$_POST['search']."'")->get();
+        return $articles;
+    }
+
 }

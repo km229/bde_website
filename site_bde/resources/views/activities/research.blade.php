@@ -24,7 +24,10 @@ Activities
 				<div class="dropdown-menu search">
 				</div>
 				</div>
-			</div>
+            </div>
+        </div>
+        <div class="list-group card my-4 card-search">
+			<a href="/activities" class="list-group-item black">Return to activities</a>
 		</div>
 		
 		<?php
@@ -131,10 +134,14 @@ Activities
 				} else { size=data.length }
 				//insertion activites
 				for(i=0; i<size; i++){
+					text = data[i].activity_desc.substr(0,25);
+					if(data[i].activity_desc.length>25){
+						text+="...";
+					}
 					$(".dropdown-item:eq("+i+")").css('display', 'block');
 					$(".dropdown-item:eq("+i+")").html(
 						'<h3>'+data[i].activity_title+'</h3>'+
-						'<div>'+data[i].activity_desc+'</div>'+
+						'<div>'+text+'</div>'+
 						'<a href="/activities/'+data[i].activity_id+'" class="number">See the activity >></a>'
 						);
 				}
@@ -143,18 +150,13 @@ Activities
 					$(".dropdown-item:eq("+size+")").css('display', 'none');
 				}
 				//si aucune activite
-				if(size===0){
+				if(data.length===0){
 					$(".dropdown-item:eq(5)").css('display', 'block');
 					$(".dropdown-item:eq(5)").html(
 						'<div class="dropdown-item"><h3>No content</h3>'+
 						'<div>Try with other key words</div>'
 						);
-				} else { 
-					$(".dropdown-item:eq(5)").css('display', 'none');
-					$(".dropdown-item:eq(5)").html(''); 
-				}
-				//si activites > 5 on ajoute +number
-				if(data.length>5){
+				} else if(data.length>5){
 					number = data.length - 5;
 					$(".dropdown-item:eq(5)").css('display', 'block');
 					$(".dropdown-item:eq(5)").html('<strong class="number">+'+number+'</strong>');

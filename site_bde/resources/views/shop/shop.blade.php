@@ -14,10 +14,22 @@ Shop
 			<h5 class="card-header card-search black">Search</h5>
 			<div class="card-body">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search for...">
-					<span class="input-group-btn">
-						<button class="btn btn-secondary" type="button">Go!</button>
-					</span>
+				<form action="/shop/search" method="GET" class="form-search">
+						<div class="input-group">
+							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
+							<span class="input-group-btn">
+								<input class="btn btn-secondary" type="submit" value="Go!">
+							</span>
+						</div>
+					</form>
+					<div class="dropdown-menu search">
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -163,4 +175,105 @@ Shop
 
 
 	@endsection
+
+	@section('script')
+<script>
+	//affiche les activites
+	$("#search").focus(function () {
+		if($("#search").val()!==''){
+			$(".search").css('display', 'block');
+		}
+	});
+	$(".dropdown-item:eq(0)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(0) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(1)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(1) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(2)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(2) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(3)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(3) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(4)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(4) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	/*$("#search").focusout(function () {
+		$(".search").css('display', 'none');
+	});*/
+	//content=last value
+	content='';
+	$("#search").keyup(function () {
+		//si on entre une valeur différente
+		if(content!==$("#search").val() && $("#search").val()!==''){
+			//ajax
+			urlValue = "/shop/search";
+			$.ajax({
+				method: 'POST',
+				url: urlValue,
+				data: { search: $("#search").val() }
+			}).then(function (data) {
+				//success - affiche les activites
+				$(".search").css('display', 'block');
+				//taille max d'affichage
+				if(data.length>5){
+					size=5;
+				} else { size=data.length }
+				//insertion activites
+				for(i=0; i<size; i++){
+					text = data[i].product_desc.substr(0,25);
+					if(data[i].product_desc.length>25){
+						text+="...";
+					}
+					$(".dropdown-item:eq("+i+")").css('display', 'block');
+					$(".dropdown-item:eq("+i+")").html(
+						'<h3>'+data[i].product_name+'</h3>'+
+						'<div>'+text+'<p class="date">'+data[i].product_price+' €</span></p>'+
+						'<a href="/shop/'+data[i].product_id+'" class="number">See the product >></a>'
+						);
+				}
+				//si activites < 5 on cache les autres div
+				for(size; size<5; size++){
+					$(".dropdown-item:eq("+size+")").css('display', 'none');
+				}
+				//si aucune activite
+				if(data.length===0){
+					$(".dropdown-item:eq(5)").css('display', 'block');
+					$(".dropdown-item:eq(5)").html(
+						'<div class="dropdown-item"><h3>No product</h3>'+
+						'<div>Try with other key words</div>'
+						);
+				} else if(data.length>5){
+					number = data.length - 5;
+					$(".dropdown-item:eq(5)").css('display', 'block');
+					$(".dropdown-item:eq(5)").html('<strong class="number">+'+number+'</strong>');
+				} else {
+					$(".dropdown-item:eq(5)").css('display', 'none');
+				}
+			}).catch(function (data) {
+				//error
+				for(i=0; i<5; i++){
+					$(".dropdown-item:eq("+i+")").css('display', 'none');
+				}
+				$(".search").css('display', 'block');
+				$(".dropdown-item:eq(5)").css('display', 'block');
+				$(".dropdown-item:eq(5)").html(
+					'<h3>Error</h3>'+
+					'<p>Try again</p>'
+					);
+			});
+		} 
+		if($("#search").val()==='') { 
+			$(".search").css('display', 'none');
+		}
+		content=$("#search").val();
+	});
+</script>
+@endsection
 
