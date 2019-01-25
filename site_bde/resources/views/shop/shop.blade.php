@@ -120,9 +120,8 @@ Shop
 
 		<div class="row">
 
-			@foreach ($products as $product)
 			<?php
-
+				foreach ($products as $product){
 			$min = 0;
 			$max = 1000;
 
@@ -145,7 +144,15 @@ Shop
 
 				if (isset($_GET['category'])){
 					if ($product -> category_id_fk == $_GET['category']){
-						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
+						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; 
+						if(isset($product -> product_img)){
+							echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+						} else { 
+							echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+							echo '" />';
+						 }
+						echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+						echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
 						echo $product -> product_name;
 						echo '</a></h4><h5>';
 						echo $category -> category_name;
@@ -155,10 +162,14 @@ Shop
 
 					}
 				} else {
-
-
-
-					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img).'" />'; echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
+					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; 
+					if(isset($product -> product_img)){
+						echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+					} else { 
+						echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+						echo '" />';
+					 }
+					echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
 					echo $product -> product_name;
 					echo '</a></h4><h5>';
 					echo $category -> category_name;
@@ -168,9 +179,10 @@ Shop
 
 				}
 			}
+		}
 			?>
-			@endforeach
 		</div>
+		{{ $links }}
 	</div>
 
 

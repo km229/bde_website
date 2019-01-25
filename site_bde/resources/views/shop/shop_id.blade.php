@@ -46,7 +46,15 @@ Shop
 
 			<!-- Portfolio Item Row -->
 			<div class="card mt-4 card-body2">
-            <?php echo '<img class="w-100" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; ?>
+				
+			<?php 
+			if(isset($product -> product_img)){
+				echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+			} else { 
+				echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+				echo '" />';
+			 }
+			?>
                 <div class="card-body">
                     <h3 class="card-title">Price : {{$product->product_price}} €</h3>
                     <h4>{{$product->product_desc}}</h4>

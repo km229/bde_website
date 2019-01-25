@@ -168,7 +168,7 @@ Route::post('activities/{id}/img_{id2}/like', [
     'uses' => 'AjaxController@change_activity_picture_like'
 ]);
 Route::post('shop/search', [
-    'as' => 'cart',
+    'as' => 'search_acticles',
     'uses' => 'AjaxController@search_acticles'
 ]);
 

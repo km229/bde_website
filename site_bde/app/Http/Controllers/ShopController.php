@@ -18,10 +18,11 @@ if(!isset($_SESSION)){
 class ShopController extends Controller
 {
 	public function index(){
-		$products = DB::table('product')->get();
+		$products = DB::table('product')->paginate(9);
+		$links = $products->render();
 		$category = DB::table('category')->get();
 
-		return view('shop.shop', compact("products", "category"));
+		return view('shop.shop', compact("products", "category", "links"));
 	}
 
 	public function search(){
