@@ -31,7 +31,7 @@
 				if($table[0]->is_admin == 1){
 					echo '<div class="list-group card my-4 card-search">
 					<h3 class="card-header black">Administration</h3>
-					<a href="/activities/create?id='.$id.'" class="list-group-item black">Registrations</a>
+					<a href="/activities/'.$id.'/download_registration" class="list-group-item black">Registrations</a>
 					<a href="/activities/'.$id.'/update" class="list-group-item black">Update activity</a>
 					<a href="/activities/'.$id.'/delete" class="list-group-item black">Delete</a>
 					</div>';

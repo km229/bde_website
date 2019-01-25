@@ -312,6 +312,7 @@ class ActivitiesController extends Controller
 
         $writer = new Xlsx($spreadsheet);
         $writer->save('hello world.xlsx');
+        return(ActivitiesController::id($id));
     }
 
 	public function picture_delete($id, $id2){

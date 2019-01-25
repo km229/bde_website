@@ -121,12 +121,13 @@ class CartController extends Controller
                 array(
                     'order_id_fk' => $orderid,
                     'product_id_fk' =>  $product -> product_id,
-                    'number' => $product -> number
+                    'number' => $product -> number,
+                    'price' => $product -> product_price
                 )
             );
 
 
-            $productmsg = "{productname} : {quantity} x {price} = {totalprice}€\n";
+            $productmsg = "{productname} : {quantity} x {price} € = {totalprice}€\n";
             $productmsg = str_replace('{productname}', $product -> product_name, $productmsg);
             $productmsg = str_replace('{quantity}', $product -> number, $productmsg);
             $productmsg = str_replace('{price}', $product -> product_price, $productmsg);
