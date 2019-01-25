@@ -58,7 +58,6 @@ Shop
 				<h5 class="card-header black">Administration</h5>
 				<a href="/shop/add/product" class="list-group-item black">New product</a>
 				<a href="/shop/add/category" class="list-group-item black">New category</a>
-
 				</div>';
 			}
 		}
