@@ -19,12 +19,17 @@ Sign up
 
 <div class="container">
 	{!! form($form) !!}
+	<input type="checkbox" id="mentions"> I accept <a href="{{route('legal_terms')}}">terms and conditions</a>
 </div>
 @endsection
 
 
 @section('script')
 <script>
+	$('#form_register').submit(function(event){
+		
+	});
+
 	$("#password").keyup(function(){
 		$pass=$("#password").val();
 		if ($pass.match(/[a-zA-Z\d]{8,}$/)){ $(".eight").css('color', 'green'); } 

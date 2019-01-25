@@ -256,10 +256,10 @@ Route::get('account/orders', 'AccountController@orders');
 
 
 Route::get('legal_terms', [
-    'as' => 'legal',
+    'as' => 'legal_terms',
     'uses' => 'LegalController@legal'
 ]);
 Route::get('terms_conditions', [
-    'as' => 'legal',
+    'as' => 'terms_conditions',
     'uses' => 'LegalController@terms'
 ]);
