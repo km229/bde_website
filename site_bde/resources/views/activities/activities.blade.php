@@ -60,20 +60,20 @@ Activities
 		<div class="row">
 			<?php
 			foreach($activities as $activity){
-                switch($activity->activity_recurrence) {
-                    case 0:
-                        $tmp = "Punctual";
-                        break;
-                    case 1:
-                        $tmp = "Weekly";
-                        break;
-                    case 2:
-                        $tmp = "Monthly";
-                        break;
-                    case 3:
-                        $tmp = "Yearly";
-                        break;
-                }
+				switch($activity->activity_recurrence) {
+					case 0:
+					$tmp = "Punctual";
+					break;
+					case 1:
+					$tmp = "Weekly";
+					break;
+					case 2:
+					$tmp = "Monthly";
+					break;
+					case 3:
+					$tmp = "Yearly";
+					break;
+				}
 				echo '<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100 bloc-link">';
 				if(isset($activity -> activity_img)){
@@ -110,19 +110,19 @@ Activities
 	});
 	$(".dropdown-item:eq(1)").click(function () {
 		$("#search").val(($(".dropdown-item:eq(1) h3").text()));
-			$(".search").css('display', 'none');
+		$(".search").css('display', 'none');
 	});
 	$(".dropdown-item:eq(2)").click(function () {
 		$("#search").val(($(".dropdown-item:eq(2) h3").text()));
-			$(".search").css('display', 'none');
+		$(".search").css('display', 'none');
 	});
 	$(".dropdown-item:eq(3)").click(function () {
 		$("#search").val(($(".dropdown-item:eq(3) h3").text()));
-			$(".search").css('display', 'none');
+		$(".search").css('display', 'none');
 	});
 	$(".dropdown-item:eq(4)").click(function () {
 		$("#search").val(($(".dropdown-item:eq(4) h3").text()));
-			$(".search").css('display', 'none');
+		$(".search").css('display', 'none');
 	});
 	/*$("#search").focusout(function () {
 		$(".search").css('display', 'none');

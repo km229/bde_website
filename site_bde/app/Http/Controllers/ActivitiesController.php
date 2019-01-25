@@ -12,6 +12,7 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
+use ZipArchive;
 
 if(!isset($_SESSION)){
 	session_start();
@@ -308,32 +309,32 @@ class ActivitiesController extends Controller
 
 	}
 
-    public function download_registration($id)
-    {
-        $result = DB::table('link_members_activities')->join('members', 'member_id_fk', '=', 'member_id')->get()->where('activity_id_fk', $id);
-        $headers = array();
+	public function download_registration($id)
+	{
+		$result = DB::table('link_members_activities')->join('members', 'member_id_fk', '=', 'member_id')->get()->where('activity_id_fk', $id);
+		$headers = array();
 
-        if (sizeof($result) != 0) {
-            foreach ($result as $member) {
-                $headers[] = utf8_decode($member->member_firstname) . ';' . utf8_decode($member->member_lastname). ";" . utf8_decode($member->member_mail);
-            }
-        }
+		if (sizeof($result) != 0) {
+			foreach ($result as $member) {
+				$headers[] = utf8_decode($member->member_firstname) . ';' . utf8_decode($member->member_lastname). ";" . utf8_decode($member->member_mail);
+			}
+		}
 
-        $fp = fopen('php://output', 'w');
+		$fp = fopen('php://output', 'w');
 
-        if ($fp && $result) {
-            header('Content-Type: text/csv');
-            header('Content-Disposition: attachment; filename="registrations.csv"');
-            header('Pragma: no-cache');
-            header('Expires: 0');
-            foreach ($headers as $field){
-                fwrite($fp, $field."\n");
-            }
+		if ($fp && $result) {
+			header('Content-Type: text/csv');
+			header('Content-Disposition: attachment; filename="registrations.csv"');
+			header('Pragma: no-cache');
+			header('Expires: 0');
+			foreach ($headers as $field){
+				fwrite($fp, $field."\n");
+			}
 
-            die;
-        }
-        return(ActivitiesController::id($id));
-    }
+			die;
+		}
+		return(ActivitiesController::id($id));
+	}
 
 	public function picture_delete($id, $id2){
 
@@ -421,5 +422,41 @@ class ActivitiesController extends Controller
 			));
 		}
 		return redirect(route('activities'));
+	}
+
+	public function download_picture($id){
+		$table = DB::table('activity_pictures')->where('activity_id_fk', $id)->get();
+		$folder = 'tempDL/activity'.$id;
+		if(!file_exists($folder)){
+			mkdir($folder);
+		}
+		$zip = new ZipArchive();
+		$zip->open($folder.'.zip', ZipArchive::CREATE);
+		foreach ($table as $el) {
+			$file = $folder.'/img'.$el -> picture_id.'.png';
+			file_put_contents($file, $el -> picture_img);	
+			$zip->addFile($file);		
+		}
+
+		$zip->close();
+
+		$objects = scandir($folder);
+		foreach ($objects as $object) {
+			if($object !== '.' && $object !== '..'){
+				unlink($folder."/".$object);
+			}
+		}
+		reset($objects);
+		rmdir($folder);
+		header('Content-disposition: attachment; filename='.$folder.'.zip'); 
+		header('Content-Type: application/force-download'); 
+		header('Content-Transfer-Encoding: fichier');  
+		header('Content-Length: '.filesize($folder.'.zip')); 
+		header('Pragma: no-cache'); 
+		header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0'); 
+		header('Expires: 0'); 
+		readfile($folder.'.zip');
+
+
 	}
 }

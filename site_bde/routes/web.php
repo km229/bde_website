@@ -232,7 +232,7 @@ Route::get('activities/{id}/add_picture', [
     'as' => 'activities_add_picture',
     'uses' => 'ActivitiesController@add_picture'
 ]);
-Route::get('activities/{id}/download_picture', [
+Route::get('activities/{id}/download_pictures', [
     'as' => 'activities_download_picture',
     'uses' => 'ActivitiesController@download_picture'
 ]);
