@@ -26,10 +26,6 @@ Sign up
 
 @section('script')
 <script>
-	$('#form_register').submit(function(event){
-		
-	});
-
 	$("#password").keyup(function(){
 		$pass=$("#password").val();
 		if ($pass.match(/[a-zA-Z\d]{8,}$/)){ $(".eight").css('color', 'green'); } 

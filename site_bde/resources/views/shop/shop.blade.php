@@ -52,7 +52,6 @@ Shop
 		<?php
 		if(sizeof($_SESSION) > 0){
 			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
-
 			if($table[0]->is_admin == 1){
 				echo '<div class="list-group card my-4 card-search">
 				<h5 class="card-header black">Administration</h5>
