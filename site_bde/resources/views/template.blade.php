@@ -42,15 +42,20 @@ if(!isset($_SESSION)){
 				<div id="notif_dropdown" class="dropdown-menu">
 					<?php
 
-					if(sizeof($table_notif) > 0){
-						if(sizeof($_SESSION)>0){
-							foreach ($table_notif as $notif) {
-								echo($notif->notif_desc.'<div class="dropdown-divider" ></div>');
+					if(isset($table_notif)){
+						if(sizeof($table_notif) > 0){
+							if(sizeof($_SESSION)>0){
+								foreach ($table_notif as $notif) {
+									echo($notif->notif_desc.'<div class="dropdown-divider" ></div>');
+								}
 							}
+						}else{
+							echo 'You don\'t have notifications';
 						}
 					}else{
 						echo 'You don\'t have notifications';
 					}
+					
 					?>
 
 				</div>

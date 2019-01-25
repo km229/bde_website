@@ -23,87 +23,87 @@ class ActivitiesController extends Controller
 	public function index(){
 		$activities = DB::table('activity')->paginate(9);
 		$links = $activities->render();
-        $recurringactivities = DB::table('activity')->get()->where('activity_recurrence', !0);
-        if(!empty($recurringactivities)) {
-            ActivitiesController::update_activities($recurringactivities);
-            $activities = DB::table('activity')->paginate(9);
-        }
+		$recurringactivities = DB::table('activity')->get()->where('activity_recurrence', !0);
+		if(!empty($recurringactivities)) {
+			ActivitiesController::update_activities($recurringactivities);
+			$activities = DB::table('activity')->paginate(9);
+		}
 		return view('activities.activities', compact("activities", "links"));
 	}
 
 	public function update_activities($activities){
-        foreach($activities as $activity){
+		foreach($activities as $activity){
 
-            $activity_date = date_create();
-            date_timestamp_set($activity_date, strtotime($activity -> activity_date));
+			$activity_date = date_create();
+			date_timestamp_set($activity_date, strtotime($activity -> activity_date));
             //$datetime = new DateTime($activity -> activity_date);
-            $today = strtotime(date('Y-m-d'));
+			$today = strtotime(date('Y-m-d'));
             //dd($activity_date->format('d'));
-            if (strtotime($activity_date->format("Y-m-d")) < $today) {
-                switch ($activity->activity_recurrence) {
-                    case 1:
-                        $i = 0;
-                        do {
-                            $i += 1;
-                            $tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m'), $activity_date->format('d') + 7 * $i, $activity_date->format('Y')));
-                        } while ($today > strtotime($tmp));
+			if (strtotime($activity_date->format("Y-m-d")) < $today) {
+				switch ($activity->activity_recurrence) {
+					case 1:
+					$i = 0;
+					do {
+						$i += 1;
+						$tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m'), $activity_date->format('d') + 7 * $i, $activity_date->format('Y')));
+					} while ($today > strtotime($tmp));
 
-                        DB::table('activity')->insert(
-                            array(
-                                'activity_title' => $activity->activity_title,
-                                'activity_desc' => $activity->activity_desc,
-                                'activity_date' => $tmp,
-                                'activity_img' => $activity->activity_img,
-                                'activity_price' => $activity->activity_price,
-                                'activity_recurrence' => $activity->activity_recurrence
-                            )
-                        );
-                        break;
-                    case 2:
-                        $i = 0;
-                        do {
-                            $i += 1;
-                            $tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m') + 1 * $i, $activity_date->format('d'), $activity_date->format('Y')));
-                        } while ($today > strtotime($tmp));
+					DB::table('activity')->insert(
+						array(
+							'activity_title' => $activity->activity_title,
+							'activity_desc' => $activity->activity_desc,
+							'activity_date' => $tmp,
+							'activity_img' => $activity->activity_img,
+							'activity_price' => $activity->activity_price,
+							'activity_recurrence' => $activity->activity_recurrence
+						)
+					);
+					break;
+					case 2:
+					$i = 0;
+					do {
+						$i += 1;
+						$tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m') + 1 * $i, $activity_date->format('d'), $activity_date->format('Y')));
+					} while ($today > strtotime($tmp));
 
-                        DB::table('activity')->insert(
-                            array(
-                                'activity_title' => $activity->activity_title,
-                                'activity_desc' => $activity->activity_desc,
-                                'activity_date' => $tmp,
-                                'activity_img' => $activity->activity_img,
-                                'activity_price' => $activity->activity_price,
-                                'activity_recurrence' => $activity->activity_recurrence
-                            )
-                        );
-                        break;
-                    case 3:
-                        $i = 0;
-                        do {
-                            $i += 1;
-                            $tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m'), $activity_date->format('d'), $activity_date->format('Y') + 1 * $i));
-                        } while ($today > strtotime($tmp));
+					DB::table('activity')->insert(
+						array(
+							'activity_title' => $activity->activity_title,
+							'activity_desc' => $activity->activity_desc,
+							'activity_date' => $tmp,
+							'activity_img' => $activity->activity_img,
+							'activity_price' => $activity->activity_price,
+							'activity_recurrence' => $activity->activity_recurrence
+						)
+					);
+					break;
+					case 3:
+					$i = 0;
+					do {
+						$i += 1;
+						$tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m'), $activity_date->format('d'), $activity_date->format('Y') + 1 * $i));
+					} while ($today > strtotime($tmp));
 
-                        DB::table('activity')->insert(
-                            array(
-                                'activity_title' => $activity->activity_title,
-                                'activity_desc' => $activity->activity_desc,
-                                'activity_date' => $tmp,
-                                'activity_img' => $activity->activity_img,
-                                'activity_price' => $activity->activity_price,
-                                'activity_recurrence' => $activity->activity_recurrence
-                            )
-                        );
-                        break;
-                }
-                DB::table('activity')->where('activity_id', $activity->activity_id)->update(
-                    array(
-                        'activity_recurrence' => 0
-                    )
-                );
-            }
-        }
-    }
+					DB::table('activity')->insert(
+						array(
+							'activity_title' => $activity->activity_title,
+							'activity_desc' => $activity->activity_desc,
+							'activity_date' => $tmp,
+							'activity_img' => $activity->activity_img,
+							'activity_price' => $activity->activity_price,
+							'activity_recurrence' => $activity->activity_recurrence
+						)
+					);
+					break;
+				}
+				DB::table('activity')->where('activity_id', $activity->activity_id)->update(
+					array(
+						'activity_recurrence' => 0
+					)
+				);
+			}
+		}
+	}
 	
 	public function search(){
 		if(isset($_GET['request'])){
@@ -156,10 +156,13 @@ class ActivitiesController extends Controller
 	}
 
 	public function id($id){
-		$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
-		$verif = DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->get();
 		$activity = DB::table('activity')->where('activity_id',$id)->get();
-		return view('activities.activities_id', compact('id', 'table', 'verif', 'activity'));
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+			$verif = DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->get();
+			return view('activities.activities_id', compact('id', 'table', 'verif', 'activity'));
+		}
+		return view('activities.activities_id', compact('id','activity'));
 	}
 
 	public function id_update(FormBuilder $formbuilder){
@@ -306,14 +309,14 @@ class ActivitiesController extends Controller
 	}
 
 	public function download_registration($id){
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Hello World !');
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'Hello World !');
 
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('hello world.xlsx');
-        return(ActivitiesController::id($id));
-    }
+		$writer = new Xlsx($spreadsheet);
+		$writer->save('hello world.xlsx');
+		return(ActivitiesController::id($id));
+	}
 
 	public function picture_delete($id, $id2){
 
@@ -345,5 +348,62 @@ class ActivitiesController extends Controller
 		}
 		return redirect(route('activities_id', ['id'=> $id]));
 
+	}
+
+	public function comment_delete($id, $id2, $id3){
+
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+
+			if($table[0]->is_admin == 1){
+				DB::table('comment_picture_member')
+				->where('comment_id',$id3)
+				->delete();
+
+				return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]))->with('success', 'Commentary deleted');
+			}
+		}
+		return redirect(route('activities_id', ['id'=> $id, 'id2'=>$id2]))->with('error', 'You don\'t have access');
+
+	}
+
+	public function warning($id){
+		$table_members = DB::table('members')-> where('is_admin', '1')->get();
+		$table_activity = DB::table('activity')-> where('activity_id', $id)->get()[0];
+		$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
+		foreach ($table_members as $member) {
+			DB::table('notifications')->insert(array(
+				'notif_desc' => '<a href="/activities/'.$id.'">This activity </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
+				'member_id_fk' => $member->member_id
+			));
+		}
+		return redirect(route('activities'));
+	}
+
+	public function picture_warning($id, $id2){
+		$table_members = DB::table('members')-> where('is_admin', '1')->get();
+		$table_activity = DB::table('activity')-> where('activity_id', $id)->get()[0];
+		$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
+		foreach ($table_members as $member) {
+			DB::table('notifications')->insert(array(
+				'notif_desc' => '<a href="/activities/'.$id.'/img_'.$id2.'">This picture </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
+				'member_id_fk' => $member->member_id
+			));
+		}
+		return redirect(route('activities'));
+	}
+
+	public function comment_warning($id, $id2, $id3){
+		$table_members = DB::table('members')-> where('is_admin', '1')->get();
+		$table_comment = DB::table('activity_pictures')->join('comment_picture_member','picture_id','=','picture_id_fk')->join('members', 'member_id_fk','=','member_id')->join('activity','activity_id_fk', '=', 'activity_id')-> where('comment_id', $id3)->get()[0];
+		$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
+
+		foreach ($table_members as $member) {
+			DB::table('notifications')->insert(array(
+				'notif_desc' => '<a href="/activities/'.$id.'/img_'.$id2.'#comment_'.$id3.'">This commentary </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
+				'member_id_fk' => $member->member_id
+			));
+		}
+		return redirect(route('activities'));
 	}
 }

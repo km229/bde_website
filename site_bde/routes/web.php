@@ -216,6 +216,10 @@ Route::get('activities/{id}/delete', [
     'as' => 'activities_delete',
     'uses' => 'ActivitiesController@delete'
 ]);
+Route::get('activities/{id}/warning', [
+    'as' => 'activities_warning',
+    'uses' => 'ActivitiesController@warning'
+]);
 Route::get('activities/{id}/join', [
     'as' => 'activities_join',
     'uses' => 'ActivitiesController@join'
@@ -249,6 +253,20 @@ Route::post('activities/{id}/img_{id2}', [
 Route::get('activities/{id}/img_{id2}/delete', [
     'as' => 'activities_picture_delete',
     'uses' => 'ActivitiesController@picture_delete'
+]);
+Route::get('activities/{id}/img_{id2}/warning', [
+    'as' => 'activities_picture_warning',
+    'uses' => 'ActivitiesController@picture_warning'
+]);
+
+
+Route::get('activities/{id}/img_{id2}/comment_{id3}/delete', [
+    'as' => 'activities_comment_delete',
+    'uses' => 'ActivitiesController@comment_delete'
+]);
+Route::get('activities/{id}/img_{id2}/comment_{id3}/warning', [
+    'as' => 'activities_comment_warning',
+    'uses' => 'ActivitiesController@comment_warning'
 ]);
 
 

@@ -11,17 +11,20 @@
 
 			<h2 class="my-4">Activity</h2>
 			<div class="list-group card my-4 card-search">
-				<h3 class="card-header black">Activity</h3>
+				
 				<?php
-				if($activity[0]->activity_date < date('Y-m-d')){
-					if(sizeof($verif)>0){
-						echo '<a href="/activities/'.$id.'/add_picture" class="list-group-item black">Add picture</a>';
-					}
-				}else{
-					if(sizeof($verif)==0){
-						echo'<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>';
+				if(sizeof($_SESSION) > 0){
+					echo'<h3 class="card-header black">Activity</h3>';
+					if($activity[0]->activity_date < date('Y-m-d')){
+						if(sizeof($verif)>0){
+							echo '<a href="/activities/'.$id.'/add_picture" class="list-group-item black">Add picture</a>';
+						}
 					}else{
-						echo'<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>';
+						if(sizeof($verif)==0){
+							echo'<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>';
+						}else{
+							echo'<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>';
+						}
 					}
 				}
 				?>
@@ -33,6 +36,7 @@
 					<h3 class="card-header black">Administration</h3>
 					<a href="/activities/'.$id.'/download_registration" class="list-group-item black">Registrations</a>
 					<a href="/activities/'.$id.'/update" class="list-group-item black">Update activity</a>
+					<a href="/activities/'.$id.'/warning" class="list-group-item black">Report</a>
 					<a href="/activities/'.$id.'/delete" class="list-group-item black">Delete</a>
 					</div>';
 				}
@@ -63,19 +67,19 @@
 					<p>{{$activity[0]->activity_date}}</p>
 					<h3 class="my-3">Type</h3>
 					<p><?php switch($activity[0]->activity_recurrence) {
-                            case 0:
-                                echo "Punctual";
-                                break;
-                            case 1:
-                                echo "Weekly";
-                                break;
-                            case 2:
-                                echo "Monthly";
-                                break;
-                            case 3:
-                                echo "Yearly";
-                                break;
-                        } ?></p>
+						case 0:
+						echo "Punctual";
+						break;
+						case 1:
+						echo "Weekly";
+						break;
+						case 2:
+						echo "Monthly";
+						break;
+						case 3:
+						echo "Yearly";
+						break;
+					} ?></p>
 					<h3 class="my-3">Price</h3>
 					<p>{{$activity[0]->activity_price}} €</p>
 				</div>
@@ -104,6 +108,7 @@
 					</a>
 					<div class="list-group-item">
 					<a href="'.$id.'/img_'.$el ->picture_id.'/delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+					<a href="'.$id.'/img_'.$el ->picture_id.'/warning" class="btn btn-warning"><i class="fas fa-exclamation-triangle"></i></a>
 					</div></div>';
 				}
 
