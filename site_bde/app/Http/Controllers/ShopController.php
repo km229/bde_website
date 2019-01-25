@@ -21,7 +21,19 @@ class ShopController extends Controller
 		$products = DB::table('product')->get();
 		$category = DB::table('category')->get();
 
-		return view('shop.shop', compact("products"), compact("category"));
+		return view('shop.shop', compact("products", "category"));
+	}
+
+	public function search(){
+		if(isset($_GET['request'])){
+			$_SESSION['request']=$_GET['request'];
+		}
+		$search=$_SESSION['request'];
+		$products = DB::table('product')->whereRaw("product_name REGEXP '".$search."' OR product_desc REGEXP '".$search."'")->paginate(9);
+		$verif_product = DB::table('product')->whereRaw("product_name REGEXP '".$search."' OR product_desc REGEXP '".$search."'")->get();
+		$links = $products->render();
+		$category = DB::table('category')->get();
+		return view('shop.research', compact("products", "links", "search", "verif_product", "category"));
 	}
 
 	public function add_product(FormBuilder $formbuilder){

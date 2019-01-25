@@ -34,6 +34,9 @@ Shop
 			</div>
 		</div>
 		<div class="list-group card my-4 card-search">
+			<a href="/shop" class="list-group-item black">Return to shop</a>
+		</div>
+		<div class="list-group card my-4 card-search">
 			<h5 class="card-header black">Categories</h5>
 			<a href="/shop"  class="list-group-item buttoncat">All</a>
 			@foreach ($category as $cat)
@@ -80,41 +83,12 @@ Shop
 	<!-- /.col-lg-3 -->
 
 	<div class="col-lg-9">
+		
 		<?php
-
-		$bestsellers = DB::table('product')->orderBy('product.product_sales_number', 'DESC')->limit(3)->get();
-		$size = sizeof($bestsellers);
-
-		if ($size > 0) {
-			echo "<div id=\"carouselExampleIndicators\" class=\"carousel slide my-4\" data-ride=\"carousel\">
-			<ol class=\"carousel-indicators\">";
-
-
-			for ($i = 0; $i < $size; $i++) {
-				if ($i == 0) {
-					echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\" class=\"active\"></li>";
-				} else {
-					echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\"></li>";
-				}
-			}
-
-			echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><a href=\"shop/".$bestsellers[0] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"First slide\"></a></div>";
-
-			for ($j = 1; $j < $size; $j++) {
-				if ($j == 1){
-					echo "<div class=\"carousel-item\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Second slide\"></a></div>";
-				}
-				elseif ($j == 2){
-					echo "<div class=\"carousel-item\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Third slide\"></a></div>";
-				}
-			}
-
-		}
-
-		if ($size > 1){
-			echo "</div><a class=\"carousel-control-prev\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"prev\"><span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Previous</span></a><a class=\"carousel-control-next\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"next\"><span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span><span class=\"sr-only\">Next</span></a></div>";
+		if(!empty($verif_product[0])){
+			echo '<h2>Your research for : '.$search.'</h2>';
 		} else {
-			echo "</div></div></div>";
+			echo '<h2>No activity found with : '.$search.'</h2><p>Try with other words</p>';
 		}
 		?>
 
@@ -170,6 +144,7 @@ Shop
 			}
 			?>
 			@endforeach
+			{{ $links }}
 		</div>
 	</div>
 

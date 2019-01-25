@@ -91,6 +91,10 @@ Route::get('shop/add_{id}', [
     'as' => 'shop_add_to_cart',
     'uses' => 'ShopController@add_to_cart'
 ]);
+Route::get('shop/search', [
+    'as' => 'activities_search',
+    'uses' => 'ShopController@search'
+]);
 Route::get('shop/{id}', [
     'as' => 'shop_id',
     'uses' => 'ShopController@id'
