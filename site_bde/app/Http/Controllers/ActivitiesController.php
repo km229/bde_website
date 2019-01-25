@@ -10,6 +10,8 @@ use Faker\Provider\cs_CZ\DateTime;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if(!isset($_SESSION)){
 	session_start();
@@ -22,7 +24,6 @@ class ActivitiesController extends Controller
 		$activities = DB::table('activity')->paginate(9);
 		$links = $activities->render();
         $recurringactivities = DB::table('activity')->get()->where('activity_recurrence', !0);
-        //dd($test = DB::table('activity')->get()->where('activity_recurrence', !0));
         if(!empty($recurringactivities)) {
             ActivitiesController::update_activities($recurringactivities);
             $activities = DB::table('activity')->paginate(9);
@@ -303,6 +304,15 @@ class ActivitiesController extends Controller
 		return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]));
 
 	}
+
+	public function download_registration($id){
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->setCellValue('A1', 'Hello World !');
+
+        $writer = new Xlsx($spreadsheet);
+        $writer->save('hello world.xlsx');
+    }
 
 	public function picture_delete($id, $id2){
 
