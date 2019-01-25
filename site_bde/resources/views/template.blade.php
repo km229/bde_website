@@ -35,21 +35,24 @@ if(!isset($_SESSION)){
 					$table_notif = DB::table('notifications')->where('member_id_fk', $_SESSION['id'])->get();
 				}
 				?>
-				<button type="button" id="notif" class="btn notif" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<button type="button" class="notif" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="notif">
 					<i class="fas fa-bell"></i>
 					<?php if(sizeof($_SESSION)>0){if(sizeof($table_notif) > 0) echo'<span class="badge badge-light">'.sizeof($table_notif) .'</span>';}?>
 				</button>
 				<div id="notif_dropdown" class="dropdown-menu">
 					<?php
-					if(sizeof($_SESSION)>0){
 
-						foreach ($table_notif as $notif) {
-							echo($notif->notif_desc.'<div class="dropdown-divider" ></div>');
+					if(sizeof($table_notif) > 0){
+						if(sizeof($_SESSION)>0){
+							foreach ($table_notif as $notif) {
+								echo($notif->notif_desc.'<div class="dropdown-divider" ></div>');
+							}
 						}
+					}else{
+						echo 'You don\'t have notifications';
 					}
-					
 					?>
-					
+
 				</div>
 			</div>
 			<div class="burger"><i class="fas fa-bars"></i></div>
@@ -187,7 +190,7 @@ if(!isset($_SESSION)){
 				url: "/notif"
 			}).then(function(){
 				$('#notif').html('<i class="fas fa-bell"></i>');
-				$('#notif_dropdown').html('');
+				$('#notif_dropdown').html('You don\'t have notifications');
 			}).catch(function(){
 
 			});

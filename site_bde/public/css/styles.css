@@ -33,9 +33,10 @@
 	background-color: black; 
 	border-color: black; 
 	color:rgb(255,194,82);
+	cursor: pointer;
 }
 
-.notif:active{
-	outline-style: 0;
+.notif:focus{
+	outline: none;
 }
 
