@@ -118,10 +118,9 @@ class ActivitiesController extends Controller
 	public function create(FormBuilder $formbuilder){
 
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-			if($table[$index]->is_admin == 1){
+			if($table[0]->is_admin == 1){
 				$form = $formbuilder->create(ActivitiesForm::class);
 				return view('activities.activities_create', compact('form'));
 			}
@@ -131,7 +130,15 @@ class ActivitiesController extends Controller
 	}
 
 	public function create_check(){
+
 		if(!empty($_POST)){
+			if(isset($_POST['hidden'])){
+				$table_idea = DB::table('idea')-> where('idea_id', $_POST['hidden'])->get();
+				DB::table('notifications')->insert(array(
+					'notif_desc' => 'Your idea "'.$table_idea[0]->idea_title.'" is now the activity : '.$_POST['name'],
+					'member_id_fk' => $table_idea[0]->member_id_fk
+				));
+			}
 			DB::table('activity')->insert(
 				array(
 					'activity_title' => $_POST['name'],
@@ -277,7 +284,7 @@ class ActivitiesController extends Controller
 		$idea = DB::table('activity_pictures')->where('picture_id', '=', $id2)->get();
 		$like = DB::table('activity_pictures')->select(DB::raw('picture_id, COUNT(picture_id) as picture_likes'))->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->groupBy('picture_id')->where('picture_id', '=', $id2)->get();
 		$verif_like = DB::table('activity_pictures')->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->where('member_id_fk', $_SESSION['id'])->where('picture_id', $id2)->get();
-		return view('activities.activities_id_pictures', compact('idea', 'like', 'verif_like', 'id', 'id2', 'form'));
+		return view('activities.activities_id_pictures', compact('idea', 'like', 'verif_like', 'id', 'id2', 'form', 'verif'));
 
 
 	}

@@ -19,7 +19,7 @@ Shop
 			    echo '<div class="list-group card my-4 card-search">
                 <h5 class="card-header black">Administration</h5>
                 <a href="/shop/'.$id.'/update" class="list-group-item black">Update the product</a>
-				<a href="/shop/{{$id}}/delete" class="list-group-item black">Delete</a>
+				<a href="/shop/'.$id.'/delete" class="list-group-item black">Delete</a>
 				<a href="/shop" class="list-group-item black">Back</a>
             </div>';
                 }

@@ -90,13 +90,32 @@ Activities
 			$(".search").css('display', 'block');
 		}
 	});
+	$(".dropdown-item:eq(0)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(0) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(1)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(1) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(2)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(2) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(3)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(3) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(4)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(4) h3").text()));
+			$(".search").css('display', 'none');
+	});
 	/*$("#search").focusout(function () {
 		$(".search").css('display', 'none');
 	});*/
 	//content=last value
 	content='';
 	$("#search").keyup(function () {
-		console.log(unescape(encodeURIComponent($('#search').val())));
 		//si on entre une valeur différente
 		if(content!==$("#search").val() && $("#search").val()!==''){
 			//ajax
@@ -104,7 +123,7 @@ Activities
 			$.ajax({
 				method: 'POST',
 				url: urlValue,
-				data: { search: mb_convert_encoding($("#search").val(), 'UTF-8', 'UTF-8') }
+				data: { search: $("#search").val() }
 			}).then(function (data) {
 				//success - affiche les activites
 				$(".search").css('display', 'block');
@@ -120,23 +139,13 @@ Activities
 						'<div>'+data[i].activity_desc+'</div>'+
 						'<a href="/activities/'+data[i].activity_id+'" class="number">See the activity >></a>'
 						);
-					//hover pour le texte dans la barre
-					bar_val=$("#search").val();
-					$(".dropdown-item:eq("+i+")").hover(
-						function on(data) {
-							$(this).addClass("active");
-						//$("#search").val(data[i].activity_title);
-					}, function off(data, bar_val) {
-						$(this).removeClass("active");
-						//$("#search").val(bar_val);
-					});
-				} 
+				}
 				//si activites < 5 on cache les autres div
 				for(size; size<5; size++){
 					$(".dropdown-item:eq("+size+")").css('display', 'none');
 				}
 				//si aucune activite
-				if(data.length===0){
+				if(size===0){
 					$(".dropdown-item:eq(5)").css('display', 'block');
 					$(".dropdown-item:eq(5)").html(
 						'<div class="dropdown-item"><h3>No content</h3>'+

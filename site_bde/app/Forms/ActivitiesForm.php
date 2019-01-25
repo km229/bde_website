@@ -17,22 +17,25 @@ class ActivitiesForm extends Form
 		if(isset($_GET['id'])){
 			$info = DB::table('idea')->where('idea_id', $_GET['id'])->get();
 			$this
-		->add('name', 'text',[
-			'rules' => 'required|min:1',
-			'value' =>	$info[0]->idea_title
-		])
-		->add('description', 'textarea',[
-			'rules' => 'required|min:1',
-			'value' =>	$info[0]->idea_desc
-		]);
+			->add('name', 'text',[
+				'rules' => 'required|min:1',
+				'value' =>	$info[0]->idea_title
+			])
+			->add('description', 'textarea',[
+				'rules' => 'required|min:1',
+				'value' =>	$info[0]->idea_desc
+			])
+			->add('hidden', 'hidden',[
+				'value' =>	$_GET['id']
+			]);
 		} else {
 			$this
-		->add('name', 'text',[
-			'rules' => 'required|min:1'
-		])
-		->add('description', 'textarea',[
-			'rules' => 'required|min:1'
-		]);
+			->add('name', 'text',[
+				'rules' => 'required|min:1'
+			])
+			->add('description', 'textarea',[
+				'rules' => 'required|min:1'
+			]);
 		}
 		$this->add('image', 'file',[
 			'rules' => 'required|min:1'

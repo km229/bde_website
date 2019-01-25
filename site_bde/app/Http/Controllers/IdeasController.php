@@ -57,25 +57,6 @@ class IdeasController extends Controller
 
 	}
 
-	public function change_like($id){
-		if(isset($_POST['affect']) && isset($_SESSION['id'])){
-			switch ($_POST['affect']) {
-				case 'Like':
-				DB::table('link_member_idea_like')->insert(['member_id_fk' => $_SESSION['id'], 'idea_id_fk' => $id]);
-				return 'ok';
-				break;
-				case 'Dislike':
-				DB::table('link_member_idea_like')->where('member_id_fk', $_SESSION['id'])->where('idea_id_fk', $id)->delete();
-				return 'ok';
-				break;
-				default:
-				return 'ko';
-				break;
-			}
-		}
-		return 'ko';
-	}
-
 	public function idea_delete($id){
 		if(sizeof($_SESSION) > 0){
 			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();

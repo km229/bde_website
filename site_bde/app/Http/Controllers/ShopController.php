@@ -137,10 +137,9 @@ class ShopController extends Controller
 	public function delete($id){
 
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-			if($table[$index]->is_admin == 1){       
+			if($table[0]->is_admin == 1){       
 				DB::table('link_member_product_cart')
 				->where('product_id_fk',$id)
 				->delete();
@@ -152,9 +151,10 @@ class ShopController extends Controller
 				DB::table('product')
 				->where('product_id',$id)
 				->delete();
+				return redirect(route('shop'))->with('success', 'Product deleted');
 			}
 		}
 
-		return redirect(route('shop'))->with('success', 'Product deleted');
+		return redirect(route('shop'))->with('error', 'You don\'t have access !');
 	}
 }

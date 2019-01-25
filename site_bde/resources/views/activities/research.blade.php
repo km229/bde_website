@@ -82,58 +82,101 @@ Activities
 
 @section('script')
 <script>
+	//affiche les activites
 	$("#search").focus(function () {
 		if($("#search").val()!==''){
 			$(".search").css('display', 'block');
 		}
 	});
+	$(".dropdown-item:eq(0)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(0) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(1)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(1) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(2)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(2) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(3)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(3) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(4)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(4) h3").text()));
+			$(".search").css('display', 'none');
+	});
 	/*$("#search").focusout(function () {
 		$(".search").css('display', 'none');
 	});*/
-	val=0;
+	//content=last value
 	content='';
 	$("#search").keyup(function () {
+		//si on entre une valeur différente
 		if(content!==$("#search").val() && $("#search").val()!==''){
+			//ajax
 			urlValue = "/search/activities";
 			$.ajax({
-			method: 'POST',
-			url: urlValue,
-			data: { search: $("#search").val() }
+				method: 'POST',
+				url: urlValue,
+				data: { search: $("#search").val() }
 			}).then(function (data) {
+				//success - affiche les activites
 				$(".search").css('display', 'block');
+				//taille max d'affichage
 				if(data.length>5){
 					size=5;
 				} else { size=data.length }
-				$(".search").html('');
+				//insertion activites
 				for(i=0; i<size; i++){
-					concat=$(".search").html();
-					$(".search").html(concat+
-						'<div class="dropdown-item">'+
+					$(".dropdown-item:eq("+i+")").css('display', 'block');
+					$(".dropdown-item:eq("+i+")").html(
 						'<h3>'+data[i].activity_title+'</h3>'+
 						'<div>'+data[i].activity_desc+'</div>'+
-						'<a href="/activities/'+data[i].activity_id+'" class="number">See the activity >></a>'+
-						'</div><div class="dropdown-divider"></div>'
-					);
+						'<a href="/activities/'+data[i].activity_id+'" class="number">See the activity >></a>'
+						);
 				}
-				if(data.length===0){
-					$(".search").html(
-					'<div class="dropdown-item"><h3>No content</h3>'+
+				//si activites < 5 on cache les autres div
+				for(size; size<5; size++){
+					$(".dropdown-item:eq("+size+")").css('display', 'none');
+				}
+				//si aucune activite
+				if(size===0){
+					$(".dropdown-item:eq(5)").css('display', 'block');
+					$(".dropdown-item:eq(5)").html(
+						'<div class="dropdown-item"><h3>No content</h3>'+
 						'<div>Try with other key words</div>'
-					);
+						);
+				} else { 
+					$(".dropdown-item:eq(5)").css('display', 'none');
+					$(".dropdown-item:eq(5)").html(''); 
 				}
-				result=$(".search").html();
+				//si activites > 5 on ajoute +number
 				if(data.length>5){
 					number = data.length - 5;
-					$(".search").html(result+'<strong class="dropdown-item number">+'+number+'</strong>');
+					$(".dropdown-item:eq(5)").css('display', 'block');
+					$(".dropdown-item:eq(5)").html('<strong class="number">+'+number+'</strong>');
+				} else {
+					$(".dropdown-item:eq(5)").css('display', 'none');
 				}
 			}).catch(function (data) {
+				//error
+				for(i=0; i<5; i++){
+					$(".dropdown-item:eq("+i+")").css('display', 'none');
+				}
 				$(".search").css('display', 'block');
-				$(".search").html(
-					'<div class="dropdown-item"><h3>Error</h3>'+
-						'<div>Try again</div>'
-				);
+				$(".dropdown-item:eq(5)").css('display', 'block');
+				$(".dropdown-item:eq(5)").html(
+					'<h3>Error</h3>'+
+					'<p>Try again</p>'
+					);
 			});
-		} if($("#search").val()==='') { $(".search").css('display', 'none'); }
+		} 
+		if($("#search").val()==='') { 
+			$(".search").css('display', 'none');
+		}
 		content=$("#search").val();
 	});
 </script>

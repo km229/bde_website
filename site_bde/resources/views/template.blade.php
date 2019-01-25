@@ -30,13 +30,18 @@ if(!isset($_SESSION)){
 				<a href="/"><img src='{{ asset('img/logo.jpg') }}' alt="Logo"></a>
 			</div>
 			<div class="btn-group">
-				<button type="button" class="btn btn-danger notif" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				<?php
+				if(sizeof($_SESSION)>0){
+					$table_notif = DB::table('notifications')->where('member_id_fk', $_SESSION['id'])->get();
+				}
+				?>
+				<button type="button" id="notif" class="btn notif" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					<i class="fas fa-bell"></i>
+					<?php if(sizeof($_SESSION)>0){if(sizeof($table_notif) > 0) echo'<span class="badge badge-light">'.sizeof($table_notif) .'</span>';}?>
 				</button>
-				<div class="dropdown-menu">
+				<div id="notif_dropdown" class="dropdown-menu">
 					<?php
 					if(sizeof($_SESSION)>0){
-						$table_notif = DB::table('notifications')->where('member_id_fk', $_SESSION['id'])->get();
 
 						foreach ($table_notif as $notif) {
 							echo($notif->notif_desc.'<div class="dropdown-divider" ></div>');
@@ -174,6 +179,19 @@ if(!isset($_SESSION)){
 			}
 			val=$(window).scrollTop();
 		})
+	</script>
+	<script>
+		$('#notif').focusout(function(){
+			$.ajax({
+				type: "PUT",                
+				url: "/notif"
+			}).then(function(){
+				$('#notif').html('<i class="fas fa-bell"></i>');
+				$('#notif_dropdown').html('');
+			}).catch(function(){
+
+			});
+		});
 	</script>
 </body>
 </html>

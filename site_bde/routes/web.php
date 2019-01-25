@@ -148,12 +148,20 @@ Route::post('ideas/{id}/update', [
 
 /*---AJAX---*/
 Route::post('ideas/{id}', [
-    'as' => 'change_like',
-    'uses' => 'IdeasController@change_like'
+    'as' => 'change_like_idea',
+    'uses' => 'AjaxController@change_like_idea'
 ]);
 Route::post('search/activities', [
     'as' => 'search_activities',
     'uses' => 'AjaxController@search_activities'
+]);
+Route::put('notif', [
+    'as' => 'notif',
+    'uses' => 'AjaxController@notif'
+]);
+Route::post('activities/{id}/img_{id2}/like', [
+    'as' => 'change_activity_picture_like',
+    'uses' => 'AjaxController@change_activity_picture_like'
 ]);
 
 /*---ACTIVITIES---*/
