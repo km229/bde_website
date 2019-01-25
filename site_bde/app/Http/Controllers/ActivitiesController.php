@@ -304,15 +304,32 @@ class ActivitiesController extends Controller
 		return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]));
 
 	}
+	
 
-	public function download_registration($id){
-        $spreadsheet = new Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->setCellValue('A1', 'Hello World !');
+    public function download_registration($id)
+    {
+        $result = DB::table('link_members_activities')->join('members', 'member_id_fk', '=', 'member_id')->get()->where('activity_id_fk', $id);
+        $headers = array();
 
-        $writer = new Xlsx($spreadsheet);
-        $writer->save('hello world.xlsx');
-        return(ActivitiesController::id($id));
+        if (sizeof($result) != 0) {
+            foreach ($result as $member) {
+                $headers[] = utf8_decode($member->member_firstname) . ';' . utf8_decode($member->member_lastname). ";" . utf8_decode($member->member_mail);
+            }
+        }
+
+        $fp = fopen('php://output', 'w');
+
+        if ($fp && $result) {
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="registrations.csv"');
+            header('Pragma: no-cache');
+            header('Expires: 0');
+            foreach ($headers as $field){
+                fwrite($fp, $field."\n");
+            }
+
+            die;
+        }
     }
 
 	public function picture_delete($id, $id2){
