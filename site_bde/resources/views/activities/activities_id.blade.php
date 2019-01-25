@@ -34,7 +34,8 @@
 				if($table[0]->is_admin == 1){
 					echo '<div class="list-group card my-4 card-search">
 					<h3 class="card-header black">Administration</h3>
-					<a href="/activities/'.$id.'/download_registration" class="list-group-item black">Registrations</a>
+					<a href="/activities/'.$id.'/download_registration" class="list-group-item black">Download participants</a>
+					<a href="/activities/'.$id.'/download_pictures" class="list-group-item black">Download pictures</a>
 					<a href="/activities/'.$id.'/update" class="list-group-item black">Update activity</a>
 					<a href="/activities/'.$id.'/warning" class="list-group-item black">Report</a>
 					<a href="/activities/'.$id.'/delete" class="list-group-item black">Delete</a>
