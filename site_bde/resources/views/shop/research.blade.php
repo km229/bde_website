@@ -14,7 +14,7 @@ Shop
 			<h5 class="card-header card-search black">Search</h5>
 			<div class="card-body">
 				<div class="input-group">
-				<form action="/shop/search_acticles" method="GET" class="form-search">
+				<form action="/shop/search_articles" method="GET" class="form-search">
 					@csrf
 						<div class="input-group">
 							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
