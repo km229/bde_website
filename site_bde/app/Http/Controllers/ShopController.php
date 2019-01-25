@@ -21,9 +21,6 @@ class ShopController extends Controller
 		$products = DB::table('product')->get();
 		$category = DB::table('category')->get();
 
-
-        $bestsellers = DB::table('product')->orderBy('product.product_sales_number', 'DESC')->limit(3)->get();
-
 		return view('shop.shop', compact("products"), compact("category"));
 	}
 

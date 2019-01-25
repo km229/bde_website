@@ -6,6 +6,7 @@ use App\Forms\ActivitiesForm;
 use App\Forms\ActivitiesCommentForm;
 use App\Forms\ActivitiesIdForm;
 use App\Forms\ActivitiesAddPictureForm;
+use Faker\Provider\cs_CZ\DateTime;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
@@ -20,8 +21,88 @@ class ActivitiesController extends Controller
 	public function index(){
 		$activities = DB::table('activity')->paginate(9);
 		$links = $activities->render();
+        $recurringactivities = DB::table('activity')->get()->where('activity_recurrence', !0);
+        //dd($test = DB::table('activity')->get()->where('activity_recurrence', !0));
+        if(!empty($recurringactivities)) {
+            ActivitiesController::update_activities($recurringactivities);
+            $activities = DB::table('activity')->paginate(9);
+        }
 		return view('activities.activities', compact("activities", "links"));
 	}
+
+	public function update_activities($activities){
+        foreach($activities as $activity){
+
+            $activity_date = date_create();
+            date_timestamp_set($activity_date, strtotime($activity -> activity_date));
+            //$datetime = new DateTime($activity -> activity_date);
+            $today = strtotime(date('Y-m-d'));
+            //dd($activity_date->format('d'));
+            if (strtotime($activity_date->format("Y-m-d")) < $today) {
+                switch ($activity->activity_recurrence) {
+                    case 1:
+                        $i = 0;
+                        do {
+                            $i += 1;
+                            $tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m'), $activity_date->format('d') + 7 * $i, $activity_date->format('Y')));
+                        } while ($today > strtotime($tmp));
+
+                        DB::table('activity')->insert(
+                            array(
+                                'activity_title' => $activity->activity_title,
+                                'activity_desc' => $activity->activity_desc,
+                                'activity_date' => $tmp,
+                                'activity_img' => $activity->activity_img,
+                                'activity_price' => $activity->activity_price,
+                                'activity_recurrence' => $activity->activity_recurrence
+                            )
+                        );
+                        break;
+                    case 2:
+                        $i = 0;
+                        do {
+                            $i += 1;
+                            $tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m') + 1 * $i, $activity_date->format('d'), $activity_date->format('Y')));
+                        } while ($today > strtotime($tmp));
+
+                        DB::table('activity')->insert(
+                            array(
+                                'activity_title' => $activity->activity_title,
+                                'activity_desc' => $activity->activity_desc,
+                                'activity_date' => $tmp,
+                                'activity_img' => $activity->activity_img,
+                                'activity_price' => $activity->activity_price,
+                                'activity_recurrence' => $activity->activity_recurrence
+                            )
+                        );
+                        break;
+                    case 3:
+                        $i = 0;
+                        do {
+                            $i += 1;
+                            $tmp = date('Y-m-d', mktime(0, 0, 0, $activity_date->format('m'), $activity_date->format('d'), $activity_date->format('Y') + 1 * $i));
+                        } while ($today > strtotime($tmp));
+
+                        DB::table('activity')->insert(
+                            array(
+                                'activity_title' => $activity->activity_title,
+                                'activity_desc' => $activity->activity_desc,
+                                'activity_date' => $tmp,
+                                'activity_img' => $activity->activity_img,
+                                'activity_price' => $activity->activity_price,
+                                'activity_recurrence' => $activity->activity_recurrence
+                            )
+                        );
+                        break;
+                }
+                DB::table('activity')->where('activity_id', $activity->activity_id)->update(
+                    array(
+                        'activity_recurrence' => 0
+                    )
+                );
+            }
+        }
+    }
 	
 	public function search(){
 		if(isset($_GET['request'])){

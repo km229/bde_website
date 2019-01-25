@@ -27,7 +27,7 @@ Cart
             echo $article -> product_price;
             echo '€</h5><p>';
             echo $article -> product_desc;
-            echo '</p></div><div class="card-footer black">Quantity : '.$article -> number.'<a href="http://localhost:8000/shop/cart/remove_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : indianred; margin : 2px;"><i class="far fa-trash-alt"></i></a><a href="http://localhost:8000/shop/cart/plus_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : dodgerblue; margin : 2px;""><i class="fas fa-plus"></i></a><a href="http://localhost:8000/shop/cart/minus_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : dodgerblue; margin : 2px;"><i class="fas fa-minus"></i></a></div></div></div>';
+            echo '</p></div><div class="card-footer black">Quantity : '.$article -> number.'<a href="http://localhost:8000/shop/cart/plus_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : dodgerblue; margin : 2px;""><i class="fas fa-plus"></i></a><a href="http://localhost:8000/shop/cart/minus_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : dodgerblue; margin : 2px;"><i class="fas fa-minus"></i></a><a href="http://localhost:8000/shop/cart/remove_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : indianred; margin : 2px;"><i class="far fa-trash-alt"></i></a></div></div></div>';
             $totalprice += $article -> product_price * $article -> number;
 
 
