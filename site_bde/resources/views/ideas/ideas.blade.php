@@ -47,8 +47,8 @@ Ideas
 				<?php
 				if(sizeof($ideas)>0){
 					for ($i=0; $i < sizeof($ideas); $i++) { 
-						echo '<div class="col-lg-4 col-md-6 mb-4 bloc-link">
-						<div class="card h-100">
+						echo '<div class="col-lg-4 col-md-6 mb-4">
+						<div class="card h-100 bloc-link">
 						<div class="card-body card-body2">
 						<h2 class="card-title">'. $ideas[$i] -> idea_title .'</h2>
 						<p>'. $ideas[$i] -> idea_desc .'</p>

@@ -37,32 +37,24 @@ Shop
 		<div class="list-group card my-4 card-search">
 			<a href="/shop" class="list-group-item black">Return to shop</a>
 		</div>
-		<div class="list-group card my-4 card-search">
-			<h5 class="card-header black">Categories</h5>
-			<a href="/shop"  class="list-group-item buttoncat">All</a>
+
+		<<div class="list-group card my-4 card-search">
+			<h4 class="card-header black">Filters</h4>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" value="all" checked> All</div>
 			@foreach ($category as $cat)
-			<a href="?category=<?php echo $cat -> category_id ?>" class="list-group-item buttoncat"><?php echo $cat -> category_name ?></a>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" value="<?php echo $cat -> category_name ?>"> <?php echo $cat -> category_name ?></div>
 			@endforeach
-
-
-		</div>
-
-		<div class="list-group card my-4 card-search black">
-			<h5 class="card-header black">Price</h5>
-			<form action="{{route('shop_price')}}" method="post">
-				@csrf
-				<div class="list-group-item">
+			<div class="list-group-item black">
 					Min
 					<input type="number" name="min" style="width: 100%">
 				</div>
-				<div class="list-group-item">
+			<div class="list-group-item black">
 					Max
 					<input type="number" name="max" style="width: 100%">
 				</div>
-				<div class="list-group-item button">
-					<input type="submit" name="submit">
-				</div>
-			</form>
+				<div class="list-group-item button" id="submit">
+					<a href="">Confirm</a>
+			</div>
 		</div>
 
 		<?php
@@ -70,7 +62,7 @@ Shop
 			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 			if($table[0]->is_admin == 1){
 				echo '<div class="list-group card my-4 card-search">
-				<h5 class="card-header black">Administration</h5>
+				<h4 class="card-header black">Administration</h4>
 				<a href="/shop/add/product" class="list-group-item black">New product</a>
 				<a href="/shop/add/category" class="list-group-item black">New category</a>
 				</div>';

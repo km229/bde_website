@@ -67,4 +67,65 @@ class AjaxController extends Controller
         return $articles;
     }
 
+	public function product_filter(){
+		$categories = DB::table('category')->get();
+		if($_POST['button']==='all') {
+			if($_POST['min']!=='' && $_POST['max']!=='') {
+				$sql_price=[$_POST['min'], $_POST['max']];
+				$content=DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->whereBetween('product_price', $sql_price)->get();
+				foreach ($content as $val) {
+					$val->product_img=base64_encode($val->product_img);
+				}
+				return $content;
+			} else {
+				if($_POST['min']!=='') {
+					$sql_price='category_name, \'>\', '.$_POST['min'];
+				} if($_POST['max']!=='') {
+					$sql_price='category_name, \'<\', '.$_POST['max'];
+				} else {
+					$content=DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->get();
+					foreach ($content as $val) {
+						$val->product_img=base64_encode($val->product_img);
+					}
+					return $content;
+				}
+				$content=DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where($sql_price)->get();
+				foreach ($content as $val) {
+					$val->product_img=base64_encode($val->product_img);
+				}
+				return $content;
+			}
+		}
+		foreach ($categories as $category) {
+			if($category->category_name===$_POST['button']){
+				$sql_cat=$category->category_name;
+			}
+		}
+		if($_POST['min']!=='' && $_POST['max']!=='') {
+			$sql_price=[$_POST['min'], $_POST['max']];
+			$content=DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('category_name', $sql_cat)->whereBetween('product_price', $sql_price)->get();
+			foreach ($content as $val) {
+				$val->product_img=base64_encode($val->product_img);
+			}
+			return $content;
+		} else {
+			if($_POST['min']!=='') {
+				$sql_price='category_name, \'>\', '.$_POST['min'];
+			} if($_POST['max']!=='') {
+				$sql_price='category_name, \'<\', '.$_POST['max'];
+			} else {
+				$content=DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('category_name', $sql_cat)->get();
+				foreach ($content as $val) {
+					$val->product_img=base64_encode($val->product_img);
+				}
+				return $content;
+			}
+			$content=DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('category_name', $sql_cat)->where($sql_price)->get();
+			foreach ($content as $val) {
+				$val->product_img=base64_encode($val->product_img);
+			}
+			return $content;
+		}
+	}
+
 }

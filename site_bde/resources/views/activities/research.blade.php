@@ -61,8 +61,8 @@ Activities
 		<div class="row">
 			<?php
 			foreach($activities as $activity){
-				echo '<div class="col-lg-4 col-md-6 mb-4 bloc-link">
-				<div class="card h-100">';
+				echo '<div class="col-lg-4 col-md-6 mb-4">
+				<div class="card h-100 bloc-link">';
 						if(isset($activity -> activity_img)){
 							echo '<img class="w-100" src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" />';
 						} else { echo '<img class="w-100" src="'.asset('img/noimg.jpg').'" />'; }
