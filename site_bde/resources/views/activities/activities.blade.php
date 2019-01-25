@@ -60,6 +60,20 @@ Activities
 		<div class="row">
 			<?php
 			foreach($activities as $activity){
+                switch($activity->activity_recurrence) {
+                    case 0:
+                        $tmp = "Punctual";
+                        break;
+                    case 1:
+                        $tmp = "Weekly";
+                        break;
+                    case 2:
+                        $tmp = "Monthly";
+                        break;
+                    case 3:
+                        $tmp = "Yearly";
+                        break;
+                }
 				echo '<div class="col-lg-4 col-md-6 mb-4 bloc-link">
 				<div class="card h-100">';
 				if(isset($activity -> activity_img)){
@@ -70,7 +84,7 @@ Activities
 				<p>Date : '.$activity -> activity_date.'</p>
 				<p>'.$activity -> activity_desc.'</p>
 				<p>Price : '.$activity -> activity_price.' €</p>
-				<p>Type : '.$activity -> activity_recurrence.'</p>
+				<p>Type : '.$tmp.'</p>
 				</div>
 				<a href="/activities/'.$activity -> activity_id.'"></a>
 				</div>

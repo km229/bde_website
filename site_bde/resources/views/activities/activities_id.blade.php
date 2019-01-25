@@ -62,7 +62,20 @@
 					<h3 class="my-3">Date</h3>
 					<p>{{$activity[0]->activity_date}}</p>
 					<h3 class="my-3">Type</h3>
-					<p>{{$activity[0]->activity_recurrence}}</p>
+					<p><?php switch($activity[0]->activity_recurrence) {
+                            case 0:
+                                echo "Punctual";
+                                break;
+                            case 1:
+                                echo "Weekly";
+                                break;
+                            case 2:
+                                echo "Monthly";
+                                break;
+                            case 3:
+                                echo "Yearly";
+                                break;
+                        } ?></p>
 					<h3 class="my-3">Price</h3>
 					<p>{{$activity[0]->activity_price}} €</p>
 				</div>
