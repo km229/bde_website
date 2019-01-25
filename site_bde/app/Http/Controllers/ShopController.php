@@ -39,54 +39,60 @@ class ShopController extends Controller
 
 	public function add_product(FormBuilder $formbuilder){
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
-			if($table[$index]->is_admin == 1){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+			if($table[0]->is_admin == 1){
 				$form = $formbuilder->create(ShopProductForm::class);
 				return view('shop.shop_add_product', compact('form'));
 			}
 		}
-		return redirect(route('shop'));
+		return redirect(route('shop'))->with('error', 'You are not allowed to add a category');
 	}
 
 	public function add_product_check(){
-
-
-
 		if(!empty($_POST)){
 
-			$cat = $_POST['category']+1;
-			DB::table('product')->insert(
-				array(
-					'product_name' => $_POST['name'],
-					'product_desc' => $_POST['description'],
-					'product_price' => $_POST['price'],
-					'category_id_fk' => $cat,
-					'product_img' => file_get_contents($_FILES['image']['tmp_name']),
-                    'product_sales_number' => 0
-				)
-			);
-			return redirect(route('shop'))->with('success', 'Product added');
+			if(sizeof($_SESSION) > 0){
+				$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+				if($table[0]->is_admin == 1){
+					$cat = $_POST['category']+1;
+					DB::table('product')->insert(
+						array(
+						'product_name' => $_POST['name'],
+						'product_desc' => $_POST['description'],
+						'product_price' => $_POST['price'],
+						'category_id_fk' => $cat,
+						'product_img' => file_get_contents($_FILES['image']['tmp_name']),
+                    	'product_sales_number' => 0
+						)
+					);
+					return redirect(route('shop'))->with('success', 'Product "'.$_POST['name'].'" added !');
+				}
+			}
+			return redirect(route('shop'))->with('error', 'You are not allowed to add a product');
+
 		}
+		return redirect(route('shop'))->with('error', 'Error, try again');
 	}
 
 	public function add_category(FormBuilder $formbuilder){
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
-			if($table[$index]->is_admin == 1){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+			if($table[0]->is_admin == 1){
 				$form = $formbuilder->create(ShopCategoryForm::class);
 				return view('shop.shop_add_category', compact('form'));
 			}
 		}
-		return redirect(route('shop'));
+		return redirect(route('shop'))->with('error', 'You are not allowed to add a category');
 	}
 
 	public function add_category_check(){
-		DB::table('category')->insert(
-			array(
-				'category_name' => $_POST['name']));
-		return redirect(route('shop'))->with('success', 'Category added');
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+			if($table[0]->is_admin == 1){
+				return redirect(route('shop'))->with('success', 'Category "'.$_POST['name'].'" added !');
+			}
+		}
+		return redirect(route('shop'))->with('error', 'You are not allowed to add a category');
 	}
 
 	public function add_to_cart($id){
@@ -112,9 +118,10 @@ class ShopController extends Controller
 				);
 			}
 
-			$articles = DB::table('link_member_product_cart')->get()->where('member_id_fk', $_SESSION['id']);
-			return redirect(route('shop'))->with('success', 'Product added to cart');
+			$articles = DB::table('link_member_product_cart')->join('product', 'product_id', '=', 'product_id_fk')->where('member_id_fk', $_SESSION['id'])->where('product_id_fk', $id)->get();
+			return redirect(route('shop'))->with('success', 'Product "'.$articles[0]->product_name.'" added to cart !');
 		}
+		return redirect(route('shop'))->with('error', 'You must be connected before to purchase products.');
 	}
 
 	public function id ($id){
@@ -123,28 +130,34 @@ class ShopController extends Controller
 
 	public function id_update($id, FormBuilder $formbuilder){
 		if(sizeof($_SESSION) > 0){
-			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
-			$index = $table->keys()[0];
-
-			if($table[$index]->is_admin == 1){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+			if($table[0]->is_admin == 1){
 				$form = $formbuilder->create(ShopIdForm::class);
 				return view('shop.shop_add_product', compact('form'));
 			}
 		}
-		return redirect(route('shop'));
+		return back()->with('error', 'You are not allowed to update a product');
 	}
 
 	public function id_update_check(){
-		if($_FILES['image']['tmp_name'] === ""){
-			DB::table('product')
-			->where('product_id',$_POST['id'])
-			->update(['product_name' => $_POST['name'],'product_desc' => $_POST['description'],'product_price' => $_POST['price']]);
-		}else{
-			DB::table('product')
-			->where('product_id',$_POST['id'])
-			->update(['product_name' => $_POST['name'],'product_desc' => $_POST['description'],'product_img' => file_get_contents($_FILES['image']['tmp_name']),'product_price' => $_POST['price']]);
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+			if($table[0]->is_admin == 1){
+
+				if($_FILES['image']['tmp_name'] === ""){
+					DB::table('product')
+					->where('product_id',$_POST['id'])
+					->update(['product_name' => $_POST['name'],'product_desc' => $_POST['description'],'product_price' => $_POST['price']]);
+				}else {
+					DB::table('product')
+					->where('product_id',$_POST['id'])
+					->update(['product_name' => $_POST['name'],'product_desc' => $_POST['description'],'product_img' => file_get_contents($_FILES['image']['tmp_name']),'product_price' => $_POST['price']]);
+				}
+				return redirect(route('shop'))->with('success', 'Product "'.$_POST['name'].'" updated !');
+
+			}
 		}
-		return redirect(route('shop'))->with('success', 'product updated');
+		return redirect(route('shop'))->with('error', 'You are not allowed to update a product');
 	}
 
 	public function delete($id){
@@ -160,14 +173,14 @@ class ShopController extends Controller
 				DB::table('link_orders_products')
 				->where('product_id_fk',$id)
 				->delete();
-
+				$product=DB::table('product')->where('product_id',$id)->get();
 				DB::table('product')
 				->where('product_id',$id)
 				->delete();
-				return redirect(route('shop'))->with('success', 'Product deleted');
+				return redirect(route('shop'))->with('success', 'Product "'.$product[0]->product_name.'" deleted !');
 			}
 		}
 
-		return redirect(route('shop'))->with('error', 'You don\'t have access !');
+		return back()->with('error', 'You are not allowed to delete a product');
 	}
 }
