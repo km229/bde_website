@@ -332,6 +332,10 @@ class ActivitiesController extends Controller
         return(ActivitiesController::id($id));
     }
 
+    public function download_picture(){
+	    $pictures =
+    }
+
 	public function picture_delete($id, $id2){
 
 		if(sizeof($_SESSION) > 0){
