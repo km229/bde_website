@@ -90,6 +90,26 @@ Activities
 			$(".search").css('display', 'block');
 		}
 	});
+	$(".dropdown-item:eq(0)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(0) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(1)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(1) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(2)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(2) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(3)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(3) h3").text()));
+			$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(4)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(4) h3").text()));
+			$(".search").css('display', 'none');
+	});
 	/*$("#search").focusout(function () {
 		$(".search").css('display', 'none');
 	});*/
@@ -119,26 +139,6 @@ Activities
 						'<div>'+data[i].activity_desc+'</div>'+
 						'<a href="/activities/'+data[i].activity_id+'" class="number">See the activity >></a>'
 						);
-					//hover pour le texte dans la barre
-					bar_val=$("#search").val();
-					/*$(".dropdown-item:eq("+i+")").hover(
-						function on() {
-							$(this).addClass("active");
-						//$("#search").val(data[i].activity_title);
-					}, function off() {
-						$(this).removeClass("active");
-						//$("#search").val(bar_val);
-					});*/
-					val=i;
-					$(".dropdown-item:eq("+i+")").on("click", function () {
-						console.log(val);
-						$("#search").val(data[val].activity_title);
-						$(".search").css('display', 'none');
-					});
-					/*$(".dropdown-item:eq("+i+")").click(function () {
-						$("#search").val(data[i].activity_title);
-						$(".search").css('display', 'none');
-					});*/
 				}
 				//si activites < 5 on cache les autres div
 				for(size; size<5; size++){
