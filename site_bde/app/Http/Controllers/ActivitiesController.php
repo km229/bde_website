@@ -304,7 +304,6 @@ class ActivitiesController extends Controller
 		return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]));
 
 	}
-	
 
     public function download_registration($id)
     {
@@ -330,10 +329,10 @@ class ActivitiesController extends Controller
 
             die;
         }
+        return(ActivitiesController::id($id));
     }
 
 	public function picture_delete($id, $id2){
-
 
 		if(sizeof($_SESSION) > 0){
 			$table = DB::table('members')->get()->where('member_id', $_SESSION['id']);
