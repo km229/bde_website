@@ -228,6 +228,14 @@ Route::get('activities/{id}/add_picture', [
     'as' => 'activities_add_picture',
     'uses' => 'ActivitiesController@add_picture'
 ]);
+Route::get('activities/{id}/download_picture', [
+    'as' => 'activities_download_picture',
+    'uses' => 'ActivitiesController@download_picture'
+]);
+Route::get('activities/{id}/download_registration', [
+    'as' => 'activities_download_registration',
+    'uses' => 'ActivitiesController@download_registration'
+]);
 
 
 Route::get('activities/{id}/img_{id2}', [
