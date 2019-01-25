@@ -91,7 +91,7 @@ Route::get('shop/add_{id}', [
     'as' => 'shop_add_to_cart',
     'uses' => 'ShopController@add_to_cart'
 ]);
-Route::get('shop/search', [
+Route::get('shop/search_articles', [
     'as' => 'activities_search',
     'uses' => 'ShopController@search'
 ]);
@@ -168,7 +168,7 @@ Route::post('activities/{id}/img_{id2}/like', [
     'uses' => 'AjaxController@change_activity_picture_like'
 ]);
 Route::post('shop/search', [
-    'as' => 'cart',
+    'as' => 'search_acticles',
     'uses' => 'AjaxController@search_acticles'
 ]);
 
@@ -183,7 +183,7 @@ Route::post('activities', [
     'as' => 'activities_id_update_check',
     'uses' => 'ActivitiesController@id_update_check'
 ]);
-Route::get('activities/search', [
+Route::get('activities/search_acticles', [
     'as' => 'activities_search',
     'uses' => 'ActivitiesController@search'
 ]);

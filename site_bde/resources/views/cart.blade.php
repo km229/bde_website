@@ -21,7 +21,14 @@ Cart
 
 
 
-            echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($article -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
+            echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; 
+            if(isset($product -> product_img)){
+                echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($acticle -> product_img) .'" />'; 
+            } else { 
+                echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+                echo '" />';
+             }
+            echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
             echo $article -> product_name;
             echo '</a></h4><h5>';
             echo $article -> product_price;

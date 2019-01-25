@@ -11,10 +11,11 @@ Shop
 
 		<h1 class="my-4">Shop</h1>
 		<div class="card my-4">
-			<h5 class="card-header card-search black">Search</h5>
+			<h4 class="card-header card-search black">Search</h4>
 			<div class="card-body">
 				<div class="input-group">
-				<form action="/shop/search" method="GET" class="form-search">
+				<form action="/shop/search_articles" method="GET" class="form-search">
+					@csrf
 						<div class="input-group">
 							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
 							<span class="input-group-btn">
@@ -34,31 +35,22 @@ Shop
 			</div>
 		</div>
 		<div class="list-group card my-4 card-search">
-			<h5 class="card-header black">Categories</h5>
-			<a href="/shop"  class="list-group-item buttoncat">All</a>
+			<h4 class="card-header black">Filters</h4>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" value="all" checked> All</div>
 			@foreach ($category as $cat)
-			<a href="?category=<?php echo $cat -> category_id ?>" class="list-group-item buttoncat"><?php echo $cat -> category_name ?></a>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" value="<?php echo $cat -> category_name ?>"> <?php echo $cat -> category_name ?></div>
 			@endforeach
-
-
-		</div>
-
-		<div class="list-group card my-4 card-search black">
-			<h5 class="card-header black">Price</h5>
-			<form action="{{route('shop_price')}}" method="post">
-				@csrf
-				<div class="list-group-item">
+			<div class="list-group-item black">
 					Min
-					<input type="number" name="min">
+					<input type="number" name="min" style="width: 100%">
 				</div>
-				<div class="list-group-item">
+			<div class="list-group-item black">
 					Max
-					<input type="number" name="max">
+					<input type="number" name="max" style="width: 100%">
 				</div>
-				<div class="list-group-item">
-					<input type="submit" name="submit">
-				</div>
-			</form>
+				<div class="list-group-item button" id="submit">
+					<a href="">Confirm</a>
+			</div>
 		</div>
 
 		<?php
@@ -66,7 +58,7 @@ Shop
 			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 			if($table[0]->is_admin == 1){
 				echo '<div class="list-group card my-4 card-search">
-				<h5 class="card-header black">Administration</h5>
+				<h4 class="card-header black">Administration</h4>
 				<a href="/shop/add/product" class="list-group-item black">New product</a>
 				<a href="/shop/add/category" class="list-group-item black">New category</a>
 				</div>';
@@ -120,9 +112,8 @@ Shop
 
 		<div class="row">
 
-			@foreach ($products as $product)
 			<?php
-
+				foreach ($products as $product){
 			$min = 0;
 			$max = 1000;
 
@@ -145,7 +136,14 @@ Shop
 
 				if (isset($_GET['category'])){
 					if ($product -> category_id_fk == $_GET['category']){
-						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
+						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; 
+						if(isset($product -> product_img)){
+							echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+						} else { 
+							echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+							echo '" />';
+						 }
+						echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
 						echo $product -> product_name;
 						echo '</a></h4><h5>';
 						echo $category -> category_name;
@@ -155,10 +153,14 @@ Shop
 
 					}
 				} else {
-
-
-
-					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img).'" />'; echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
+					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; 
+					if(isset($product -> product_img)){
+						echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+					} else { 
+						echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+						echo '" />';
+					 }
+					echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
 					echo $product -> product_name;
 					echo '</a></h4><h5>';
 					echo $category -> category_name;
@@ -168,9 +170,10 @@ Shop
 
 				}
 			}
+		}
 			?>
-			@endforeach
 		</div>
+		{{ $links }}
 	</div>
 
 
@@ -178,6 +181,8 @@ Shop
 
 	@section('script')
 <script>
+
+
 	//affiche les activites
 	$("#search").focus(function () {
 		if($("#search").val()!==''){

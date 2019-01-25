@@ -14,7 +14,8 @@ Shop
 			<h5 class="card-header card-search black">Search</h5>
 			<div class="card-body">
 				<div class="input-group">
-				<form action="/shop/search" method="GET" class="form-search">
+				<form action="/shop/search_articles" method="GET" class="form-search">
+					@csrf
 						<div class="input-group">
 							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
 							<span class="input-group-btn">
@@ -52,13 +53,13 @@ Shop
 				@csrf
 				<div class="list-group-item">
 					Min
-					<input type="number" name="min">
+					<input type="number" name="min" style="width: 100%">
 				</div>
 				<div class="list-group-item">
 					Max
-					<input type="number" name="max">
+					<input type="number" name="max" style="width: 100%">
 				</div>
-				<div class="list-group-item">
+				<div class="list-group-item button">
 					<input type="submit" name="submit">
 				</div>
 			</form>
@@ -119,7 +120,15 @@ Shop
 
 				if (isset($_GET['category'])){
 					if ($product -> category_id_fk == $_GET['category']){
-						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
+						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; 
+						if(isset($product -> product_img)){
+							echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+						} else { 
+							echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+							echo '" />';
+						}
+						echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+						echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
 						echo $product -> product_name;
 						echo '</a></h4><h5>';
 						echo $category -> category_name;
@@ -129,10 +138,14 @@ Shop
 
 					}
 				} else {
-
-
-
-					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img).'" />'; echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
+					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; 
+					if(isset($product -> product_img)){
+						echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+					} else { 
+						echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
+						echo '" />';
+					}
+					echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
 					echo $product -> product_name;
 					echo '</a></h4><h5>';
 					echo $category -> category_name;
@@ -144,8 +157,8 @@ Shop
 			}
 			?>
 			@endforeach
-			{{ $links }}
 		</div>
+		{{ $links }}
 	</div>
 
 
