@@ -19,6 +19,7 @@ Sign up
 
 <div class="container">
 	{!! form($form) !!}
+	<input type="checkbox" id="mentions"> I accept <a href="{{route('legal_terms')}}">terms and conditions</a>
 </div>
 @endsection
 

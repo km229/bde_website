@@ -52,6 +52,5 @@ Legal terms
 			The site www.bdecesi.fr contains a number of hypertext links to other sites (partners, information, etc.) set up with the authorization of BDE CESI. However, BDE CESI does not have the possibility to check all the content of the sites thus visited and therefore declines any responsibility for this fact regarding the possible risks of illegal content.
 			The user is informed that during his visits to the www.bdecesi.fr site, one or more cookies may be automatically installed on his computer. 
 
-			Translated with www.DeepL.com/Translator
 			@endsection
 

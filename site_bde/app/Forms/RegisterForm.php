@@ -11,7 +11,8 @@ class RegisterForm extends Form
     {
         $this->formOptions = [
             'method' => 'POST',
-            'url' => route('register_check')
+            'url' => route('register_check'),
+            'id' =>'form_register'
         ];
 
         $db = DB::table('location')->get();
