@@ -63,6 +63,7 @@ if(!isset($_SESSION)){
 			<div class="burger"><i class="fas fa-bars"></i></div>
 			<nav>
 				<ul>
+					<li class="level1"><a href="/admin">Administration</a></li>
 					<li class="level1"><a href="/activities">Activities</a></li>
 					<li class="level1"><a href="/ideas">Ideas</a></li>
 					<li class="level1"><a href="/shop">Shop</a></li>

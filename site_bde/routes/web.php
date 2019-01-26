@@ -297,3 +297,10 @@ Route::get('terms_conditions', [
     'as' => 'terms_conditions',
     'uses' => 'LegalController@terms'
 ]);
+
+/*---ADMINISTRATION---*/
+
+Route::get('admin', [
+    'as' => 'admin',
+    'uses' => 'AdminController@index'
+]);
