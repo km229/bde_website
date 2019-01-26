@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-Shop
+{{$search}} | Research a product
 @endsection
 
 @section('body')
@@ -9,14 +9,16 @@ Shop
 
 	<div class="col-lg-3">
 
-		<h1 class="my-4">Shop</h1>
+		<h1>Research a product</h1>
+		<div class="list-group card my-4 card-search">
+			<a href="/shop" class="list-group-item black">Return to shop</a>
+		</div>
 		<div class="card my-4">
 			<h5 class="card-header card-search black">Search</h5>
 			<div class="card-body">
 				<div class="input-group">
-				<form action="/shop/search_articles" method="GET" class="form-search">
-					@csrf
-						<div class="input-group">
+				<form action="/shop/search" method="GET" class="form-search">
+					<div class="input-group">
 							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
 							<span class="input-group-btn">
 								<input class="btn btn-secondary" type="submit" value="Go!">
@@ -34,11 +36,8 @@ Shop
 				</div>
 			</div>
 		</div>
-		<div class="list-group card my-4 card-search">
-			<a href="/shop" class="list-group-item black">Return to shop</a>
-		</div>
 
-		<<div class="list-group card my-4 card-search">
+		<div class="list-group card my-4 card-search">
 			<h4 class="card-header black">Filters</h4>
 			<div class="list-group-item buttoncat black"><input type="radio" name="category" value="all" checked> All</div>
 			@foreach ($category as $cat)

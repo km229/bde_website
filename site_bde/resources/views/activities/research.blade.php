@@ -1,14 +1,17 @@
 @extends('template')
 
 @section('title')
-Activities
+{{$search}} | Research an activity
 @endsection
 
 @section('body')
 <div class="row">
 	<div class="col-lg-3">
 
-		<h1 class="my-4">Activities</h1>
+		<h1 class="my-4">Research an activity</h1>
+        <div class="list-group card my-4 card-search">
+			<a href="/activities" class="list-group-item black">Return to activities</a>
+		</div>
 		<div class="card my-4">
 			<h3 class="card-header black">Search</h3>
 			<div class="card-body">
@@ -26,9 +29,6 @@ Activities
 				</div>
             </div>
         </div>
-        <div class="list-group card my-4 card-search">
-			<a href="/activities" class="list-group-item black">Return to activities</a>
-		</div>
 		
 		<?php
 		if(sizeof($_SESSION) > 0){

@@ -9,13 +9,12 @@ Shop
 
 	<div class="col-lg-3">
 
-		<h1 class="my-4">Shop</h1>
+		<h1>Shop</h1>
 		<div class="card my-4">
 			<h4 class="card-header card-search black">Search</h4>
 			<div class="card-body">
 				<div class="input-group">
-					<form action="/shop/search_articles" method="GET" class="form-search">
-						@csrf
+					<form action="/shop/search" method="GET" class="form-search">
 						<div class="input-group">
 							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
 							<span class="input-group-btn">
@@ -36,24 +35,27 @@ Shop
 		</div>
 		<div class="list-group card my-4 card-search">
 			<h4 class="card-header black">Filters</h4>
-			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="all" checked> All</div>
+			<form action="/shop/filter" method="GET">
+			
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="" <?php if(!isset($_GET['category']) || $_GET['category']=""){ echo 'checked'; } ?>> All</div>
 			<?php
 			$category = DB::table('category')->get();
 			?>
 			@foreach ($category as $cat)
-			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="<?php echo $cat -> category_name ?>"> <?php echo $cat -> category_name ?></div>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="<?php echo $cat -> category_name ?>" <?php if(isset($_GET['category']) && $_GET['category']=$cat -> category_name){ echo 'checked'; } ?>> <?php echo $cat -> category_name ?></div>
 			@endforeach
 			<div class="list-group-item black">
 				Min
-				<input type="number" name="min" id="min" style="width: 100%">
+				<input type="number" name="min" id="min" style="width: 100%" value="<?php if(isset($_GET['min'])){ echo $_GET['min']; } ?>" />
 			</div>
 			<div class="list-group-item black">
 				Max
-				<input type="number" name="max" id="max" style="width: 100%">
+				<input type="number" name="max" id="max" style="width: 100%" value="<?php if(isset($_GET['max'])){ echo $_GET['max']; } ?>" />
 			</div>
-			<div class="list-group-item button" id="submit">
-				<a>Confirm</a>
+			<div class="list-group-item button black" id="submit">
+				<input type="submit" style="width: 100%" />
 			</div>
+			</form>
 		</div>
 
 		<?php
@@ -142,7 +144,8 @@ Shop
 	@section('script')
 	<script>
 
-		$("#submit").click(function () {
+		//Filtres en ajax
+		/*$("#submit").click(function () {
 			$.ajax({
 				method: 'POST',
 				url: 'shop/filter',
@@ -154,14 +157,12 @@ Shop
 			}).then(function name(data) {
 				$("#content").html('');
 				for(a=0; a<data.size; a++){
-					last_html=$("#content").html();
-					$("#content").html(last_html+
-						)
+					//last_html=$("#content").html();
 				}
 			}).catch(function name(data) {
 				alert('Error filter, try again');
 			});
-		});
+		});*/
 
 	//affiche les activites
 	$("#search").focus(function () {

@@ -67,9 +67,9 @@ Route::get('shop', [
     'as' => 'shop',
     'uses' => 'ShopController@index'
 ]);
-Route::post('shop', [
-    'as' => 'shop_price',
-    'uses' => 'ShopController@index'
+Route::get('shop/filter', [
+    'as' => 'shop_filter',
+    'uses' => 'ShopController@filter'
 ]);
 Route::get('shop/add/product', [
     'as' => 'shop_add_product',
@@ -91,7 +91,7 @@ Route::get('shop/add_{id}', [
     'as' => 'shop_add_to_cart',
     'uses' => 'ShopController@add_to_cart'
 ]);
-Route::get('shop/search_articles', [
+Route::get('shop/search', [
     'as' => 'activities_search',
     'uses' => 'ShopController@search'
 ]);
@@ -155,7 +155,7 @@ Route::post('ideas/{id}', [
     'as' => 'change_like_idea',
     'uses' => 'AjaxController@change_like_idea'
 ]);
-Route::post('search/activities', [
+Route::post('activities/search', [
     'as' => 'search_activities',
     'uses' => 'AjaxController@search_activities'
 ]);
@@ -183,7 +183,7 @@ Route::post('activities', [
     'as' => 'activities_id_update_check',
     'uses' => 'ActivitiesController@id_update_check'
 ]);
-Route::get('activities/search_acticles', [
+Route::get('activities/search', [
     'as' => 'activities_search',
     'uses' => 'ActivitiesController@search'
 ]);

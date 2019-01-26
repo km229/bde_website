@@ -25,15 +25,46 @@ class ShopController extends Controller
 	}
 
 	public function search(){
-		if(isset($_GET['request'])){
-			$_SESSION['request']=$_GET['request'];
-		}
-		$search=$_SESSION['request'];
+		$search=$_GET['request'];
 		$products = DB::table('product')->whereRaw("product_name REGEXP '".$search."' OR product_desc REGEXP '".$search."'")->paginate(9);
 		$verif_product = DB::table('product')->whereRaw("product_name REGEXP '".$search."' OR product_desc REGEXP '".$search."'")->get();
+		$products->withPath('/shop/search?request='.$_GET['request']);
 		$links = $products->render();
 		$category = DB::table('category')->get();
 		return view('shop.research', compact("products", "links", "search", "verif_product", "category"));
+	}
+
+	public function filter(){
+		if(($_GET['category'])!==""){
+			if($_GET['min']!=="" && $_GET['max']!==""){
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('category_name', $_GET['category'])->whereBetween('product_price', [$_GET['min'], $_GET['max']])->paginate(9);
+				$products->withPath('/shop/filter?category='.$_GET['category'].'&min='.$_GET['min'].'&max='.$_GET['max']);
+			} else if($_GET['min']!==""){
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('category_name', $_GET['category'])->where('product_price', '>', $_GET['min'])->paginate(9);
+				$products->withPath('/shop/filter?category='.$_GET['category'].'&min='.$_GET['min']);
+			} else if($_GET['max']!==""){
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('category_name', $_GET['category'])->where('product_price', '<', $_GET['max'])->paginate(9);
+				$products->withPath('/shop/filter?category='.$_GET['category'].'&max='.$_GET['max']);
+			} else {
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('category_name', $_GET['category'])->paginate(9);
+				$products->withPath('/shop/filter?category='.$_GET['category']);
+			}
+		} else {
+			if($_GET['min']!=="" && $_GET['max']!==""){
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->whereBetween('product_price', [$_GET['min'], $_GET['max']])->paginate(9);
+				$products->withPath('/shop/filter?min='.$_GET['min'].'&max='.$_GET['max']);
+			} else if($_GET['min']!==""){
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('product_price', '>', $_GET['min'])->paginate(9);
+				$products->withPath('/shop/filter?min='.$_GET['min']);
+			} else if($_GET['max']!==""){
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->where('product_price', '<', $_GET['max'])->paginate(9);
+				$products->withPath('/shop/filter?max='.$_GET['max']);
+			} else {
+				$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->paginate(9);
+			}
+		}
+		$links = $products->render();
+		return view('shop.shop', compact("products", "links"));
 	}
 
 	public function add_product(FormBuilder $formbuilder){

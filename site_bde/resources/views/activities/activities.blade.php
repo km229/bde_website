@@ -133,7 +133,7 @@ Activities
 		//si on entre une valeur différente
 		if(content!==$("#search").val() && $("#search").val()!==''){
 			//ajax
-			urlValue = "/search/activities";
+			urlValue = "/activities/search";
 			$.ajax({
 				method: 'POST',
 				url: urlValue,
