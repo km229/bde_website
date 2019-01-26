@@ -39,21 +39,27 @@
 
 		<div class="list-group card my-4 card-search">
 			<h4 class="card-header black">Filters</h4>
-			<div class="list-group-item buttoncat black"><input type="radio" name="category" value="all" checked> All</div>
+			<form action="/shop/search/filter" method="GET">
+			<input type="hidden" name="request" value="{{$search}}" />
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="" <?php if(!isset($_GET['category']) || $_GET['category']===""){ echo 'checked'; } ?>> All</div>
+			<?php
+			$category = DB::table('category')->get();
+			?>
 			@foreach ($category as $cat)
-			<div class="list-group-item buttoncat black"><input type="radio" name="category" value="<?php echo $cat -> category_name ?>"> <?php echo $cat -> category_name ?></div>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="<?php echo $cat -> category_name ?>" <?php if(isset($_GET['category']) && $_GET['category']===$cat -> category_name){ echo 'checked'; } ?>> <?php echo $cat -> category_name ?></div>
 			@endforeach
 			<div class="list-group-item black">
-					Min
-					<input type="number" name="min" style="width: 100%">
-				</div>
-			<div class="list-group-item black">
-					Max
-					<input type="number" name="max" style="width: 100%">
-				</div>
-				<div class="list-group-item button" id="submit">
-					<a href="">Confirm</a>
+				Min
+				<input type="number" name="min" id="min" style="width: 100%" value="<?php if(isset($_GET['min']) && $_GET['min']!==""){ echo $_GET['min']; } ?>" />
 			</div>
+			<div class="list-group-item black">
+				Max
+				<input type="number" name="max" id="max" style="width: 100%" value="<?php if(isset($_GET['max']) && $_GET['max']!==""){ echo $_GET['max']; } ?>" />
+			</div>
+			<div class="list-group-item button black" id="submit">
+				<input type="submit" style="width: 100%" />
+			</div>
+			</form>
 		</div>
 
 		<?php
@@ -86,68 +92,22 @@
 
 		<div class="row">
 
-			@foreach ($products as $product)
-			<?php
+		<?php
+			foreach ($products as $product){
 
-			$min = 0;
-			$max = 1000;
-
-			if(isset($_POST['min'])){
-				if($_POST['min'] != ""){
-					$min = $_POST['min'];
+				echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100 bloc-link"><a href="/shop/'.$product -> product_id.'"></a>'; 
+				if(isset($product -> product_img)){
+					echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+				} else { 
+					echo '<img class="card-img-top" src="'.asset('img/noimg.jpg').'" />';
 				}
-			}
-			
-			if(isset($_POST['max'])){
-				if($_POST['max'] != ""){
-					$max = $_POST['max'];
-				}
-			}
-
-			if($product->product_price >= $min && $product->product_price <= $max){
-				$table = DB::table('category')->where('category_id',$product -> category_id_fk)->get();
-
-				$category = $table[0];
-
-				if (isset($_GET['category'])){
-					if ($product -> category_id_fk == $_GET['category']){
-						echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; 
-						if(isset($product -> product_img)){
-							echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
-						} else { 
-							echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
-							echo '" />';
-						}
-						echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
-						echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
-						echo $product -> product_name;
-						echo '</a></h4><h5>';
-						echo $category -> category_name;
-						echo '</h5><p>';
-						echo $product -> product_desc;
-						echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>Price : '.$product -> product_price.' €</div></div></div>';
-
-					}
-				} else {
-					echo '<div class="col-lg-4 col-md-6 mb-4 product "><div class="card h-100"><a href="/shop/'.$product -> product_id.'">'; 
-					if(isset($product -> product_img)){
-						echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
-					} else { 
-						echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
-						echo '" />';
-					}
-					echo ' </a><div class="card-body black"><h4 class="card-title"><a href="/shop/'.$product -> product_id.'">';
-					echo $product -> product_name;
-					echo '</a></h4><h5>';
-					echo $category -> category_name;
-					echo '</h5><p>';
-					echo $product -> product_desc;
-					echo '</p></div><div class="card-footer black"><a class="btn btn-secondary" type="button" href="shop/add_'; echo $product -> product_id; echo'">Add to cart</a>Price : '.$product -> product_price.' €</div></div></div>';
-
-				}
+				echo '<div class="card-body card-body2"><h2 class="card-title">'.$product -> product_name.'</h2>'.
+				'<p>'.$product -> product_desc.'</p><h5>'.$product -> category_name.'</h5></div>'.
+				'<div class="card-footer card-body2"><div></div> <h4 class="number">'.$product -> product_price.' €</h4><div class="button"><a class="btn btn-secondary" type="button" href="shop/add_'.$product -> product_id.'"><span class="black">Add to cart</span></a></div>'.
+				'</div></div></div>';
 			}
 			?>
-			@endforeach
+
 		</div>
 		{{ $links }}
 	</div>

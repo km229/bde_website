@@ -108,6 +108,9 @@ class ActivitiesController extends Controller
 	
 	public function search(){
 		$search=$_GET['request'];
+		if($search===""){
+			return redirect()->back();
+		}
 		$activities = DB::table('activity')->whereRaw("activity_title REGEXP '".$search."' OR activity_desc REGEXP '".$search."'")->paginate(9);
 		$verif_activity = DB::table('activity')->whereRaw("activity_title REGEXP '".$search."' OR activity_desc REGEXP '".$search."'")->get();
 		$activities->withPath('/activities/search?request='.$_GET['request']);

@@ -95,6 +95,10 @@ Route::get('shop/search', [
     'as' => 'activities_search',
     'uses' => 'ShopController@search'
 ]);
+Route::get('shop/search/filter', [
+    'as' => 'shop_filter',
+    'uses' => 'ShopController@filter'
+]);
 Route::get('shop/{id}', [
     'as' => 'shop_id',
     'uses' => 'ShopController@id'

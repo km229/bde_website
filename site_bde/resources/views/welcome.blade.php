@@ -55,17 +55,19 @@ Homepage
 				$size = sizeof($activities);
 				if($size>0){
 					for ($i=0; $i < $size; $i++) { 
-						echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
-						<h3>'. $activities[$i] -> activity_title .'</h3>
-						<img class="d-block w-100" alt="'.$activities[$i] -> activity_title.'" src="';
+						echo '<div class="col-sm-12 col-md-6 col-lg-3">
+						<div><h3>'. $activities[$i] -> activity_title .'</h3>
+						<div class="card h-100 bloc-link">
+						<div class="content"><div class="img"><img class="d-block w-100 h-56" alt="'.$activities[$i] -> activity_title.'" src="';
 						if(isset($activities[$i] -> activity_img)){
 							echo 'data:image/jpeg;base64,'. base64_encode($activities[$i] -> activity_img) .'" >';
 						} else { echo asset('img/noimg.jpg').'" >'; }
-						echo '<a href="activities/' . $activities[$i] -> activity_id . '" ></a></div>';
+						echo '</div></div><a href="activities/' . $activities[$i] -> activity_id . '" ></a></div></div></div>';
 					}
 				} else {
 					echo "<p>No recent activities to present.</p>";
 				}
+				
 				?>
 			</div>
 		</div>
@@ -78,13 +80,14 @@ Homepage
 				$size = sizeof($products);
 				if($size>0){
 					for ($i=0; $i < $size; $i++) { 
-						echo '<div class="col-sm-12 col-md-6 col-lg-3 bloc-link">
+						echo '<div class="col-sm-12 col-md-6 col-lg-3">
 						<h3>'. $products[$i] -> product_name .'</h3>
-						<img class="d-block w-100" src="';
+						<div class="card bloc-link">
+						<div class="content"><div class="img"><img src="';
 						if(isset($products[$i] -> product_img)){
 							echo 'data:image/jpeg;base64,'. base64_encode($products[$i] -> product_img) .'" >';
 						} else { echo asset('img/noimg.jpg').'" >'; }
-						echo '<a href="shop/' . $products[$i] -> product_id . '" ></a></div>';
+						echo '</div></div><a href="shop/' . $products[$i] -> product_id . '" ></a></div><span class="number right">'.$products[$i] -> product_price.' €</span></div>';
 					}
 				} else {
 					echo "<p>No recent activities to present.</p>";

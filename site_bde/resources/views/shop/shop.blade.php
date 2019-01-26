@@ -14,7 +14,20 @@ Shop
 			<h4 class="card-header card-search black">Search</h4>
 			<div class="card-body">
 				<div class="input-group">
-					<form action="/shop/search" method="GET" class="form-search">
+					<form action="/shop/search
+					<?php
+					if(isset($_GET['category']) || isset($_GET['min']) || isset($_GET['max'])){
+						echo '?';
+						if(isset($_GET['category']) && $_GET['category']!==""){
+							$cat='category='.$_GET['category'];
+						} if (isset($_GET['min']) && $_GET['min']!==""){
+							$mi='&min='.$_GET['min'];
+						} if (isset($_GET['max']) && $_GET['max']!==""){
+							$ma='&max='.$_GET['max'];
+						}
+					}
+					?>
+					" method="GET" class="form-search">
 						<div class="input-group">
 							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
 							<span class="input-group-btn">
@@ -36,13 +49,12 @@ Shop
 		<div class="list-group card my-4 card-search">
 			<h4 class="card-header black">Filters</h4>
 			<form action="/shop/filter" method="GET">
-			
-			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="" <?php if(!isset($_GET['category']) || $_GET['category']=""){ echo 'checked'; } ?>> All</div>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="" <?php if(!isset($_GET['category']) || $_GET['category']===""){ echo 'checked'; } ?>> All</div>
 			<?php
 			$category = DB::table('category')->get();
 			?>
 			@foreach ($category as $cat)
-			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="<?php echo $cat -> category_name ?>" <?php if(isset($_GET['category']) && $_GET['category']=$cat -> category_name){ echo 'checked'; } ?>> <?php echo $cat -> category_name ?></div>
+			<div class="list-group-item buttoncat black"><input type="radio" name="category" id="category" value="<?php echo $cat -> category_name ?>" <?php if(isset($_GET['category']) && $_GET['category']===$cat -> category_name){ echo 'checked'; } ?>> <?php echo $cat -> category_name ?></div>
 			@endforeach
 			<div class="list-group-item black">
 				Min

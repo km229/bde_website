@@ -8,7 +8,7 @@ Activities
 <div class="row">
 	<div class="col-lg-3">
 
-		<h1 class="my-4">Activities</h1>
+		<h1>Activities</h1>
 		<div class="card my-4">
 			<h3 class="card-header black">Search</h3>
 			<div class="card-body">
