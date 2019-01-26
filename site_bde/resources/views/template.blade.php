@@ -19,6 +19,9 @@ if(!isset($_SESSION)){
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/styles.css') }}">
 	<!-- Utilise LESS -->
 	<link rel="stylesheet/less" type="text/css" href="{{ asset('less/styles.less') }}">
+
+	<link rel="stylesheet/less" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>@yield('title') | BDE CESI</title>
 </head>
@@ -156,6 +159,7 @@ if(!isset($_SESSION)){
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/less.js/3.9.0/less.min.js" ></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 	@yield('script')
 	<script>
 		$.ajaxSetup({
