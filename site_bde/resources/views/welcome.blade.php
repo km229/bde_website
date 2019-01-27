@@ -58,7 +58,7 @@ Homepage
 						echo '<div class="col-sm-12 col-md-6 col-lg-3">
 						<div><h3>'. $activities[$i] -> activity_title .'</h3>
 						<div class="card h-100 bloc-link">
-						<div class="content"><div class="img"><img class="d-block w-100 h-56" alt="'.$activities[$i] -> activity_title.'" src="';
+						<div class="content"><div class="img"><img alt="'.$activities[$i] -> activity_title.'" src="';
 						if(isset($activities[$i] -> activity_img)){
 							echo 'data:image/jpeg;base64,'. base64_encode($activities[$i] -> activity_img) .'" >';
 						} else { echo asset('img/noimg.jpg').'" >'; }

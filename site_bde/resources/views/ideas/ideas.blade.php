@@ -19,15 +19,6 @@ Ideas
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search for...">
 				</div>
-				<div class="form-group black">
-					<label for="sel1">Number of ideas per page:</label>
-					<select class="form-control" id="ideas_page">
-						<option value="9">9</option>
-						<option value="18">18</option>
-						<option value="36">36</option>
-						<option value="72">72</option>
-					</select>
-				</div>
 			</div>
 		</div>
 		<?php
@@ -42,7 +33,6 @@ Ideas
 	<!-- /.col-lg-3 -->
 
 	<div class="col-lg-9">
-		<div class="content">
 			<div class="row">
 				<?php
 				if(sizeof($ideas)>0){
@@ -71,6 +61,5 @@ Ideas
 				?>
 			</div>
 			{!! $links !!}
-		</div>
 	</div>
 	@endsection
