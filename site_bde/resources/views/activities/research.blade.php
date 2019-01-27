@@ -153,7 +153,7 @@
 				if(data.length===0){
 					$(".dropdown-item:eq(5)").css('display', 'block');
 					$(".dropdown-item:eq(5)").html(
-						'<div class="dropdown-item"><h3>No content</h3>'+
+						'<div class="dropdown-item"><h3>No activity</h3>'+
 						'<div>Try with other key words</div>'
 						);
 				} else if(data.length>5){

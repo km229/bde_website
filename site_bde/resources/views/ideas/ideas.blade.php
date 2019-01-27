@@ -9,15 +9,28 @@ Ideas
 <div class="row">
 
 	<div class="col-lg-3">
-
-		<h1 class="my-4">Idea box</h1>
+		<h1>Idea box</h1>
 		<p  class="my-4">Idea box allows students of the school to give event ideas to BDE members.</p>
-		<p  class="my-4">Don't hesitate to add ideas !</p>
 		<div class="card my-4">
 			<h3 class="card-header black">Search</h3>
 			<div class="card-body">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search for...">
+			<div class="input-group">
+					<form action="/ideas/search" method="GET" class="form-search">
+						<div class="input-group">
+							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
+							<span class="input-group-btn">
+								<input class="btn btn-secondary" type="submit" value="Go!">
+							</span>
+						</div>
+					</form>
+					<div class="dropdown-menu search">
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+						<div class="dropdown-item"></div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -28,7 +41,6 @@ Ideas
 			</div>';
 		}
 		?>
-		
 	</div>
 	<!-- /.col-lg-3 -->
 
@@ -49,7 +61,7 @@ Ideas
 								$val_like = $likes[$y]->idea_likes;
 							}
 						} 
-						echo $val_like.' <i class="fas fa-heart"></i></div>
+						echo $val_like.' <i class="fas fa-thumbs-up"></i></div>
 						<div class="date">Créée par '. $ideas[$i] -> member_firstname .' '. $ideas[$i] -> member_lastname .'</div>
 						</div>
 						<a href="ideas/'.$ideas[$i]->idea_id.'"></a>
@@ -63,3 +75,104 @@ Ideas
 			{!! $links !!}
 	</div>
 	@endsection
+
+	@section('script')
+<script>
+	//affiche les activites
+	$("#search").focus(function () {
+		if($("#search").val()!==''){
+			$(".search").css('display', 'block');
+		}
+	});
+	$(".dropdown-item:eq(0)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(0) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(1)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(1) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(2)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(2) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(3)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(3) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	$(".dropdown-item:eq(4)").click(function () {
+		$("#search").val(($(".dropdown-item:eq(4) h3").text()));
+		$(".search").css('display', 'none');
+	});
+	/*$("#search").focusout(function () {
+		$(".search").css('display', 'none');
+	});*/
+	//content=last value
+	content='';
+	$("#search").keyup(function () {
+		//si on entre une valeur différente
+		if(content!==$("#search").val() && $("#search").val()!==''){
+			//ajax
+			urlValue = "/ideas/search";
+			$.ajax({
+				method: 'POST',
+				url: urlValue,
+				data: { search: $("#search").val() }
+			}).then(function (data) {
+				//success - affiche les activites
+				$(".search").css('display', 'block');
+				//taille max d'affichage
+				if(data.length>5){
+					size=5;
+				} else { size=data.length }
+				//insertion activites
+				for(i=0; i<size; i++){
+					text = data[i].idea_desc.substr(0,15);
+					if(data[i].idea_desc.length>15){
+						text+="...";
+					}
+					$(".dropdown-item:eq("+i+")").css('display', 'block');
+					$(".dropdown-item:eq("+i+")").html(
+						'<h3>'+data[i].idea_title+'</h3>'+
+						'<div>'+text+'</div>'+
+						'<a href="/activities/'+data[i].idea_id+'" class="number">See the idea >></a>'
+						);
+				}
+				//si activites < 5 on cache les autres div
+				for(size; size<5; size++){
+					$(".dropdown-item:eq("+size+")").css('display', 'none');
+				}
+				//si aucune activite
+				if(data.length===0){
+					$(".dropdown-item:eq(5)").css('display', 'block');
+					$(".dropdown-item:eq(5)").html(
+						'<div class="dropdown-item"><h3>No activity</h3>'+
+						'<div>Try with other key words</div>'
+						);
+				} else if(data.length>5){
+					number = data.length - 5;
+					$(".dropdown-item:eq(5)").css('display', 'block');
+					$(".dropdown-item:eq(5)").html('<strong class="number">+'+number+'</strong>');
+				} else {
+					$(".dropdown-item:eq(5)").css('display', 'none');
+				}
+			}).catch(function (data) {
+				//error
+				for(i=0; i<5; i++){
+					$(".dropdown-item:eq("+i+")").css('display', 'none');
+				}
+				$(".search").css('display', 'block');
+				$(".dropdown-item:eq(5)").css('display', 'block');
+				$(".dropdown-item:eq(5)").html(
+					'<h3>Error</h3>'+
+					'<p>Try again</p>'
+					);
+			});
+		} 
+		if($("#search").val()==='') { 
+			$(".search").css('display', 'none');
+		}
+		content=$("#search").val();
+	});
+</script>
+@endsection

@@ -1,19 +1,21 @@
 @extends('template')
 
 @section('title')
-Activities
+{{$search}} | Research an idea
 @endsection
 
 @section('body')
 <div class="row">
 	<div class="col-lg-3">
-
-		<h1>Activities</h1>
+		<h1>Research an idea</h1>
+        <div class="list-group card my-4 card-search">
+			<a href="/ideas" class="list-group-item black">Return to ideas</a>
+		</div>
 		<div class="card my-4">
 			<h3 class="card-header black">Search</h3>
 			<div class="card-body">
 				<div class="input-group">
-					<form action="/activities/search" method="GET" class="form-search">
+				<form action="/ideas/search" method="GET" class="form-search">
 						<div class="input-group">
 							<input type="text" class="form-control" id="search" name="request" placeholder="Search for...">
 							<span class="input-group-btn">
@@ -30,8 +32,8 @@ Activities
 						<div class="dropdown-item"></div>
 					</div>
 				</div>
-			</div>
-		</div>
+            </div>
+        </div>
 		
 		<?php
 		if(sizeof($_SESSION) > 0){
@@ -41,53 +43,51 @@ Activities
 			if($table[$index]->is_admin == 1){
 				echo '<div class="list-group card my-4 card-search">
 				<h5 class="card-header black">Administration</h5>
-				<a href="/activities/create" class="list-group-item black">New activity</a>
+				<a href="/ideas/create" class="list-group-item black">New idea</a>
 				
 				</div>';
 			}
 		}
 		
 		?>
+		
 	</div>
 	<!-- /.col-lg-3 -->
 
 	<div class="col-lg-9">
-		<?php if(empty($activities)){
-			echo '<h2>No activity</h2><p>Contact your BDE if necessary</p>';
-		}?>
+        <?php 
+        if(!empty($verif_idea[0])){
+            echo '<h2>Your research for : '.$search.'</h2>';
+        } else {
+			echo '<h2>No activity found with : '.$search.'</h2><p>Try with other words</p>';
+        }
+        ?>
 		<div class="row">
-			<?php
-			foreach($activities as $activity){
-				switch($activity->activity_recurrence) {
-					case 0:
-					$tmp = "Punctual";
-					break;
-					case 1:
-					$tmp = "Weekly";
-					break;
-					case 2:
-					$tmp = "Monthly";
-					break;
-					case 3:
-					$tmp = "Yearly";
-					break;
+<?php
+				if(sizeof($ideas)>0){
+					for ($i=0; $i < sizeof($ideas); $i++) { 
+						echo '<div class="col-lg-4 col-md-6 mb-4">
+						<div class="card h-100 bloc-link">
+						<div class="card-body card-body2">
+						<h2 class="card-title">'. $ideas[$i] -> idea_title .'</h2>
+						<p>'. $ideas[$i] -> idea_desc .'</p>
+						<div class="date">';
+						$val_like='0';
+						for($y=0; $y < sizeof($likes); $y++){
+							if($ideas[$i]->idea_id==$likes[$y]->idea_id){
+								$val_like = $likes[$y]->idea_likes;
+							}
+						} 
+						echo $val_like.' <i class="fas fa-thumbs-up"></i></div>
+						<div class="date">Créée par '. $ideas[$i] -> member_firstname .' '. $ideas[$i] -> member_lastname .'</div>
+						</div>
+						<a href="/ideas/'.$ideas[$i]->idea_id.'"></a>
+						</div></div>';
+					}
+				} else {
+					echo "<p>All ideas have been processed, feel free to add a new one <a href=\"ideas/create\">here</a>!";
 				}
-				echo '<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100 bloc-link">';
-				if(isset($activity -> activity_img)){
-					echo '<img class="w-100" src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" />';
-				} else { echo '<img class="w-100" src="'.asset('img/noimg.jpg').'" />'; }
-				echo '<div class="card-body card-body2">
-				<h2 class="card-title">'.$activity -> activity_title.'</h2>
-				<p>Date : '.$activity -> activity_date.'</p>
-				<p>'.$activity -> activity_desc.'</p>
-				<p>Price : '.$activity -> activity_price.' €</p>
-				<p>Type : '.$tmp.'</p>
-				</div>
-				<a href="/activities/'.$activity -> activity_id.'"></a>
-				</div>
-				</div>';
-			}?>
+?>
 		</div>
 		{{ $links }}
 	</div>
@@ -131,7 +131,7 @@ Activities
 		//si on entre une valeur différente
 		if(content!==$("#search").val() && $("#search").val()!==''){
 			//ajax
-			urlValue = "/activities/search";
+			urlValue = "/ideas/search";
 			$.ajax({
 				method: 'POST',
 				url: urlValue,
@@ -145,15 +145,15 @@ Activities
 				} else { size=data.length }
 				//insertion activites
 				for(i=0; i<size; i++){
-					text = data[i].activity_desc.substr(0,25);
-					if(data[i].activity_desc.length>25){
+					text = data[i].idea_desc.substr(0,15);
+					if(data[i].idea_desc.length>15){
 						text+="...";
 					}
 					$(".dropdown-item:eq("+i+")").css('display', 'block');
 					$(".dropdown-item:eq("+i+")").html(
-						'<h3>'+data[i].activity_title+'</h3>'+
+						'<h3>'+data[i].idea_title+'</h3>'+
 						'<div>'+text+'</div>'+
-						'<a href="/activities/'+data[i].activity_id+'" class="number">See the activity >></a>'
+						'<a href="/activities/'+data[i].idea_id+'" class="number">See the idea >></a>'
 						);
 				}
 				//si activites < 5 on cache les autres div

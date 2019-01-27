@@ -8,12 +8,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-3">
-
 			<h2 class="my-4">Activity</h2>
-			<div class="list-group card my-4 card-search">
 				
 				<?php
 				if(sizeof($_SESSION) > 0){
+					echo '<div class="list-group card my-4 card-search">';
 					echo'<h3 class="card-header black">Activity</h3>';
 					if($activity[0]->activity_date < date('Y-m-d')){
 						if(sizeof($verif)>0){
@@ -26,9 +25,9 @@
 							echo'<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>';
 						}
 					}
+					echo '</div>';
 				}
 				?>
-			</div>
 			<?php
 			if(sizeof($_SESSION) > 0){
 				if($table[0]->is_admin == 1){
@@ -47,7 +46,6 @@
 			<div class="list-group card my-4 card-search">
 				<a href="/activities" class="list-group-item black">Back</a>
 			</div>
-
 		</div>
 		<div class="col-lg-9">
 

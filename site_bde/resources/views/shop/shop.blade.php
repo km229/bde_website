@@ -8,7 +8,6 @@ Shop
 <div class="row">
 
 	<div class="col-lg-3">
-
 		<h1>Shop</h1>
 		<div class="card my-4">
 			<h4 class="card-header card-search black">Search</h4>
@@ -82,8 +81,6 @@ Shop
 			}
 		}
 		?>
-
-
 
 	</div>
 	<!-- /.col-lg-3 -->

@@ -1,10 +1,11 @@
 @extends('template')
 
 @section('title')
-Activities
+Create an activity
 @endsection
 
 @section('body')
+<h1>Create an activity</h1>
 <div class="container">
 	{!! form($form) !!}
 </div>

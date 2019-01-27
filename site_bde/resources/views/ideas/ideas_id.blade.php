@@ -10,7 +10,7 @@
 	<div class="row">
 		<div class="col-lg-3">
 
-			<h2 class="my-4">Idea box</h2>
+			<h2>Idea box</h2>
 
 			
 			<?php
@@ -39,30 +39,25 @@
 
 		</div>
 		<div class="col-lg-9">
-
-
 			<!-- Portfolio Item Heading -->
-			<h1 class="my-4">{{ $idea[0]->idea_title }}</h1>
+			<h1>{{ $idea[0]->idea_title }}</h1>
 
-			<div class="col-md-4">
+			<div>
 				<h3 class="my-3">Description</h3>
 				<p>{{ $idea[0]->idea_desc }}</p>
 				<h3 class="my-3">Likes</h3>
 				<span class="nb_like">
 					<?php if(isset($like[0]->idea_likes)){ echo $like[0]->idea_likes; } 
-					else { echo '0'; }?>
+					else { echo '0'; }
+					echo ' ';?>
 				</span>
-				<i class="fas fa-heart"></i>
-				<div class="button">
 					<?php
-					if(empty($verif_like[0])){
-						echo '<a class="like">Like</a>';
+					if(empty($verif_like)){
+						echo ' <span class="like"><span class="Like"><i class="fas fa-thumbs-up"></i></span></span>';
 					} else {
-						echo '<a class="like">Dislike</a>';
+						echo ' <span class="like"><span class="Dislike"><i class="fas fa-thumbs-down"></i></i></span></span>';
 					}
 					?>
-					
-				</div>
 			</div>
 		</div>
 	</div>
@@ -79,20 +74,22 @@
 		$.ajax({
 			method: 'POST',
 			url: urlValue,
-			data: { affect: $(".like").html() }
+			data: { affect: $(".like span").attr("class") }
 		}).then(function name(data) {
 			if(data==="ok"){
 				oldval=parseInt($(".nb_like").text());
-				switch ($(".like").text()) {
+				switch ($(".like span").attr("class")) {
 					case "Like":
 					oldval++;
-					$(".nb_like").text(oldval++);
-					$(".like").text("Dislike");
+					$(".nb_like").text(oldval+++' ');
+					$(".like span").attr("class", "Dislike");
+					$(".like span i").attr("class", "fas fa-thumbs-down");
 					break;
 					case "Dislike":
 					oldval--;
-					$(".nb_like").text(oldval--);
-					$(".like").text("Like");
+					$(".nb_like").text(oldval--+' ');
+					$(".like span").attr("class", "Like");
+					$(".like span i").attr("class", "fas fa-thumbs-up");
 					break;
 					default:
 					break;

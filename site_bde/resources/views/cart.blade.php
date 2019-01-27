@@ -19,24 +19,21 @@ Cart
 
             <?php
 
+                echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card bloc-link"><a href="/shop/'.$article -> product_id.'"></a>'; 
+				if(isset($article -> product_img)){
+					echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($article -> product_img) .'" />'; 
+				} else { 
+					echo '<img class="card-img-top" src="'.asset('img/noimg.jpg').'" />';
+				}
+				echo '<div class="card-body card-body2"><h2 class="card-title">'.$article -> product_name.'</h2>'.
+				'<p>'.$article -> product_desc.'</p></div>'.
+                '<div class="card-footer card-body2"><h4 class="number">'.$article -> product_price.' €</h4></div>
 
-
-            echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100"><a href="#">'; 
-            if(isset($product -> product_img)){
-                echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($acticle -> product_img) .'" />'; 
-            } else { 
-                echo '<img class="card-img-top" src="'.asset('img/noimg.jpg'); 
-                echo '" />';
-             }
-            echo ' <div class="card-body black"><h4 class="card-title"><a href="#">';
-            echo $article -> product_name;
-            echo '</a></h4><h5>';
-            echo $article -> product_price;
-            echo '€</h5><p>';
-            echo $article -> product_desc;
-            echo '</p></div><div class="card-footer black">Quantity : '.$article -> number.'<a href="http://localhost:8000/shop/cart/plus_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : dodgerblue; margin : 2px;""><i class="fas fa-plus"></i></a><a href="http://localhost:8000/shop/cart/minus_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : dodgerblue; margin : 2px;"><i class="fas fa-minus"></i></a><a href="http://localhost:8000/shop/cart/remove_'.$article -> product_id.'" class=" black btn btn-secondary" style="background-color : indianred; margin : 2px;"><i class="far fa-trash-alt"></i></a></div></div></div>';
-            $totalprice += $article -> product_price * $article -> number;
-
+                </div><div class="card-footer">Quantity : '.$article -> number.' 
+                <a href="/shop/cart/plus_'.$article -> product_id.'" class="btn btn-secondary" style="background-color : dodgerblue; margin : 2px;""><i class="fas fa-plus"></i></a>
+                <a href="/shop/cart/minus_'.$article -> product_id.'" class=" btn btn-secondary" style="background-color : dodgerblue; margin : 2px;"><i class="fas fa-minus"></i></a>
+                <a href="/shop/cart/remove_'.$article -> product_id.'" class=" btn btn-secondary" style="background-color : indianred; margin : 2px;"><i class="far fa-trash-alt"></i></a></div></div>';
+                $totalprice += $article -> product_price * $article -> number;
 
             ?>
 
@@ -45,15 +42,12 @@ Cart
     </div>
 
     <div class="col-lg-3">
-
-
         <div class="list-group card my-4 card-search">
             <h2 class="card-header ">Total</h2>
             <h3 class="list-group-item black"><?php echo $totalprice; ?> €</h3>
             <a href="cart/buy" class="list-group-item black btn btn-secondary">Buy</a>
 
         </div>
-
     </div>
     <!-- /.col-lg-3 -->
 

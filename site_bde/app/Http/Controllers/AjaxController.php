@@ -128,4 +128,10 @@ class AjaxController extends Controller
 		}
 	}
 
+	public function search_ideas()
+    {
+        $ideas = DB::table('idea')->select('idea_id', 'idea_title', 'idea_desc')->whereRaw("idea_title REGEXP '".$_POST['search']."' OR idea_desc REGEXP '".$_POST['search']."'")->get();
+        return $ideas;
+    }
+
 }

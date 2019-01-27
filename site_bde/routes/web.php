@@ -133,13 +133,13 @@ Route::post('ideas/create', [
     'as' => 'ideas_create_check',
     'uses' => 'IdeasController@create_check'
 ]);
+Route::get('ideas/search', [
+    'as' => 'search_idea',
+    'uses' => 'IdeasController@search_idea'
+]);
 Route::get('ideas/{id}', [
     'as' => 'idea',
     'uses' => 'IdeasController@display_idea'
-]);
-Route::post('ideas/{id}', [
-    'as' => 'change_like',
-    'uses' => 'IdeasController@change_like'
 ]);
 Route::get('ideas/{id}/delete', [
     'as' => 'idea_delete',
@@ -155,6 +155,10 @@ Route::post('ideas/{id}/update', [
 ]);
 
 /*---AJAX---*/
+Route::post('ideas/search', [
+    'as' => 'search_ideas',
+    'uses' => 'AjaxController@search_ideas'
+]);
 Route::post('ideas/{id}', [
     'as' => 'change_like_idea',
     'uses' => 'AjaxController@change_like_idea'

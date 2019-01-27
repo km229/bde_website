@@ -33,8 +33,10 @@ if(!isset($_SESSION)){
 			<div class="logo">
 				<a href="/"><img src='{{ asset('img/logo.jpg') }}' alt="Logo"></a>
 			</div>
-			<div class="btn-group">
-				<?php
+			<nav>
+			<div style="display: flex; height: 100%">
+			<div class="burger">
+			<?php
 				if(sizeof($_SESSION)>0){
 					$table_notif = DB::table('notifications')->where('member_id_fk', $_SESSION['id'])->get();
 				}
@@ -59,15 +61,11 @@ if(!isset($_SESSION)){
 					}else{
 						echo 'You don\'t have notifications';
 					}
-					
+					echo '</div>';
 					?>
-
-				</div>
+			<i class="fas fa-bars"></i>
 			</div>
-			<div class="burger"><i class="fas fa-bars"></i></div>
-			<nav>
 				<ul>
-					<li class="level1"><a href="/admin">Administration</a></li>
 					<li class="level1"><a href="/activities">Activities</a></li>
 					<li class="level1"><a href="/ideas">Ideas</a></li>
 					<li class="level1"><a href="/shop">Shop</a></li>
@@ -169,7 +167,7 @@ if(!isset($_SESSION)){
 				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
 			}
 		});
-		$(".burger").click(function(){
+		$(".fa-bars").click(function(){
 			if(!$("header").hasClass("menu-open")){
 				$("header").addClass("menu-open");
 				$(".fa-bars").addClass("fa-times");
@@ -185,11 +183,13 @@ if(!isset($_SESSION)){
 				if($(window).scrollTop() > val){
 					$('body').removeClass("scroll-up");
 					$('body').addClass("scroll-down");
+					$('.fixed').addClass("col-lg-3");
 				} else {
 					$('body').removeClass("scroll-down");
 					$('body').addClass("scroll-up");
 				}
 			} else {
+				$('.fixed').removeClass("col-lg-3");
 				$('body').removeClass("scroll-up");
 			}
 			val=$(window).scrollTop();

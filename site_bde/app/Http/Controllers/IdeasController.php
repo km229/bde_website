@@ -93,4 +93,17 @@ class IdeasController extends Controller
 		return redirect(route('idea',['id'=>$id]));
 	}
 
+	public function search_idea(){
+		$search=$_GET['request'];
+		if($search===""){
+			return redirect()->back();
+		}
+		$ideas = DB::table('idea')->join('members', 'idea.member_id_fk', '=', 'members.member_id')->whereRaw("idea_title REGEXP '".$search."' OR idea_desc REGEXP '".$search."'")->paginate(9);
+		$verif_idea = DB::table('idea')->whereRaw("idea_title REGEXP '".$search."' OR idea_desc REGEXP '".$search."'")->get();
+		$ideas->withPath('/ideas/search?request='.$_GET['request']);
+		$likes = DB::table('idea')->select(DB::raw('idea_id, COUNT(idea_id) as idea_likes'))->join('link_member_idea_like', 'idea_id', '=', 'idea_id_fk')->groupBy('idea_id')->get();
+		$links = $ideas->render();
+		return view('ideas.research', compact("ideas", "links", "likes", "search", "verif_idea"));
+	}
+
 }

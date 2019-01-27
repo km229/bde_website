@@ -78,7 +78,6 @@ class ShopController extends Controller
 			$search=$_GET['request'];
 			$products = $products->paginate(9);
 			$verif_product = DB::table('product')->whereRaw("product_name REGEXP '".$search."' OR product_desc REGEXP '".$search."'")->get();
-			dd($verif_product);
 			$products->withPath('/shop/search/filter'.$path.'&request='.$_GET['request']);
 			$links = $products->render();
 			$category = DB::table('category')->get();

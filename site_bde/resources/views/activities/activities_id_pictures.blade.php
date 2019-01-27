@@ -1,34 +1,33 @@
 @extends('template')
 
 @section('title')
-Activities
+<?php
+$activity = DB::table('activity_pictures')->join('activity', 'activity_id', '=', 'activity_id_fk')->where('picture_id', '=', $id2)->get();
+?>
+Picture n°{{$id2}} | {{$activity[0]->activity_title}}
 @endsection
 
 @section('body')
 <section>
 	<div class="row">
 		<div class="col-lg-3 mb-5">
-			<h2 class="my-4">Pictures & commentaries</h2>
+			<h2>Pictures & commentaries</h2>
 			<div class="list-group card my-4 card-search">
 				<a href="/activities/<?php echo $id; ?>" class="list-group-item black">Back to activity</a>
 				<a href="/activities" class="list-group-item black">Return to activities</a>
 			</div>
+			<h3 class="my-4">Likes</h3>
+			<span class="nb_like">
+			<?php if(!empty($like)){ echo sizeof($like); } 
+			else { echo '0'; }
+			echo ' ';?>
+		</span>
 			<?php
-			echo'<span class="nb_like">';
-			if(isset($like[0]->picture_likes)){ 
-				echo $like[0]->picture_likes; 
-			} else { 
-				echo '0'; 
-			}
-			echo'</span>
-			<i class="fas fa-heart"></i>
-			<div class="button">';
-			if(empty($verif_like[0])){
-				echo'<a class="like">Like</a>';
+			if(empty($verif_like)){
+				echo ' <span class="like"><span class="Like"><i class="fas fa-thumbs-up"></i></span></span>';
 			} else {
-				echo '<a class="like">Dislike</a>';
+				echo ' <span class="like"><span class="Dislike"><i class="fas fa-thumbs-down"></i></i></span></span>';
 			}
-			echo'</div>'; 
 			?>
 		</div>
 		<div class="col-lg-9">
@@ -80,20 +79,22 @@ echo '</section>';
 		$.ajax({
 			method: 'POST',
 			url: urlValue,
-			data: { affect: $(".like").html() }
+			data: { affect: $(".like span").attr("class") }
 		}).then(function name(data) {
 			if(data==="ok"){
 				oldval=parseInt($(".nb_like").text());
-				switch ($(".like").text()) {
+				switch ($(".like span").attr("class")) {
 					case "Like":
 					oldval++;
-					$(".nb_like").text(oldval++);
-					$(".like").text("Dislike");
+					$(".nb_like").text(oldval+++' ');
+					$(".like span").attr("class", "Dislike");
+					$(".like span i").attr("class", "fas fa-thumbs-down");
 					break;
 					case "Dislike":
 					oldval--;
-					$(".nb_like").text(oldval--);
-					$(".like").text("Like");
+					$(".nb_like").text(oldval--+' ');
+					$(".like span").attr("class", "Like");
+					$(".like span i").attr("class", "fas fa-thumbs-up");
 					break;
 					default:
 					break;
