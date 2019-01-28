@@ -199,11 +199,15 @@ header .burger {
 	display: flex;
 	align-items: center;
 	color: #ffc252;
-	font-size: 50px;
+	font-size: 20px;
 	cursor: pointer;
 }
-header .burger .fa-bars {
+header .burger .fa-bars, header .burger .fa-times {
 	display: none;
+	font-size: 50px;
+}
+header .burger #notif_dropdown {
+	padding: 0.5rem 1rem;
 }
 header nav {
 	z-index: 3;
@@ -392,9 +396,16 @@ footer .footer-menu .footer-bloc .social a:hover {
 @media only screen and (min-width: 1px) and (max-width: 699px) {
 	header .burger {
 		display: flex;
-		position: relative;
 	}
-	header .burger .fa-bars {
+	header .burger .fa-bell {
+		font-size: 30px;
+	}
+	header .burger #notif_dropdown {
+		width: 100%;
+		top: 100%!important;
+		transform: translate3d(0, 0, 0)!important;
+	}
+	header .burger .fa-bars, header .burger .fa-times {
 		display: block;
 	}
 	header nav > div > ul {
