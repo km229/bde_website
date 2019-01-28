@@ -16,7 +16,8 @@ class LoginForm extends Form
         $this
             ->add('email', 'text',[
                 'label'=>'E-mail',
-                'rules'=>'required|min:1'
+                'rules'=>'required|min:1',
+                'value'=> $_COOKIE['email']
             ])
             ->add('password', 'password',[
                 'rules'=>'required|min:1'

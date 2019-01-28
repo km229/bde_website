@@ -23,21 +23,21 @@ class LoginController extends Controller
 	public function check(){
 		if(!empty($_POST)){
 
-			if(sizeof($member = DB::table('members')->get()->where('member_mail', $_POST['email'])) == 0){
+			if(sizeof($member = DB::table('members')->where('member_mail', $_POST['email'])->get()) == 0){
 				return redirect(route('login'))->with('error', 'No account exists with this email address !');
 			}
 
-			$index = $member->keys()[0];
-
-			$password = $member[$index]->member_password;
+			$password = $member[0]->member_password;
 
 			if(!password_verify($_POST['password'], $password)){
 
 				return redirect(route('login'))->with('error', 'Login problem: check your password !');
 			}
 
-			$_SESSION['name'] = $member[$index]->member_firstname;
-			$_SESSION['id'] = $member[$index]->member_id;
+			setcookie('email', $member[0]->member_mail , time() + 365*24*3600);
+
+			$_SESSION['name'] = $member[0]->member_firstname;
+			$_SESSION['id'] = $member[0]->member_id;
 
 			return redirect(route('welcome'))->with('success', 'Welcome back '. $_SESSION["name"] .' !');
 		}
