@@ -4,6 +4,10 @@
 Administration
 @endsection
 
+@section('link')
+<link rel="stylesheet/less" type="text/css" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+@endsection
+
 @section('body')
 <table id="table_id" class="display">
 	<thead>
@@ -37,7 +41,7 @@ Administration
 @endsection
 
 @section('script')
-
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 <script>
 	$(document).ready( function () {
 		$('#table_id').DataTable();

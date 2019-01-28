@@ -19,13 +19,13 @@ Cart
 
             <?php
 
-                echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card bloc-link"><a href="/shop/'.$article -> product_id.'"></a>'; 
+                echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card bloc-link"><a href="/shop/'.$article -> product_id.'"></a><div class="content">'; 
 				if(isset($article -> product_img)){
-					echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($article -> product_img) .'" />'; 
+					echo '<div class="img"><img class="card-img-top" src="data:image/png;base64,'.base64_encode($article -> product_img) .'" />'; 
 				} else { 
 					echo '<img class="card-img-top" src="'.asset('img/noimg.jpg').'" />';
 				}
-				echo '<div class="card-body card-body2"><h2 class="card-title">'.$article -> product_name.'</h2>'.
+				echo '</div></div><div class="card-body card-body2"><h2 class="card-title">'.$article -> product_name.'</h2>'.
 				'<p>'.$article -> product_desc.'</p></div>'.
                 '<div class="card-footer card-body2"><h4 class="number">'.$article -> product_price.' €</h4></div>
 

@@ -19,7 +19,7 @@ a {
 }
 .button {
     margin: 0; text-align: center;
-    a, input {
+    a, input, .link {
         position: relative; display: block; padding: 0 50px; font: .9em/50px 'Montserrat', sans-serif; color: #FFF; text-decoration: none;  border: 1px solid @yellow; cursor: pointer; background: @yellow;
         &:hover { color: @yellow; background: #FFF }  
     }
@@ -98,6 +98,9 @@ main {
 }
 .Like:hover { color: green; cursor: pointer }
 .Dislike:hover { color: red; cursor: pointer }
+.cookie-menu { 
+    z-index: 5; position: fixed; display: flex; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.9); align-items: center;
+ }
 
 
 /* ------ SEARCH-AJAX ------ */
