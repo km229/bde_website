@@ -74,8 +74,8 @@ Activities
 				echo '<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100 bloc-link">';
 				if(isset($activity -> activity_img)){
-					echo '<div class="content"><div class="img"><img class="w-100" src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" /></div></div>';
-				} else { echo '<div class="content"><div class="img"><img class="w-100" src="'.asset('img/noimg.jpg').'" /></div></div>'; }
+					echo '<div class="content"><div class="img"><img src="data:image/png;base64,'.base64_encode($activity -> activity_img) .'" /></div></div>';
+				} else { echo '<div class="content"><div class="img"><img src="'.asset('img/noimg.jpg').'" /></div></div>'; }
 				echo '<div class="card-body card-body2">
 				<h2 class="card-title">'.$activity -> activity_title.'</h2>
 				<p>Date : '.$activity -> activity_date.'</p>
