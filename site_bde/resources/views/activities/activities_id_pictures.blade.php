@@ -18,12 +18,12 @@ Picture n°{{$id2}} | {{$activity[0]->activity_title}}
 			</div>
 			<h3 class="my-4">Likes</h3>
 			<span class="nb_like">
-			<?php if(!empty($like)){ echo sizeof($like); } 
-			else { echo '0'; }
-			echo ' ';?>
-		</span>
+				<?php if(!empty($like)){ echo sizeof($like); } 
+				else { echo '0'; }
+				echo ' ';?>
+			</span>
 			<?php
-			if(empty($verif_like)){
+			if(sizeof($verif_like)==0){
 				echo ' <span class="like"><span class="Like"><i class="fas fa-thumbs-up"></i></span></span>';
 			} else {
 				echo ' <span class="like"><span class="Dislike"><i class="fas fa-thumbs-down"></i></i></span></span>';

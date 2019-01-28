@@ -19,22 +19,23 @@ class IdeasController extends Controller
 		if(sizeof($_SESSION) > 0){
 			$form = $formbuilder->create(IdeasForm::class);
 			return view('ideas.ideas_create', compact('form'));
-		}else{
-			return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
 		}
+		return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
 	}
 
 	public function create_check(){
 		if(!empty($_POST)){
-
-			DB::table('idea')->insert(
-				array(
-					'idea_title' => $_POST['name'],
-					'idea_desc' => $_POST['description'],
-					'member_id_fk' => $_SESSION['id']
-				)
-			);
-			return redirect(route('ideas'))->with('success', 'Your idea has been added !');
+			if(sizeof($_SESSION) > 0){
+				DB::table('idea')->insert(
+					array(
+						'idea_title' => $_POST['name'],
+						'idea_desc' => $_POST['description'],
+						'member_id_fk' => $_SESSION['id']
+					)
+				);
+				return redirect(route('ideas'))->with('success', 'Your idea has been added !');
+			}
+			return redirect()->back()->with('error', 'You can\'t add idea, please sign in !');
 		}
 	}
 
@@ -49,12 +50,10 @@ class IdeasController extends Controller
 		if(sizeof($_SESSION) > 0){
 			$idea = DB::table('idea')->where('idea_id', '=', $id)->get();
 			$like = DB::table('idea')->select(DB::raw('idea_id, COUNT(idea_id) as idea_likes'))->join('link_member_idea_like', 'idea_id', '=', 'idea_id_fk')->groupBy('idea_id')->where('idea_id', '=', $id)->get();
-			$verif_like = DB::table('idea')->join('link_member_idea_like', 'idea_id', '=', 'idea_id_fk')->where('idea.member_id_fk', $_SESSION['id'])->where('idea_id', $id)->get();
+			$verif_like = DB::table('idea')->join('link_member_idea_like', 'idea_id', '=', 'idea_id_fk')->where('link_member_idea_like.member_id_fk', $_SESSION['id'])->where('idea_id', $id)->get();
 			return view('ideas.ideas_id', compact('idea', 'like', 'verif_like'));
-		}else{
-			return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
 		}
-
+		return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
 	}
 
 	public function idea_delete($id){
