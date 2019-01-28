@@ -62,7 +62,7 @@ Ideas
 							}
 						} 
 						echo $val_like.' <i class="fas fa-thumbs-up"></i></div>
-						<div class="date">Créée par '. $ideas[$i] -> member_firstname .' '. $ideas[$i] -> member_lastname .'</div>
+						<div class="date">Created by '. $ideas[$i] -> member_firstname .' '. $ideas[$i] -> member_lastname .'</div>
 						</div>
 						<a href="ideas/'.$ideas[$i]->idea_id.'"></a>
 						</div></div>';

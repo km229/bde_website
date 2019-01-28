@@ -86,10 +86,6 @@
 					} ?></p>
 					<h3 class="my-3">Price</h3>
 					<p>{{$activity[0]->activity_price}} €</p>
-					<h3 class="my-3">Participants</h3>
-					<p><?php $result = DB::table('link_members_activities')->join('members', 'member_id_fk', '=', 'member_id')->where('activity_id_fk', $id)->get();
-						echo(sizeof($result));
-					 ?></p>
 				</div>
 
 			</div>
@@ -112,7 +108,7 @@
 
 					echo '<div class="col-md-3 col-sm-6 mb-4">
 					<div class="content"><a href="/activities/'.$id.'/img_'.$el->picture_id.'"><div class="img">
-					<img class="img-fluid src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
+					<img class="img-fluid class="w-100" src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
 					</div></a></div>
 					<div class="list-group-item">';
 					if($table[0]->is_admin == 1){
