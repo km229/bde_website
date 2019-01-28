@@ -55,7 +55,7 @@ My orders | Account
 				<td>'.$el->product_name.'</td>
 				<td>x'.$el->number.'</td>
 				<td>'.$el->product_price.' €</td>
-				<td>'.($el->product_price * $el->number).' €</td></tr>';
+				<td>'.$el->price.' €</td></tr>';
 			}
 			echo'
 			
