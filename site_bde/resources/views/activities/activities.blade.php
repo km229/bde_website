@@ -37,7 +37,7 @@ Activities
 		if(sizeof($_SESSION) > 0){
 			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-			if($table[0]->is_admin == 1){
+			if($table[0]->is_admin === 1){
 				echo '<div class="list-group card my-4 card-search">
 				<h5 class="card-header black">Administration</h5>
 				<a href="/activities/create" class="list-group-item black">New activity</a>
