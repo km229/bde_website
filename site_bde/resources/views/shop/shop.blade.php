@@ -106,14 +106,14 @@ Shop
 
 			
 
-			echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><a href=\"shop/".$bestsellers[0] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"First slide\"></a></div>";
+			echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><div class=\"content\"><div class=\"img\"><a href=\"shop/".$bestsellers[0] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"First slide\"></a></div></div></div>";
 
 			for ($j = 1; $j < $size; $j++) {
 				if ($j == 1){
-					echo "<div class=\"carousel-item\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Second slide\"></a></div>";
+					echo "<div class=\"carousel-item\"><div class=\"content\"><div class=\"img\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Second slide\"></a></div></div></div>";
 				}
 				elseif ($j == 2){
-					echo "<div class=\"carousel-item\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Third slide\"></a></div>";
+					echo "<div class=\"carousel-item\"><div class=\"content\"><div class=\"img\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Third slide\"></a></div></div></div>";
 				}
 			}
 
@@ -133,9 +133,9 @@ Shop
 
 				echo '<div class="col-lg-4 col-md-6 mb-4 product"><div class="card h-100 bloc-link"><a href="/shop/'.$product -> product_id.'"></a>'; 
 				if(isset($product -> product_img)){
-					echo '<img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" />'; 
+					echo '<div class="content"><div class="img"><img class="card-img-top" src="data:image/png;base64,'.base64_encode($product -> product_img) .'" /></div></div>';
 				} else { 
-					echo '<img class="card-img-top" src="'.asset('img/noimg.jpg').'" />';
+					echo '<div class="content"><div class="img"><img class="card-img-top" src="'.asset('img/noimg.jpg').'" /></div></div>';
 				}
 				echo '<div class="card-body card-body2"><h2 class="card-title">'.$product -> product_name.'</h2>'.
 				'<p>'.$product -> product_desc.'</p><h5>'.$product -> category_name.'</h5></div>'.

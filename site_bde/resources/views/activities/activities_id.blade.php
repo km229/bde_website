@@ -107,9 +107,9 @@
 				foreach ($table_picture as $el) {
 
 					echo '<div class="col-md-3 col-sm-6 mb-4">
-					<a href="/activities/'.$id.'/img_'.$el->picture_id.'">
+					<div class="content"><div class="img"><a href="/activities/'.$id.'/img_'.$el->picture_id.'">
 					<img class="img-fluid w-100" src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
-					</a>
+					</a></div></div>
 					<div class="list-group-item">';
 					if($table[0]->is_admin == 1){
 						echo'<a href="'.$id.'/img_'.$el ->picture_id.'/delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>';
