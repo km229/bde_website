@@ -95,7 +95,6 @@ Shop
 			echo "<div id=\"carouselExampleIndicators\" class=\"carousel slide my-4\" data-ride=\"carousel\">
 			<ol class=\"carousel-indicators\">";
 
-
 			for ($i = 0; $i < $size; $i++) {
 				if ($i == 0) {
 					echo "<li data-target=\"#carouselExampleIndicators\" data-slide-to=\".$i.\" class=\"active\"></li>";
@@ -104,16 +103,14 @@ Shop
 				}
 			}
 
-			
-
-			echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><div class=\"content\"><div class=\"img\"><a href=\"shop/".$bestsellers[0] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"First slide\"></a></div></div></div>";
+			echo "</ol><div class=\"carousel-inner\" role=\"listbox\"><div class=\"carousel-item active\"><div class=\"content\"><a href=\"shop/".$bestsellers[0] -> product_id."\" ><div class=\"img\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[0] -> product_img)." alt=\"Best seller n°1\"></div></a></div></div>";
 
 			for ($j = 1; $j < $size; $j++) {
 				if ($j == 1){
-					echo "<div class=\"carousel-item\"><div class=\"content\"><div class=\"img\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Second slide\"></a></div></div></div>";
+					echo "<div class=\"carousel-item\"><div class=\"content\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><div class=\"img\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Best seller n°2\"></div></a></div></div>";
 				}
 				elseif ($j == 2){
-					echo "<div class=\"carousel-item\"><div class=\"content\"><div class=\"img\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Third slide\"></a></div></div></div>";
+					echo "<div class=\"carousel-item\"><div class=\"content\"><a href=\"shop/".$bestsellers[$j] -> product_id."\" ><div class=\"img\"><img class=\"d-block img-fluid\" src=data:image/png;base64,".base64_encode($bestsellers[$j] -> product_img)." alt=\"Best seller n°3\"></div></a></div></div>";
 				}
 			}
 

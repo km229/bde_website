@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-{{ $idea[0] -> idea_title }}
+{{ $idea[0] -> idea_title }} | Ideas
 @endsection
 
 @section('body')

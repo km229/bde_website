@@ -13,7 +13,7 @@ Sign up
 		<li class="eight">contain 8 characters</li>
 		<li class="lowercase">contain a lowercase letter</li>
 		<li class="capital">contain a capital letter</li>
-		<li class="number">contain a number</li>
+		<li class="numb">contain a number</li>
 	</ul>
 </p>
 
@@ -34,8 +34,8 @@ Sign up
 		else { $(".lowercase").css('color', 'red'); };
 		if ($pass.match(/[A-Z]/)){ $(".capital").css('color', 'green'); } 
 		else { $(".capital").css('color', 'red'); };
-		if ($pass.match(/\d/)){ $(".number").css('color', 'green'); } 
-		else { $(".number").css('color', 'red'); };
+		if ($pass.match(/\d/)){ $(".numb").css('color', 'green'); } 
+		else { $(".numb").css('color', 'red'); };
 	});
 </script>
 @endsection

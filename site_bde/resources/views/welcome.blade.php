@@ -28,17 +28,17 @@ Homepage
 			</div>
 			</div>
 			<div class="carousel-item">
-				<div class="content"><div class="img"><a href="activities/<?php if(!empty($activities)){ echo $activities[0] -> activity_id; } ?>"><img src="data:image/jpeg;base64,<?php if(!empty($activities)){ echo base64_encode($activities[0] -> activity_img); } ?>" alt="Next activity"></a></div></div>
+				<div class="content"><a href="activities/<?php if(sizeof($activities)>0){ echo $activities[0] -> activity_id; } ?>"><div class="img"><img src="data:image/jpeg;base64,<?php if(sizeof($activities)>0){ echo base64_encode($activities[0] -> activity_img); } ?>" alt="Next activity"></div></a></div>
 				<div class="carousel-caption d-none d-md-block">
 				<h5>NEXT ACTIVITY</h5>
-    			<p><?php if(!empty($activities)){ echo $activities[0] -> activity_title; } ?></p>
+    			<p><?php if(sizeof($activities)>0){ echo $activities[0] -> activity_title; } ?></p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<div class="content"><div class="img"><a href="shop/<?php if(!empty($products)){ echo $products[0] -> product_id; } ?>"><img src="data:image/jpeg;base64,<?php if(!empty($activities)){ echo base64_encode($products[0] -> product_img); } ?>" alt="Next activity"></a></div></div>
+				<div class="content"><a href="shop/<?php if(sizeof($products)>0){ echo $products[0] -> product_id; } ?>"><div class="img"><img src="data:image/jpeg;base64,<?php if(sizeof($activities)>0){ echo base64_encode($products[0] -> product_img); } ?>" alt="Next activity"></div></a></div>
 				<div class="carousel-caption d-none d-md-block">
 				<h5>BEST SELLER</h5>
-    			<p><?php if(!empty($products)){ echo $products[0] -> product_name; } ?></p>
+    			<p><?php if(sizeof($products)>0){ echo $products[0] -> product_name; } ?></p>
 				</div>
 			</div>
 		</div>
@@ -52,7 +52,6 @@ Homepage
 		</a>
 	</div>
 </section>
-
 <section>
 	<h1>Welcome to the BDE CESI website !</h1>
 	<article> 

@@ -1,7 +1,7 @@
 @extends('template')
 
 @section('title')
-Ideas
+Create an idea
 @endsection
 
 @section('body')
