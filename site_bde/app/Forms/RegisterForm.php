@@ -43,6 +43,10 @@ class RegisterForm extends Form
         ->add('password', 'password',[
             'rules'=>'required|min:1|regex:(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}'
         ])
+        ->add('check', 'checkbox',[
+            'label' =>'I agree with legals terms',
+            'rules'=>'required',
+        ])
         ->add('submit', 'submit',[
             'label' => 'Sign up'
         ]);
