@@ -21,13 +21,25 @@ Homepage
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<div class="carousel-item active">
-				<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="First slide">
+			<div class="content"><div class="img"><img src="{{ asset('img/group.jpg') }}" alt="First slide"></div></div>
+			<div class="carousel-caption d-none d-md-block">
+			<h5>BDE CESI</h5>
+			<p>Welcome !</p>
+			</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Second slide">
+				<div class="content"><div class="img"><a href="activities/<?php echo $activities[0] -> activity_id; ?>" ><img src="<?php base64_encode($activities[0] -> activity_img); ?>" alt="Next activity"></a></div></div>
+				<div class="carousel-caption d-none d-md-block">
+				<h5>NEXT ACTIVITY</h5>
+    			<p><?php echo $activities[0] -> activity_title; ?></p>
+				</div>
 			</div>
 			<div class="carousel-item">
-				<img class="d-block w-100" src="{{ asset('img/group.jpg') }}" alt="Third slide">
+				<div class="content"><div class="img"><a href="shop/<?php echo $products[0] -> product_id; ?>" ><img src="<?php base64_encode($products[0] -> product_img); ?>" alt="Best seller"></a></div></div>
+				<div class="carousel-caption d-none d-md-block">
+				<h5>BEST SELLER</h5>
+    			<p><?php echo $products[0] -> product_name; ?></p>
+				</div>
 			</div>
 		</div>
 		<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

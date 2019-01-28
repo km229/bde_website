@@ -49,7 +49,7 @@ class IdeasController extends Controller
 		if(sizeof($_SESSION) > 0){
 			$idea = DB::table('idea')->where('idea_id', '=', $id)->get();
 			$like = DB::table('idea')->select(DB::raw('idea_id, COUNT(idea_id) as idea_likes'))->join('link_member_idea_like', 'idea_id', '=', 'idea_id_fk')->groupBy('idea_id')->where('idea_id', '=', $id)->get();
-			$verif_like = DB::table('idea')->join('link_member_idea_like', 'idea.idea_id', '=', 'link_member_idea_like.idea_id_fk')->where('idea.member_id_fk', $_SESSION['id'])->where('idea_id', $id)->get();
+			$verif_like = DB::table('idea')->join('link_member_idea_like', 'idea_id', '=', 'idea_id_fk')->where('idea.member_id_fk', $_SESSION['id'])->where('idea_id', $id)->get();
 			return view('ideas.ideas_id', compact('idea', 'like', 'verif_like'));
 		}else{
 			return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
