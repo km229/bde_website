@@ -30,16 +30,16 @@
 			?>
 			<?php
 			if(sizeof($_SESSION) > 0){
-				if($table[0]->is_admin === 1 || $table[0]->state_name !== 'Student'){
+				if($table[0]->is_admin == 1 || $table[0]->state_name != 'Student'){
 					echo '<div class="list-group card my-4 card-search">
 					<h3 class="card-header black">Administration</h3>';
-					if($table[0]->is_admin === 1){
+					if($table[0]->is_admin == 1){
 
 						echo'<a href="/activities/'.$id.'/download_registration" class="list-group-item black">Download participants</a>
 						<a href="/activities/'.$id.'/update" class="list-group-item black">Update activity</a>
 						<a href="/activities/'.$id.'/delete" class="list-group-item black">Delete</a>';
 					}
-					if($table[0]->state_name !== 'Student'){
+					if($table[0]->state_name != 'Student'){
 						echo'<a href="/activities/'.$id.'/download_pictures" class="list-group-item black">Download pictures</a>
 						<a href="/activities/'.$id.'/warning" class="list-group-item black">Report</a>';
 					}
@@ -61,7 +61,7 @@
 			<div class="row">
 
 				<div class="col-md-8">
-					<?php echo '<img src="data:image/png;base64,'.base64_encode($activity[0] -> activity_img) .'" />'; ?>
+					<?php echo '<img class="w-100" src="data:image/png;base64,'.base64_encode($activity[0] -> activity_img) .'" />'; ?>
 				</div>
 
 				<div class="col-md-4">
@@ -111,9 +111,9 @@
 				foreach ($table_picture as $el) {
 
 					echo '<div class="col-md-3 col-sm-6 mb-4">
-					<div class="content"><div class="img"><a href="/activities/'.$id.'/img_'.$el->picture_id.'">
-					<img class="img-fluid w-100" src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
-					</a></div></div>
+					<div class="content"><a href="/activities/'.$id.'/img_'.$el->picture_id.'"><div class="img">
+					<img class="img-fluid src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
+					</div></a></div>
 					<div class="list-group-item">';
 					if($table[0]->is_admin == 1){
 						echo'<a href="'.$id.'/img_'.$el ->picture_id.'/delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>';
