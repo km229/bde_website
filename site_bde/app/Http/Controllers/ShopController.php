@@ -18,6 +18,7 @@ if(!isset($_SESSION)){
 class ShopController extends Controller
 {
 	public function index(){
+
 		$products = DB::table('product')->join('category', 'category_id_fk', '=', 'category_id')->paginate(9);
 		$links = $products->render();
 

@@ -26,15 +26,16 @@ class IdeasController extends Controller
 
 	public function create_check(){
 		if(!empty($_POST)){
-
-			DB::table('idea')->insert(
-				array(
-					'idea_title' => $_POST['name'],
-					'idea_desc' => $_POST['description'],
-					'member_id_fk' => $_SESSION['id']
-				)
-			);
-			return redirect(route('ideas'))->with('success', 'Your idea has been added !');
+            if(sizeof($_SESSION) > 0){
+                DB::table('idea')->insert(
+                    array(
+                        'idea_title' => $_POST['name'],
+                        'idea_desc' => $_POST['description'],
+                        'member_id_fk' => $_SESSION['id']
+                    )
+                );
+                return redirect(route('ideas'))->with('success', 'Your idea has been added !');
+		    }
 		}
 	}
 
@@ -89,8 +90,10 @@ class IdeasController extends Controller
 	}
 
 	public function idea_update_check($id){
-		DB::table('idea')->where('idea_id', '=', $id)->update(['idea_title'=>$_POST['name'], 'idea_desc'=>$_POST['description']]);
-		return redirect(route('idea',['id'=>$id]));
+        if(sizeof($_SESSION) > 0) {
+            DB::table('idea')->where('idea_id', '=', $id)->update(['idea_title' => $_POST['name'], 'idea_desc' => $_POST['description']]);
+            return redirect(route('idea', ['id' => $id]));
+        }
 	}
 
 	public function search_idea(){
