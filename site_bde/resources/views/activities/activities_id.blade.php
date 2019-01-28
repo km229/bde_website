@@ -9,36 +9,41 @@
 	<div class="row">
 		<div class="col-lg-3">
 			<h2 class="my-4">Activity</h2>
-				
-				<?php
-				if(sizeof($_SESSION) > 0){
-					echo '<div class="list-group card my-4 card-search">';
-					echo'<h3 class="card-header black">Activity</h3>';
-					if($activity[0]->activity_date < date('Y-m-d')){
-						if(sizeof($verif)>0){
-							echo '<a href="/activities/'.$id.'/add_picture" class="list-group-item black">Add picture</a>';
-						}
-					}else{
-						if(sizeof($verif)==0){
-							echo'<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>';
-						}else{
-							echo'<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>';
-						}
-					}
-					echo '</div>';
-				}
-				?>
+
 			<?php
 			if(sizeof($_SESSION) > 0){
-				if($table[0]->is_admin == 1){
+				echo '<div class="list-group card my-4 card-search">';
+				echo'<h3 class="card-header black">Activity</h3>';
+				if($activity[0]->activity_date < date('Y-m-d')){
+					if(sizeof($verif)>0){
+						echo '<a href="/activities/'.$id.'/add_picture" class="list-group-item black">Add picture</a>';
+					}
+				}else{
+					if(sizeof($verif)==0){
+						echo'<a href="/activities/'.$id.'/join" class="list-group-item black">Join</a>';
+					}else{
+						echo'<a href="/activities/'.$id.'/leave" class="list-group-item black">Leave</a>';
+					}
+				}
+				echo '</div>';
+			}
+			?>
+			<?php
+			if(sizeof($_SESSION) > 0){
+				if($table[0]->is_admin == 1 || $table[0]->state_name != 'Student'){
 					echo '<div class="list-group card my-4 card-search">
-					<h3 class="card-header black">Administration</h3>
-					<a href="/activities/'.$id.'/download_registration" class="list-group-item black">Download participants</a>
-					<a href="/activities/'.$id.'/download_pictures" class="list-group-item black">Download pictures</a>
-					<a href="/activities/'.$id.'/update" class="list-group-item black">Update activity</a>
-					<a href="/activities/'.$id.'/warning" class="list-group-item black">Report</a>
-					<a href="/activities/'.$id.'/delete" class="list-group-item black">Delete</a>
-					</div>';
+					<h3 class="card-header black">Administration</h3>';
+					if($table[0]->is_admin == 1){
+
+						echo'<a href="/activities/'.$id.'/download_registration" class="list-group-item black">Download participants</a>
+						<a href="/activities/'.$id.'/update" class="list-group-item black">Update activity</a>
+						<a href="/activities/'.$id.'/delete" class="list-group-item black">Delete</a>';
+					}
+					if($table[0]->state_name != 'Student'){
+						echo'<a href="/activities/'.$id.'/download_pictures" class="list-group-item black">Download pictures</a>
+						<a href="/activities/'.$id.'/warning" class="list-group-item black">Report</a>';
+					}
+					echo'</div>';
 				}
 
 			}
@@ -97,18 +102,22 @@
 
 				<?php
 
-				$table = DB::table('activity_pictures')->get()->where('activity_id_fk', $id);
+				$table_picture = DB::table('activity_pictures')->get()->where('activity_id_fk', $id);
 
-				foreach ($table as $el) {
+				foreach ($table_picture as $el) {
 
 					echo '<div class="col-md-3 col-sm-6 mb-4">
 					<a href="/activities/'.$id.'/img_'.$el->picture_id.'">
 					<img class="img-fluid w-100" src="data:image/png;base64,'.base64_encode($el -> picture_img) .'" alt="">
 					</a>
-					<div class="list-group-item">
-					<a href="'.$id.'/img_'.$el ->picture_id.'/delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-					<a href="'.$id.'/img_'.$el ->picture_id.'/warning" class="btn btn-warning"><i class="fas fa-exclamation-triangle"></i></a>
-					</div></div>';
+					<div class="list-group-item">';
+					if($table[0]->is_admin == 1){
+						echo'<a href="'.$id.'/img_'.$el ->picture_id.'/delete" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>';
+					}
+					if($table[0]->state_name != 'Student'){
+						echo'<a href="'.$id.'/img_'.$el ->picture_id.'/warning" class="btn btn-warning"><i class="fas fa-exclamation-triangle"></i></a>';
+					}
+					echo'</div></div>';
 				}
 
 				?>

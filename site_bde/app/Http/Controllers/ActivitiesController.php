@@ -10,8 +10,6 @@ use Faker\Provider\cs_CZ\DateTime;
 use Illuminate\Http\Request;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Facades\DB;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use ZipArchive;
 
 if(!isset($_SESSION)){
@@ -138,7 +136,7 @@ class ActivitiesController extends Controller
 			
 			if(sizeof($_SESSION) > 0){
 				$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
-	
+
 				if($table[0]->is_admin == 1){
 					if(isset($_POST['hidden'])){
 						$table_idea = DB::table('idea')-> where('idea_id', $_POST['hidden'])->get();
@@ -157,7 +155,7 @@ class ActivitiesController extends Controller
 							'activity_recurrence' => $_POST['type']
 						)
 					);
-		
+
 					return redirect(route('activities'))->with('success', 'Activity "'.$_POST['name'].'" has been created.');
 				}
 				return redirect(route('activities'))->with('error', 'You are not allowed to create an activity.');
@@ -191,18 +189,25 @@ class ActivitiesController extends Controller
 	}
 
 	public function id_update_check(){
-		if($_FILES['image']['tmp_name'] === ""){
-			DB::table('activity')
-			->where('activity_id',$_POST['id'])
-			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_date' => $_POST['date'],'activity_price' => $_POST['price'],'activity_recurrence' => $_POST['type']]);
-		}else{
-			DB::table('activity')
-			->where('activity_id',$_POST['id'])
-			->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_img' => file_get_contents($_FILES['image']['tmp_name']),'activity_date' => $_POST['date'],'activity_price' => $_POST['price'],'activity_recurrence' => $_POST['type']]);
-		}
-		return redirect(route('activities'))->with('success', 'Activity "'.$_POST['name'].'" updated');
-	}
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
+			if($table[0]->is_admin == 1){
+				if($_FILES['image']['tmp_name'] === ""){
+					DB::table('activity')
+					->where('activity_id',$_POST['id'])
+					->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_date' => $_POST['date'],'activity_price' => $_POST['price'],'activity_recurrence' => $_POST['type']]);
+				}else{
+					DB::table('activity')
+					->where('activity_id',$_POST['id'])
+					->update(['activity_title' => $_POST['name'],'activity_desc' => $_POST['description'],'activity_img' => file_get_contents($_FILES['image']['tmp_name']),'activity_date' => $_POST['date'],'activity_price' => $_POST['price'],'activity_recurrence' => $_POST['type']]);
+				}
+				return redirect(route('activities'))->with('success', 'Activity "'.$_POST['name'].'" updated');
+
+			}
+			return redirect(route('activities'));
+		}
+	}
 	public function delete($id){
 
 		if(sizeof($_SESSION) > 0){
@@ -233,7 +238,7 @@ class ActivitiesController extends Controller
 					->where('picture_id_fk',$el->picture_id)
 					->delete();
 				}
-				
+
 				DB::table('activity_pictures')
 				->where('activity_id_fk',$id)
 				->delete();
@@ -250,7 +255,7 @@ class ActivitiesController extends Controller
 			}
 		}
 		return redirect(route('activities'));
-		
+
 	}
 
 	public function join($id){
@@ -279,72 +284,78 @@ class ActivitiesController extends Controller
 	}
 
 	public function add_picture($id, FormBuilder $formbuilder){
-
-		$form = $formbuilder->create(ActivitiesAddPictureForm::class);
-		return view('activities.activities_create', compact('form'));
-
+		if(sizeof($_SESSION) > 0){
+			$form = $formbuilder->create(ActivitiesAddPictureForm::class);
+			return view('activities.activities_create', compact('form'));
+		}
 	}
 
 	public function add_picture_check($id){
-		DB::table('activity_pictures')->insert(array(
-			'picture_img' => file_get_contents($_FILES['image']['tmp_name']),
-			'activity_id_fk' => $id
-		));
-		return redirect(route('activities_id', ['id'=>$id]))->with('success', 'Picture added');
-
+		if(sizeof($_SESSION) > 0){
+			DB::table('activity_pictures')->insert(array(
+				'picture_img' => file_get_contents($_FILES['image']['tmp_name']),
+				'activity_id_fk' => $id
+			));
+			return redirect(route('activities_id', ['id'=>$id]))->with('success', 'Picture added');
+		}
 	}
 
 	public function picture($id, $id2, FormBuilder $formbuilder){
-
-		$form = $formbuilder->create(ActivitiesCommentForm::class);
-		$idea = DB::table('activity_pictures')->where('picture_id', '=', $id2)->get();
-		$like = DB::table('activity_pictures')->select(DB::raw('picture_id, COUNT(picture_id) as picture_likes'))->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->groupBy('picture_id')->where('picture_id', '=', $id2)->get();
-		$verif_like = DB::table('activity_pictures')->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->where('member_id_fk', $_SESSION['id'])->where('picture_id_fk', $id2)->get();
-		return view('activities.activities_id_pictures', compact('idea', 'like', 'verif_like', 'id', 'id2', 'form', 'verif'));
-
+		if(sizeof($_SESSION) > 0){
+			$form = $formbuilder->create(ActivitiesCommentForm::class);
+			$idea = DB::table('activity_pictures')->where('picture_id', '=', $id2)->get();
+			$like = DB::table('activity_pictures')->select(DB::raw('picture_id, COUNT(picture_id) as picture_likes'))->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->groupBy('picture_id')->where('picture_id', '=', $id2)->get();
+			$verif_like = DB::table('activity_pictures')->join('like_picture_member', 'picture_id', '=', 'picture_id_fk')->where('member_id_fk', $_SESSION['id'])->where('picture_id_fk', $id2)->get();
+			return view('activities.activities_id_pictures', compact('idea', 'like', 'verif_like', 'id', 'id2', 'form', 'verif'));
+		}
 
 	}
 
 	public function picture_check($id, $id2){
+		if(sizeof($_SESSION) > 0){
+			DB::table('comment_picture_member')->insert(array(
 
-		DB::table('comment_picture_member')->insert(array(
+				'picture_id_fk' => $id2,
+				'member_id_fk' => $_SESSION['id'],
+				'comment' => $_POST['commentary'],
+				'comment_date' => date ('y-m-d-H\hi')
 
-			'picture_id_fk' => $id2,
-			'member_id_fk' => $_SESSION['id'],
-			'comment' => $_POST['commentary'],
-			'comment_date' => date ('y-m-d-H\hi')
+			));
 
-		));
-
-		return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]));
-
+			return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]));
+		}
 	}
 
 	public function download_registration($id)
 	{
-		$result = DB::table('link_members_activities')->join('members', 'member_id_fk', '=', 'member_id')->get()->where('activity_id_fk', $id);
-		$headers = array();
+		if(sizeof($_SESSION) > 0){
+			$result = DB::table('link_members_activities')->join('members', 'member_id_fk', '=', 'member_id')->where('activity_id_fk', $id)->get();
+			$user = $result->where('member_id', $_SESSION['id'])[0];
+			if($user->is_admin == 1){
+				$headers = array();
 
-		if (sizeof($result) != 0) {
-			foreach ($result as $member) {
-				$headers[] = utf8_decode($member->member_firstname) . ';' . utf8_decode($member->member_lastname). ";" . utf8_decode($member->member_mail);
+				if (sizeof($result) != 0) {
+					foreach ($result as $member) {
+						$headers[] = utf8_decode($member->member_firstname) . ';' . utf8_decode($member->member_lastname). ";" . utf8_decode($member->member_mail);
+					}
+				}
+
+				$fp = fopen('php://output', 'w');
+
+				if ($fp && $result) {
+					header('Content-Type: text/csv');
+					header('Content-Disposition: attachment; filename="registrations.csv"');
+					header('Pragma: no-cache');
+					header('Expires: 0');
+					foreach ($headers as $field){
+						fwrite($fp, $field."\n");
+					}
+
+					die;
+				}
+				return(ActivitiesController::id($id));
 			}
 		}
-
-		$fp = fopen('php://output', 'w');
-
-		if ($fp && $result) {
-			header('Content-Type: text/csv');
-			header('Content-Disposition: attachment; filename="registrations.csv"');
-			header('Pragma: no-cache');
-			header('Expires: 0');
-			foreach ($headers as $field){
-				fwrite($fp, $field."\n");
-			}
-
-			die;
-		}
-		return(ActivitiesController::id($id));
 	}
 
 	public function picture_delete($id, $id2){
@@ -367,7 +378,7 @@ class ActivitiesController extends Controller
 					->where('picture_id_fk',$el->picture_id)
 					->delete();
 				}
-				
+
 				DB::table('activity_pictures')
 				->where('picture_id',$id2)
 				->delete();
@@ -396,78 +407,103 @@ class ActivitiesController extends Controller
 	}
 
 	public function warning($id){
-		$table_members = DB::table('members')-> where('is_admin', '1')->get();
-		$table_activity = DB::table('activity')-> where('activity_id', $id)->get()[0];
-		$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
-		foreach ($table_members as $member) {
-			DB::table('notifications')->insert(array(
-				'notif_desc' => '<a href="/activities/'.$id.'">This activity </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
-				'member_id_fk' => $member->member_id
-			));
+
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+
+			if($table[0]->state_name != 'Student'){
+				$table_members = DB::table('members')-> where('is_admin', '1')->get();
+				$table_activity = DB::table('activity')-> where('activity_id', $id)->get()[0];
+				$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
+				foreach ($table_members as $member) {
+					DB::table('notifications')->insert(array(
+						'notif_desc' => '<a href="/activities/'.$id.'">This activity </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
+						'member_id_fk' => $member->member_id
+					));
+				}
+				return redirect(route('activities'));
+			}
 		}
 		return redirect(route('activities'));
 	}
 
 	public function picture_warning($id, $id2){
-		$table_members = DB::table('members')-> where('is_admin', '1')->get();
-		$table_activity = DB::table('activity')-> where('activity_id', $id)->get()[0];
-		$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
-		foreach ($table_members as $member) {
-			DB::table('notifications')->insert(array(
-				'notif_desc' => '<a href="/activities/'.$id.'/img_'.$id2.'">This picture </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
-				'member_id_fk' => $member->member_id
-			));
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
+
+			if($table[0]->state_name != 'Student'){
+				$table_members = DB::table('members')-> where('is_admin', '1')->get();
+				$table_activity = DB::table('activity')-> where('activity_id', $id)->get()[0];
+				$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
+				foreach ($table_members as $member) {
+					DB::table('notifications')->insert(array(
+						'notif_desc' => '<a href="/activities/'.$id.'/img_'.$id2.'">This picture </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
+						'member_id_fk' => $member->member_id
+					));
+				}
+			}
 		}
 		return redirect(route('activities'));
 	}
 
 	public function comment_warning($id, $id2, $id3){
-		$table_members = DB::table('members')-> where('is_admin', '1')->get();
-		$table_comment = DB::table('activity_pictures')->join('comment_picture_member','picture_id','=','picture_id_fk')->join('members', 'member_id_fk','=','member_id')->join('activity','activity_id_fk', '=', 'activity_id')-> where('comment_id', $id3)->get()[0];
-		$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-		foreach ($table_members as $member) {
-			DB::table('notifications')->insert(array(
-				'notif_desc' => '<a href="/activities/'.$id.'/img_'.$id2.'#comment_'.$id3.'">This commentary </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
-				'member_id_fk' => $member->member_id
-			));
+			if($table[0]->state_name != 'Student'){
+				$table_members = DB::table('members')-> where('is_admin', '1')->get();
+				$table_comment = DB::table('activity_pictures')->join('comment_picture_member','picture_id','=','picture_id_fk')->join('members', 'member_id_fk','=','member_id')->join('activity','activity_id_fk', '=', 'activity_id')-> where('comment_id', $id3)->get()[0];
+				$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
+
+				foreach ($table_members as $member) {
+					DB::table('notifications')->insert(array(
+						'notif_desc' => '<a href="/activities/'.$id.'/img_'.$id2.'#comment_'.$id3.'">This commentary </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
+						'member_id_fk' => $member->member_id
+					));
+				}
+			}
 		}
 		return redirect(route('activities'));
 	}
 
 	public function download_picture($id){
-		$table = DB::table('activity_pictures')->where('activity_id_fk', $id)->get();
-		$folder = 'tempDL/activity'.$id;
-		if(!file_exists($folder)){
-			mkdir($folder);
-		}
-		$zip = new ZipArchive();
-		$zip->open($folder.'.zip', ZipArchive::CREATE);
-		foreach ($table as $el) {
-			$file = $folder.'/img'.$el -> picture_id.'.png';
-			file_put_contents($file, $el -> picture_img);	
-			$zip->addFile($file);		
-		}
+		if(sizeof($_SESSION) > 0){
+			$table = DB::table('members')->where('member_id', $_SESSION['id'])->get();
 
-		$zip->close();
+			if($table[0]->state_name != 'Student'){
+				$table = DB::table('activity_pictures')->where('activity_id_fk', $id)->get();
+				$folder = 'tempDL/activity'.$id;
+				if(!file_exists($folder)){
+					mkdir($folder);
+				}
+				$zip = new ZipArchive();
+				$zip->open($folder.'.zip', ZipArchive::CREATE);
+				foreach ($table as $el) {
+					$file = $folder.'/img'.$el -> picture_id.'.png';
+					file_put_contents($file, $el -> picture_img);	
+					$zip->addFile($file);		
+				}
 
-		$objects = scandir($folder);
-		foreach ($objects as $object) {
-			if($object !== '.' && $object !== '..'){
-				unlink($folder."/".$object);
+				$zip->close();
+
+				$objects = scandir($folder);
+				foreach ($objects as $object) {
+					if($object !== '.' && $object !== '..'){
+						unlink($folder."/".$object);
+					}
+				}
+				reset($objects);
+				rmdir($folder);
+				header('Content-disposition: attachment; filename='.$folder.'.zip'); 
+				header('Content-Type: application/force-download'); 
+				header('Content-Transfer-Encoding: fichier');  
+				header('Content-Length: '.filesize($folder.'.zip')); 
+				header('Pragma: no-cache'); 
+				header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0'); 
+				header('Expires: 0'); 
+				readfile($folder.'.zip');
 			}
 		}
-		reset($objects);
-		rmdir($folder);
-		header('Content-disposition: attachment; filename='.$folder.'.zip'); 
-		header('Content-Type: application/force-download'); 
-		header('Content-Transfer-Encoding: fichier');  
-		header('Content-Length: '.filesize($folder.'.zip')); 
-		header('Pragma: no-cache'); 
-		header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0'); 
-		header('Expires: 0'); 
-		readfile($folder.'.zip');
-
 
 	}
 }

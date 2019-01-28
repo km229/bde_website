@@ -28,14 +28,14 @@ Homepage
 			</div>
 			</div>
 			<div class="carousel-item">
-				<div class="content"><div class="img"><img src="<?php if(!empty($activities)){ echo base64_encode($activities[0] -> activity_img); } ?>" alt="Next activity"></div></div>
+				<div class="content"><div class="img"><img src="data:image/jpeg;base64,<?php if(!empty($activities)){ echo base64_encode($activities[0] -> activity_img); } ?>" alt="Next activity"></div></div>
 				<div class="carousel-caption d-none d-md-block">
 				<h5>NEXT ACTIVITY</h5>
     			<p><?php if(!empty($activities)){ echo $activities[0] -> activity_title; } ?></p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<div class="content"><div class="img"><img src="<?php if(!empty($products)){ echo base64_encode($products[0] -> product_img); } ?>" alt="Best seller"></div></div>
+				<div class="content"><div class="img"><img src="data:image/jpeg;base64,<?php if(!empty($products)){ echo base64_encode($products[0] -> product_img); } ?>" alt="Best seller"></div></div>
 				<div class="carousel-caption d-none d-md-block">
 				<h5>BEST SELLER</h5>
     			<p><?php if(!empty($products)){ echo $products[0] -> product_name; } ?></p>
