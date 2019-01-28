@@ -19,7 +19,7 @@ Homepage
 			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
 			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
 		</ol>
-		<div class="carousel-inner" role="listbox">
+		<div class="carousel-inner" role="listbox" style="height: auto !important">
 			<div class="carousel-item active">
 			<div class="content"><div class="img"><img src="{{ asset('img/group.jpg') }}" alt="First slide"></div></div>
 			<div class="carousel-caption d-none d-md-block">
@@ -28,17 +28,17 @@ Homepage
 			</div>
 			</div>
 			<div class="carousel-item">
-				<div class="content"><div class="img"><a href="activities/<?php echo $activities[0] -> activity_id; ?>" ><img src="<?php base64_encode($activities[0] -> activity_img); ?>" alt="Next activity"></a></div></div>
+				<div class="content"><div class="img"><img src="<?php if(!empty($activities)){ echo base64_encode($activities[0] -> activity_img); } ?>" alt="Next activity"></div></div>
 				<div class="carousel-caption d-none d-md-block">
 				<h5>NEXT ACTIVITY</h5>
-    			<p><?php echo $activities[0] -> activity_title; ?></p>
+    			<p><?php if(!empty($activities)){ echo $activities[0] -> activity_title; } ?></p>
 				</div>
 			</div>
 			<div class="carousel-item">
-				<div class="content"><div class="img"><a href="shop/<?php echo $products[0] -> product_id; ?>" ><img src="<?php base64_encode($products[0] -> product_img); ?>" alt="Best seller"></a></div></div>
+				<div class="content"><div class="img"><img src="<?php if(!empty($products)){ echo base64_encode($products[0] -> product_img); } ?>" alt="Best seller"></div></div>
 				<div class="carousel-caption d-none d-md-block">
 				<h5>BEST SELLER</h5>
-    			<p><?php echo $products[0] -> product_name; ?></p>
+    			<p><?php if(!empty($products)){ echo $products[0] -> product_name; } ?></p>
 				</div>
 			</div>
 		</div>
