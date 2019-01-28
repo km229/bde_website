@@ -51,13 +51,13 @@
 					else { echo '0'; }
 					echo ' ';?>
 				</span>
-					<?php
-					if(empty($verif_like)){
-						echo ' <span class="like"><span class="Like"><i class="fas fa-thumbs-up"></i></span></span>';
-					} else {
-						echo ' <span class="like"><span class="Dislike"><i class="fas fa-thumbs-down"></i></i></span></span>';
-					}
-					?>
+				<?php
+				if(sizeof($verif_like)==0){
+					echo ' <span class="like"><span class="Like"><i class="fas fa-thumbs-up"></i></span></span>';
+				} else {
+					echo ' <span class="like"><span class="Dislike"><i class="fas fa-thumbs-down"></i></i></span></span>';
+				}
+				?>
 			</div>
 		</div>
 	</div>

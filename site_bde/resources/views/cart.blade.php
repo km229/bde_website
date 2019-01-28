@@ -46,8 +46,8 @@ Cart
             <h2 class="card-header ">Total</h2>
             <h3 class="list-group-item black"><?php echo $totalprice; ?> €</h3>
             <a href="cart/buy" class="list-group-item black btn btn-secondary">Buy</a>
-
         </div>
+        <input type="checkbox" id="mentions"> I accept <a href="{{route('terms_conditions')}}">terms and conditions</a>
     </div>
     <!-- /.col-lg-3 -->
 

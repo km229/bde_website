@@ -122,7 +122,7 @@ class CartController extends Controller
                     'order_id_fk' => $orderid,
                     'product_id_fk' =>  $product -> product_id,
                     'number' => $product -> number,
-                    'price' => $product -> product_price
+                    'price' => $product -> product_price * $product -> number
                 )
             );
 
