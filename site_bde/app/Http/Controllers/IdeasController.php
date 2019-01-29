@@ -20,7 +20,7 @@ class IdeasController extends Controller
 			$form = $formbuilder->create(IdeasForm::class);
 			return view('ideas.ideas_create', compact('form'));
 		}else{
-			return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
+			return redirect()->back()->with('error', "You are not allowed to add an idea.");
 		}
 	}
 
@@ -34,8 +34,9 @@ class IdeasController extends Controller
                         'member_id_fk' => $_SESSION['id']
                     )
                 );
-                return redirect(route('ideas'))->with('success', 'Your idea has been added !');
+                return redirect(route('ideas'))->with('success', 'Your idea "'.$_POST['name'].'" has been added !');
 		    }
+			return redirect(route('ideas'))->with('error', "You are not allowed to add an idea.");
 		}
 	}
 
@@ -53,7 +54,7 @@ class IdeasController extends Controller
 			$verif_like = DB::table('idea')->join('link_member_idea_like', 'idea.idea_id', '=', 'link_member_idea_like.idea_id_fk')->where('idea.member_id_fk', $_SESSION['id'])->where('idea_id', $id)->get();
 			return view('ideas.ideas_id', compact('idea', 'like', 'verif_like'));
 		}else{
-			return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
+			return redirect(route('ideas'))->with('error', "You must be connected to access to an idea.");
 		}
 
 	}
@@ -70,7 +71,7 @@ class IdeasController extends Controller
 			}
 			
 		}
-		return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
+		return redirect(route('ideas'))->with('error', 'You are not allowed to delete an idea.');
 	}
 
 	public function idea_update($id, FormBuilder $formbuilder){
@@ -85,15 +86,20 @@ class IdeasController extends Controller
 			}
 			
 		}
-		return redirect(route('ideas'))->with('error', 'You don\'t have permission to access this page, please sign in');
+		return redirect(route('ideas'))->with('error', 'You are not allowed to update an idea.');
 		
 	}
 
 	public function idea_update_check($id){
         if(sizeof($_SESSION) > 0) {
+			
+			if(($_SESSION['id']===$idea[0]->member_id_fk) || ($table[0]->is_admin == 1)){
             DB::table('idea')->where('idea_id', '=', $id)->update(['idea_title' => $_POST['name'], 'idea_desc' => $_POST['description']]);
-            return redirect(route('idea', ['id' => $id]));
-        }
+			return redirect(route('idea', ['id' => $id]));
+			}
+
+		}
+		return redirect(route('ideas'))->with('error', 'You are not allowed to update an idea.');
 	}
 
 	public function search_idea(){

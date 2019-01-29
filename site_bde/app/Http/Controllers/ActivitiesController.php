@@ -355,7 +355,9 @@ class ActivitiesController extends Controller
 				}
 				return(ActivitiesController::id($id));
 			}
+			return redirect()->back()->with('error', 'You are not allowed to download the list of participants.');
 		}
+		return redirect()->back()->with('error', 'Your must be connected before to download.');
 	}
 
 	public function picture_delete($id, $id2){
@@ -384,9 +386,9 @@ class ActivitiesController extends Controller
 				->delete();
 				return redirect(route('activities_id', ['id'=> $id]))->with('success', 'Picture deleted');
 			}
+			return redirect()->back()->with('error', 'You are not allowed to delete a picture.');
 		}
-		return redirect(route('activities_id', ['id'=> $id]));
-
+		return redirect(route('activities_id', ['id'=> $id]))->with('error', 'You must be connected to continue.');
 	}
 
 	public function comment_delete($id, $id2, $id3){
@@ -402,7 +404,7 @@ class ActivitiesController extends Controller
 				return redirect(route('activities_picture', ['id'=> $id, 'id2'=>$id2]))->with('success', 'Commentary deleted');
 			}
 		}
-		return redirect(route('activities_id', ['id'=> $id, 'id2'=>$id2]))->with('error', 'You don\'t have access');
+		return redirect(route('activities_id', ['id'=> $id, 'id2'=>$id2]))->with('error', 'You can\'t delete this commentary');
 
 	}
 
@@ -417,7 +419,7 @@ class ActivitiesController extends Controller
 				$table_reporter = DB::table('members')-> where('member_id', $_SESSION['id'])->get()[0];
 				foreach ($table_members as $member) {
 					DB::table('notifications')->insert(array(
-						'notif_desc' => '<a href="/activities/'.$id.'">This activity </a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
+						'notif_desc' => '<a href="/activities/'.$id.'">This activity</a> has been reported by '.$table_reporter->member_firstname.' '.$table_reporter->member_lastname,
 						'member_id_fk' => $member->member_id
 					));
 				}
@@ -442,8 +444,9 @@ class ActivitiesController extends Controller
 					));
 				}
 			}
+			return redirect()->back()->with('error', 'You are not allowed to report a picture.');
 		}
-		return redirect(route('activities'));
+		return redirect()->back()->with('error', 'You must be connected before to continue.');
 	}
 
 	public function comment_warning($id, $id2, $id3){
@@ -462,8 +465,9 @@ class ActivitiesController extends Controller
 					));
 				}
 			}
+			return redirect()->back()->with('error', 'You are not allowed to report a comment.');
 		}
-		return redirect(route('activities'));
+		return redirect()->back()->with('error', 'You must be connected before to continue.');
 	}
 
 	public function download_picture($id){
@@ -504,6 +508,6 @@ class ActivitiesController extends Controller
 				readfile($folder.'.zip');
 			}
 		}
-
+		return redirect()->back()->with('error', 'You are not allowed to download pictures.');
 	}
 }

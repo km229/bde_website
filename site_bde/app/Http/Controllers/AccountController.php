@@ -54,5 +54,6 @@ class AccountController extends Controller
 			->update(['member_firstname' => $_POST["first_name"], 'member_lastname' => $_POST["last_name"], 'member_mail' => $_POST['email'], 'member_password' => $password,'location_id_fk'=> ($_POST['location']+1)]);
 			return redirect(route('account'))->with('success', 'Your information have been updated !');
 		}
+		return redirect()->back()->with('error', 'You must be connected to access to your account.');
 	}
 }
