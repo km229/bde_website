@@ -173,7 +173,7 @@ class ActivitiesController extends Controller
 			$verif = DB::table('link_members_activities')->where('member_id_fk' , $_SESSION['id'])->where('activity_id_fk' , $id)->get();
 			return view('activities.activities_id', compact('id', 'table', 'verif', 'activity'));
 		}
-		return view('activities.activities_id', compact('id','activity'));
+		return redirect()->back()->with('error', 'You must be connected to see an activity.');
 	}
 
 	public function id_update(FormBuilder $formbuilder){
@@ -185,7 +185,7 @@ class ActivitiesController extends Controller
 				return view('activities.activities_create', compact('form'));
 			}
 		}
-		return redirect(route('activities'));
+		return redirect()->back()->with('error', 'You are not allowed to update an activity.');
 	}
 
 	public function id_update_check(){
@@ -205,7 +205,7 @@ class ActivitiesController extends Controller
 				return redirect(route('activities'))->with('success', 'Activity "'.$_POST['name'].'" updated');
 
 			}
-			return redirect(route('activities'));
+			return redirect(route('activities'))->with('error', 'You are not allowed to update an activity.');
 		}
 	}
 	public function delete($id){
@@ -251,10 +251,10 @@ class ActivitiesController extends Controller
 				->where('activity_id',$id)
 				->delete();
 
-				return redirect(route('activities'))->with('success', 'Activity "'.$name[0]->activity_title.'" has been deleted');
+				return redirect(route('activities'))->with('success', 'Activity "'.$name[0]->activity_title.'" deleted !');
 			}
 		}
-		return redirect(route('activities'));
+		return redirect()->back()->with('error', 'You are not allowed to delete an activity.');;
 
 	}
 
