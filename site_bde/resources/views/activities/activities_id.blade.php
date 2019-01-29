@@ -86,6 +86,11 @@
 					} ?></p>
 					<h3 class="my-3">Price</h3>
 					<p>{{$activity[0]->activity_price}} €</p>
+					<h3 class="my-3">Participants</h3>
+					<p><?php
+						$list = DB::table('link_members_activities')->where('activity_id_fk', $activity[0]->activity_id)->get();
+						echo sizeof($list);
+					?></p>
 				</div>
 
 			</div>
