@@ -116,6 +116,8 @@ class CartController extends Controller
 
         $message = "Hello ".$member[$memberindex] -> member_firstname.",\n\nThank you for purchasing on the CESI BDE's website. Here is a summary of your order n°".$orderid." :\n\n";
 
+        $bdemessage = "New order from ".$member[$memberindex] -> member_firstname." ".$member[$memberindex] -> member_lastname." @ ".$member[$memberindex] -> member_mail.",\n\nOrder n°".$orderid." :\n\n";
+
         foreach ($cart as $product){
             DB::table('link_orders_products')->insert(
                 array(
@@ -133,12 +135,22 @@ class CartController extends Controller
             $productmsg = str_replace('{price}', $product -> product_price, $productmsg);
             $productmsg = str_replace('{totalprice}', ($product -> number * $product -> product_price), $productmsg);
             $message = $message.$productmsg;
+            $bdemessage = $bdemessage.$productmsg;
         }
 
-        $message = $message."\nTotal = ".$totalprice."€\n\nPlease contact us at this address so we can set a rendez-vous to process the payment and delivery.\n\nWe hope to see you again,\n\nCESI BDE's team.\n";
+        $message = $message."\nTotal = ".$totalprice."€\n\nWe will contact you at this address so we can set a rendez-vous to process the payment and delivery.\n\nWe hope to see you again,\n\nCESI BDE's team.\n";
+        $bdemessage = $bdemessage."\nTotal = ".$totalprice."€\n\nFirst contact must be done within 24 hours.";
+
+
         DB::table('link_member_product_cart')->where('member_id_fk', $id)->delete();
 
+        $bdemembers = DB::table('members')->where('is_admin', 1)->where('location_id_fk', $member[$memberindex]->location_id_fk)->get();
+
         mail($member[$memberindex] -> member_mail, 'Thank you for your purchase !', $message);
+
+        foreach($bdemembers as $recipient){
+            mail($recipient -> member_mail, 'Order '.$orderid, $bdemessage);
+        }
 
         return redirect(route('cart'));
     }
